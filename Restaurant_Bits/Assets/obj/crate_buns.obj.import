@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://q1ne1t2ig4l6"
+path="res://.godot/imported/crate_buns.obj-ce5897f14d4805048664e46bf977878f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/crate_buns.obj-ce5897f14d4805048664e46bf977878f.mesh"]
+
+source_file="res://Restaurant_Bits/Assets/obj/crate_buns.obj"
+dest_files=["res://.godot/imported/crate_buns.obj-ce5897f14d4805048664e46bf977878f.mesh", "res://.godot/imported/crate_buns.obj-ce5897f14d4805048664e46bf977878f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cqtrd42fqiikp"
+path="res://.godot/imported/kitchencounter_innercorner.obj-aa52c741fd6c2712ccefadb7e25440ab.mesh"
+
+[deps]
+
+files=["res://.godot/imported/kitchencounter_innercorner.obj-aa52c741fd6c2712ccefadb7e25440ab.mesh"]
+
+source_file="res://Restaurant_Bits/Assets/obj/kitchencounter_innercorner.obj"
+dest_files=["res://.godot/imported/kitchencounter_innercorner.obj-aa52c741fd6c2712ccefadb7e25440ab.mesh", "res://.godot/imported/kitchencounter_innercorner.obj-aa52c741fd6c2712ccefadb7e25440ab.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
