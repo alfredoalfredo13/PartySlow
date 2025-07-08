@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr71sii8wcgy4"]
+
+[ext_resource type="Script" uid="uid://fref78n6qn24" path="res://PlayerController.gd" id="1_montw"]
+[ext_resource type="PackedScene" uid="uid://ce47e115kqnwj" path="res://Characters/KayKit_Adventurers_1.0_FREE/Characters/fbx/Barbarian.fbx" id="2_x6sby"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ei7rr"]
+height = 2.41941
+
+[node name="Player" type="CharacterBody3D" groups=["Players"]]
+script = ExtResource("1_montw")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Barbarian" parent="Pivot" instance=ExtResource("2_x6sby")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20035, 0)
+shape = SubResource("CapsuleShape3D_ei7rr")

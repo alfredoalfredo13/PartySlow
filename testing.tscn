@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbvtfekf6m716"]
+
+[ext_resource type="PackedScene" uid="uid://cr71sii8wcgy4" path="res://BarbarianPlayerModel.tscn" id="3_feb8i"]
+[ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Ingredient.tscn" id="3_kj3p2"]
+[ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://platform.tscn" id="4_kj3p2"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14, 0)
+current = true
+
+[node name="Platform" parent="." instance=ExtResource("4_kj3p2")]
+
+[node name="Player" parent="." instance=ExtResource("3_feb8i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
+
+[node name="Item" parent="." instance=ExtResource("3_kj3p2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 1)
+itemName = "Bun"
