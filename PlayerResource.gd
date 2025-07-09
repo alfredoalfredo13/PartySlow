@@ -9,4 +9,4 @@ enum Characters_Enum
 @export var id : int
 @export var name : String
 
-signal set_name(name)
+signal remove_player

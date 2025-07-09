@@ -8,6 +8,7 @@ var peer
 var id : String
 var is_host : bool = false
 var local_player_data : PlayerData
+var has_started = false
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(peer_connected)
@@ -15,6 +16,13 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(connection_failed)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	local_player_data = PlayerData.new()
+	if "--server" in OS.get_cmdline_args():
+		$Host.visible = false
+		$Join.visible = false
+		$Start.visible = false
+		$Label.visible = false
+		$LineEdit.visible = false
+		host_game()
 	
 # this gets called on the server and clients
 func peer_connected(id):
@@ -23,6 +31,9 @@ func peer_connected(id):
 
 # this gets called on the server and clients	
 func peer_disconnected(id):
+	var player_data : PlayerData = GameManager.players[id]
+	GameManager.players.erase(id)
+	player_data.remove_player.emit()
 	print("Player Disconnected ", id)
 
 #called only from clients
@@ -53,23 +64,27 @@ func send_player_information(name, character, id):
 
 @rpc("any_peer", "call_local")
 func start_game():
+	if has_started:
+		return
+	has_started = true
 	$Host.visible = false
 	$Join.visible = false
 	$Start.visible = false
 	$Label.visible = false
 	$LineEdit.visible = false
+	var index = 0
 	for i in GameManager.players:
 		var player_instance :PlayerController = player.instantiate()
 		var remote_player_data : PlayerData = GameManager.players[i]
 		player_instance.player_data = remote_player_data
 		player_instance.seta_name(remote_player_data.name)
-		if i == 1:
-			player_instance.position = Vector3(-2.0, 0.5, -2.0)
-		else:
-			player_instance.position = Vector3(2.0, 0.5, 2.0)
+		var spawn_pos = (get_tree().get_nodes_in_group("PlayerSpawn")[index] as Node3D).global_position
+		player_instance.position = Vector3(spawn_pos.x, 0.5, spawn_pos.z)
 		get_tree().root.add_child(player_instance)
+		index += 1
+		
 
-func _on_host_pressed() -> void:
+func host_game():
 	is_host = true
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_PLAYERS)
@@ -80,6 +95,9 @@ func _on_host_pressed() -> void:
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 	print("ghost host is waiting...")
+
+func _on_host_pressed() -> void:
+	host_game()	
 	$Start.visible = true
 	send_player_information(local_player_data.name, local_player_data.char_classe, multiplayer.get_unique_id())
 	

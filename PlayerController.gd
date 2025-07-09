@@ -14,6 +14,10 @@ var sync_pos = Vector3.ZERO
 var sync_rot = Vector3.ZERO
 
 func _ready() -> void:
+	player_data.remove_player.connect(
+		func():
+			queue_free()
+	)
 	sync_pos = global_position
 	sync_rot = $Pivot.rotation_degrees
 	pass
