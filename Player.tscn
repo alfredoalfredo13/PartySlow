@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr71sii8wcgy4"]
+[gd_scene load_steps=7 format=3 uid="uid://cr71sii8wcgy4"]
 
 [ext_resource type="Script" uid="uid://fref78n6qn24" path="res://PlayerController.gd" id="1_montw"]
 [ext_resource type="PackedScene" uid="uid://dw7wb46a4kbl8" path="res://Characters/fbx/Barbarian.fbx" id="2_x6sby"]
@@ -6,6 +6,14 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ei7rr"]
 height = 2.41941
+
+[sub_resource type="LabelSettings" id="LabelSettings_rtc8v"]
+font_size = 36
+outline_size = 2
+outline_color = Color(1, 0.823529, 1, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rtc8v"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
 script = ExtResource("1_montw")
@@ -71,36 +79,62 @@ bones/47/position = Vector3(-0.513182, 0.839757, 0.11844)
 bones/47/rotation = Quaternion(-0.669631, 0.442474, 0.551558, -0.227145)
 
 [node name="Barbarian_Cape" parent="Pivot/Barbarian/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.965926, 0.049385, 0.254064, 0.0799795, 0.876629, -0.474474, -0.246151, 0.478626, 0.842809, 0.0305295, 1.23196, 0.3032)
+transform = Transform3D(0.965926, 0.0493852, 0.254064, 0.0799796, 0.876629, -0.474474, -0.246152, 0.478627, 0.842808, 0.0305296, 1.23196, 0.303201)
 bone_idx = 4
 
 [node name="Barbarian_Round_Shield" parent="Pivot/Barbarian/Rig/Skeleton3D" index="1"]
-transform = Transform3D(-0.34202, 5.92404e-07, 0.939692, 0.80186, 0.521384, 0.291853, -0.489941, 0.853322, -0.178324, 0.686508, 0.83935, 0.230581)
+transform = Transform3D(-0.342019, 2.57426e-06, 0.939692, 0.801861, 0.521383, 0.291852, -0.489939, 0.853322, -0.178325, 0.686508, 0.839349, 0.230581)
 bone_idx = 10
 
 [node name="1H_Axe_Offhand" parent="Pivot/Barbarian/Rig/Skeleton3D" index="2"]
-transform = Transform3D(-0.34202, 5.92404e-07, 0.939692, 0.80186, 0.521384, 0.291853, -0.489941, 0.853322, -0.178324, 0.540024, 0.802351, 0.272286)
+transform = Transform3D(-0.342019, 2.57426e-06, 0.939692, 0.801861, 0.521383, 0.291852, -0.489939, 0.853322, -0.178325, 0.540024, 0.802351, 0.272286)
 bone_idx = 11
 
 [node name="1H_Axe" parent="Pivot/Barbarian/Rig/Skeleton3D" index="3"]
-transform = Transform3D(-0.34202, -3.09912e-07, -0.939692, -0.80186, 0.521385, 0.291853, 0.489942, 0.853321, -0.178324, -0.552348, 0.80652, 0.249323)
+transform = Transform3D(-0.342019, -2.80109e-07, -0.939692, -0.801861, 0.521384, 0.291853, 0.48994, 0.853322, -0.178323, -0.552347, 0.80652, 0.249323)
 bone_idx = 17
 
 [node name="2H_Axe" parent="Pivot/Barbarian/Rig/Skeleton3D" index="4"]
-transform = Transform3D(-0.34202, -3.09912e-07, -0.939692, -0.80186, 0.521385, 0.291853, 0.489942, 0.853321, -0.178324, -0.552348, 0.80652, 0.249323)
+transform = Transform3D(-0.342019, -2.80109e-07, -0.939692, -0.801861, 0.521384, 0.291853, 0.48994, 0.853322, -0.178323, -0.552347, 0.80652, 0.249323)
 bone_idx = 18
 
 [node name="Mug" parent="Pivot/Barbarian/Rig/Skeleton3D" index="5"]
-transform = Transform3D(-0.34202, -3.09912e-07, -0.939692, -0.80186, 0.521385, 0.291853, 0.489942, 0.853321, -0.178324, -0.655147, 0.539989, 0.354816)
+transform = Transform3D(-0.342019, -2.80109e-07, -0.939692, -0.801861, 0.521384, 0.291853, 0.48994, 0.853322, -0.178323, -0.655147, 0.539989, 0.354816)
 bone_idx = 19
 
 [node name="Barbarian_Hat" parent="Pivot/Barbarian/Rig/Skeleton3D" index="6"]
-transform = Transform3D(0.999948, -0.000710934, 0.0101667, 0.00314933, 0.970295, -0.241906, -0.00969267, 0.241925, 0.970246, 0.0318115, 1.22957, 0.309248)
+transform = Transform3D(0.999948, -0.000710919, 0.0101675, 0.00314952, 0.970295, -0.241906, -0.0096935, 0.241925, 0.970246, 0.0318116, 1.22957, 0.309248)
 bone_idx = 21
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20035, 0)
 shape = SubResource("CapsuleShape3D_ei7rr")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(512, 64)
+
+[node name="Label" type="Label" parent="SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Player"
+label_settings = SubResource("LabelSettings_rtc8v")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0190816, 2.73332, 0)
+texture = SubResource("ViewportTexture_rtc8v")
 
 [connection signal="notify_movement" from="." to="Pivot/Barbarian" method="_on_player_notify_movement"]
 

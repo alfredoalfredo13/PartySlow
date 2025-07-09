@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dbvtfekf6m716"]
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://camera.gd" id="1_kj3p2"]
-[ext_resource type="PackedScene" uid="uid://cr71sii8wcgy4" path="res://BarbarianPlayerModel.tscn" id="3_feb8i"]
+[ext_resource type="PackedScene" uid="uid://cr71sii8wcgy4" path="res://Player.tscn" id="3_feb8i"]
 [ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Ingredient.tscn" id="3_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://platform.tscn" id="4_kj3p2"]
 [ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://MultiplayerController.gd" id="5_lc7k4"]
@@ -26,9 +26,6 @@ rot2 = Vector3(-0.881391, 0, 0)
 
 [node name="Platform" parent="." instance=ExtResource("4_kj3p2")]
 
-[node name="Player" parent="." instance=ExtResource("3_feb8i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
-
 [node name="Item" parent="." instance=ExtResource("3_kj3p2")]
 transform = Transform3D(0.999977, -0.00185969, 0.00651629, 0.00187706, 0.999995, -0.00266382, -0.00651129, 0.00267601, 0.999975, 2, 0.442275, 1)
 itemName = "Bun"
@@ -45,31 +42,51 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_lc7k4")
+player = ExtResource("3_feb8i")
 
 [node name="Host" type="Button" parent="Control"]
+visible = false
 layout_mode = 1
-offset_top = 124.0
+offset_top = 207.0
 offset_right = 185.0
-offset_bottom = 168.0
+offset_bottom = 251.0
 text = "Host
 "
 
 [node name="Join" type="Button" parent="Control"]
+visible = false
 layout_mode = 1
-offset_top = 212.0
+offset_top = 295.0
 offset_right = 185.0
-offset_bottom = 256.0
+offset_bottom = 339.0
 text = "Join
 "
 
 [node name="Start" type="Button" parent="Control"]
+visible = false
 layout_mode = 1
-offset_top = 297.0
+offset_top = 380.0
 offset_right = 185.0
-offset_bottom = 341.0
+offset_bottom = 424.0
 text = "Start
 "
+
+[node name="LineEdit" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_top = 86.0
+offset_right = 316.0
+offset_bottom = 128.0
+placeholder_text = "Fantasminha Camarada"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 50.0
+offset_right = 237.0
+offset_bottom = 73.0
+text = "Nome"
 
 [connection signal="pressed" from="Control/Host" to="Control" method="_on_host_pressed"]
 [connection signal="pressed" from="Control/Join" to="Control" method="_on_join_pressed"]
 [connection signal="pressed" from="Control/Start" to="Control" method="_on_start_pressed"]
+[connection signal="text_submitted" from="Control/LineEdit" to="Control" method="_on_line_edit_text_submitted"]

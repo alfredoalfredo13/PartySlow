@@ -1,12 +1,20 @@
-extends CharacterBody3D
+class_name PlayerController extends CharacterBody3D
 
 # movement speed
 @export var SPEED : float = 15.0
+@export var player_data : PlayerData
+@onready var id_label = $SubViewport/Label
 signal notify_movement(movement_direction : Vector3)
 
 var target_velocity = Vector3.ZERO
 var inventory : Array[String]
 var move_dir : Vector3
+
+func _ready() -> void:
+	pass
+
+func seta_name(name):
+	$SubViewport/Label.text = name
 
 func _physics_process(delta: float) -> void:
 	move(delta)

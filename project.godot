@@ -15,6 +15,10 @@ run/main_scene="uid://dbvtfekf6m716"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://GameManager.gd"
+
 [filesystem]
 
 import/blender/enabled=false
