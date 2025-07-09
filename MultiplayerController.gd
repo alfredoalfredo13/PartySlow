@@ -61,6 +61,7 @@ func start_game():
 	for i in GameManager.players:
 		var player_instance :PlayerController = player.instantiate()
 		var remote_player_data : PlayerData = GameManager.players[i]
+		player_instance.player_data = remote_player_data
 		player_instance.seta_name(remote_player_data.name)
 		if i == 1:
 			player_instance.position = Vector3(-2.0, 0.5, -2.0)
