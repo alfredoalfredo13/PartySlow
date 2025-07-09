@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbvtfekf6m716"]
+[gd_scene load_steps=7 format=3 uid="uid://dbvtfekf6m716"]
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://camera.gd" id="1_kj3p2"]
+[ext_resource type="Script" uid="uid://te1t8tjrmik5" path="res://Main.gd" id="1_lc7k4"]
 [ext_resource type="PackedScene" uid="uid://cr71sii8wcgy4" path="res://BarbarianPlayerModel.tscn" id="3_feb8i"]
 [ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Ingredient.tscn" id="3_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://platform.tscn" id="4_kj3p2"]
@@ -12,7 +13,8 @@ ambient_light_color = Color(0.354096, 0.0663849, 0.31421, 1)
 ambient_light_energy = 2.23
 ssao_enabled = true
 
-[node name="Node3D" type="Node3D"]
+[node name="Game" type="Node3D"]
+script = ExtResource("1_lc7k4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.71934, 0.694658, 0, -0.694658, 0.71934, 0, 11.105, 8.28)
@@ -29,8 +31,7 @@ rot2 = Vector3(-0.881391, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
 
 [node name="Item" parent="." instance=ExtResource("3_kj3p2")]
-transform = Transform3D(0.999977, -0.00185969, 0.00651629, 0.00187706, 0.999995, -0.00266382, -0.00651129, 0.00267601, 0.999975, 2, 0.442275, 1)
-itemName = "Bun"
+transform = Transform3D(0.999977, -0.00185969, 0.00651629, 0.00187706, 0.999995, -0.00266382, -0.00651129, 0.00267601, 0.999975, 2, 1.29602, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kj3p2")
