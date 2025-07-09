@@ -72,24 +72,31 @@ bones/47/rotation = Quaternion(-0.669631, 0.442474, 0.551558, -0.227145)
 
 [node name="Barbarian_Cape" parent="Pivot/Barbarian/Rig/Skeleton3D" index="0"]
 transform = Transform3D(0.965926, 0.049385, 0.254064, 0.0799795, 0.876629, -0.474474, -0.246151, 0.478626, 0.842809, 0.0305295, 1.23196, 0.3032)
+bone_idx = 4
 
 [node name="Barbarian_Round_Shield" parent="Pivot/Barbarian/Rig/Skeleton3D" index="1"]
 transform = Transform3D(-0.34202, 5.92404e-07, 0.939692, 0.80186, 0.521384, 0.291853, -0.489941, 0.853322, -0.178324, 0.686508, 0.83935, 0.230581)
+bone_idx = 10
 
 [node name="1H_Axe_Offhand" parent="Pivot/Barbarian/Rig/Skeleton3D" index="2"]
 transform = Transform3D(-0.34202, 5.92404e-07, 0.939692, 0.80186, 0.521384, 0.291853, -0.489941, 0.853322, -0.178324, 0.540024, 0.802351, 0.272286)
+bone_idx = 11
 
 [node name="1H_Axe" parent="Pivot/Barbarian/Rig/Skeleton3D" index="3"]
 transform = Transform3D(-0.34202, -3.09912e-07, -0.939692, -0.80186, 0.521385, 0.291853, 0.489942, 0.853321, -0.178324, -0.552348, 0.80652, 0.249323)
+bone_idx = 17
 
 [node name="2H_Axe" parent="Pivot/Barbarian/Rig/Skeleton3D" index="4"]
 transform = Transform3D(-0.34202, -3.09912e-07, -0.939692, -0.80186, 0.521385, 0.291853, 0.489942, 0.853321, -0.178324, -0.552348, 0.80652, 0.249323)
+bone_idx = 18
 
 [node name="Mug" parent="Pivot/Barbarian/Rig/Skeleton3D" index="5"]
 transform = Transform3D(-0.34202, -3.09912e-07, -0.939692, -0.80186, 0.521385, 0.291853, 0.489942, 0.853321, -0.178324, -0.655147, 0.539989, 0.354816)
+bone_idx = 19
 
 [node name="Barbarian_Hat" parent="Pivot/Barbarian/Rig/Skeleton3D" index="6"]
 transform = Transform3D(0.999948, -0.000710934, 0.0101667, 0.00314933, 0.970295, -0.241906, -0.00969267, 0.241925, 0.970246, 0.0318115, 1.22957, 0.309248)
+bone_idx = 21
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20035, 0)

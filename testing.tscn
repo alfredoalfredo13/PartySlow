@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbvtfekf6m716"]
+[gd_scene load_steps=7 format=3 uid="uid://dbvtfekf6m716"]
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://camera.gd" id="1_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://cr71sii8wcgy4" path="res://BarbarianPlayerModel.tscn" id="3_feb8i"]
 [ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Ingredient.tscn" id="3_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://platform.tscn" id="4_kj3p2"]
+[ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://MultiplayerController.gd" id="5_lc7k4"]
 
 [sub_resource type="Environment" id="Environment_kj3p2"]
 background_mode = 1
@@ -37,3 +38,38 @@ environment = SubResource("Environment_kj3p2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 light_color = Color(0.896348, 0.588473, 0.274185, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_lc7k4")
+
+[node name="Host" type="Button" parent="Control"]
+layout_mode = 1
+offset_top = 124.0
+offset_right = 185.0
+offset_bottom = 168.0
+text = "Host
+"
+
+[node name="Join" type="Button" parent="Control"]
+layout_mode = 1
+offset_top = 212.0
+offset_right = 185.0
+offset_bottom = 256.0
+text = "Join
+"
+
+[node name="Start" type="Button" parent="Control"]
+layout_mode = 1
+offset_top = 297.0
+offset_right = 185.0
+offset_bottom = 341.0
+text = "Start
+"
+
+[connection signal="pressed" from="Control/Host" to="Control" method="_on_host_pressed"]
+[connection signal="pressed" from="Control/Join" to="Control" method="_on_join_pressed"]
+[connection signal="pressed" from="Control/Start" to="Control" method="_on_start_pressed"]
