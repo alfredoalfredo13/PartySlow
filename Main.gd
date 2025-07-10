@@ -10,3 +10,7 @@ func _ready() -> void:
 	print("random = " + str(random))
 	GlobalData.currentRecipe = GlobalData.recipes[random]
 	print("current recipe: " + GlobalData.currentRecipe.recipe_name)
+
+func _physics_process(delta: float) -> void:
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().quit()

@@ -12,6 +12,7 @@ const MODEL_PATHS := {
 }
 
 func _ready() -> void:
+	$MeshInstance3D.visible = false
 	while GlobalData.currentRecipe == null:
 		await get_tree().create_timer(0.1).timeout
 	var random = randi_range(0, GlobalData.currentRecipe.ingredients.size()-1)

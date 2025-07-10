@@ -23,10 +23,9 @@ func move(delta: float) :
 		move_dir = move_dir.normalized()
 		var lerp_rotation = rotate_toward($Pivot.rotation.y, atan2(move_dir.x, move_dir.z), delta * 5)
 		$Pivot.rotation.y = lerp_rotation
-		# ^somehow this is backwards? multiplying by -1 fixes it
 	notify_movement.emit(move_dir)
 	target_velocity.x = move_dir.x
 	target_velocity.z = move_dir.z
-	target_velocity *= delta * SPEED * 100
+	target_velocity *= SPEED
 	velocity = target_velocity
 	move_and_slide()

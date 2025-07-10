@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyg66g7drqs2h"]
+[gd_scene load_steps=4 format=3 uid="uid://cyg66g7drqs2h"]
 
 [ext_resource type="Script" uid="uid://bo4o4t3himtmx" path="res://ItemController.gd" id="1_f3urf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f3urf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_n4rk7"]
 
 [node name="Item" type="Area3D" groups=["Items"]]
 collision_layer = 2
@@ -11,5 +13,9 @@ script = ExtResource("1_f3urf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.243225, 0)
 shape = SubResource("SphereShape3D_f3urf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.237663, 0)
+mesh = SubResource("SphereMesh_n4rk7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
