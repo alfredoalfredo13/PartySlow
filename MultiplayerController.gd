@@ -24,6 +24,10 @@ func _ready() -> void:
 		$LineEdit.visible = false
 		host_game()
 	
+	var name = OS.get_cmdline_args()[1]
+	$LineEdit.text = name
+	local_player_data.name = name
+	
 # this gets called on the server and clients
 func peer_connected(id):
 	self.id = str(id)
@@ -64,9 +68,6 @@ func send_player_information(name, character, id):
 
 @rpc("any_peer", "call_local")
 func start_game():
-	if has_started:
-		return
-	has_started = true
 	$Host.visible = false
 	$Join.visible = false
 	$Start.visible = false
@@ -74,8 +75,11 @@ func start_game():
 	$LineEdit.visible = false
 	var index = 0
 	for i in GameManager.players:
-		var player_instance :PlayerController = player.instantiate()
 		var remote_player_data : PlayerData = GameManager.players[i]
+		if remote_player_data.in_game:
+			continue
+		remote_player_data.in_game = true
+		var player_instance :PlayerController = player.instantiate()
 		player_instance.player_data = remote_player_data
 		player_instance.seta_name(remote_player_data.name)
 		var spawn_pos = (get_tree().get_nodes_in_group("PlayerSpawn")[index] as Node3D).global_position
@@ -83,7 +87,6 @@ func start_game():
 		get_tree().root.add_child(player_instance)
 		index += 1
 		
-
 func host_game():
 	is_host = true
 	peer = ENetMultiplayerPeer.new()

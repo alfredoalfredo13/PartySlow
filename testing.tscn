@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbvtfekf6m716"]
+[gd_scene load_steps=11 format=3 uid="uid://dbvtfekf6m716"]
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://camera.gd" id="1_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://cr71sii8wcgy4" path="res://Player.tscn" id="3_feb8i"]
 [ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Ingredient.tscn" id="3_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://platform.tscn" id="4_kj3p2"]
 [ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://MultiplayerController.gd" id="5_lc7k4"]
+[ext_resource type="Script" uid="uid://dqxj4bbgnkgkc" path="res://score.gd" id="6_jn4p2"]
 
 [sub_resource type="Environment" id="Environment_kj3p2"]
 background_mode = 1
@@ -12,6 +13,9 @@ ambient_light_source = 2
 ambient_light_color = Color(0.354096, 0.0663849, 0.31421, 1)
 ambient_light_energy = 2.23
 ssao_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_lc7k4"]
+font_size = 50
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lc7k4"]
 
@@ -88,6 +92,29 @@ offset_right = 237.0
 offset_bottom = 73.0
 text = "Nome"
 
+[node name="Scores" type="Control" parent="Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control/Scores"]
+layout_mode = 0
+offset_left = 502.0
+offset_top = 124.0
+offset_right = 719.0
+offset_bottom = 193.0
+label_settings = SubResource("LabelSettings_lc7k4")
+script = ExtResource("6_jn4p2")
+
+[node name="Label2" type="Label" parent="Control/Scores"]
+layout_mode = 0
+offset_left = 1099.0
+offset_top = 124.0
+offset_right = 1316.0
+offset_bottom = 193.0
+label_settings = SubResource("LabelSettings_lc7k4")
+script = ExtResource("6_jn4p2")
+
 [node name="Spawns" type="Node3D" parent="."]
 
 [node name="Spawn1" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
@@ -97,6 +124,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jn4p2")
 
 [node name="Spawn2" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72571, -0.408282, -3.5143)
+mesh = SubResource("CylinderMesh_lc7k4")
+surface_material_override/0 = SubResource("StandardMaterial3D_jn4p2")
+
+[node name="Spawn3" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.96515, -0.408282, 3.87356)
+mesh = SubResource("CylinderMesh_lc7k4")
+surface_material_override/0 = SubResource("StandardMaterial3D_jn4p2")
+
+[node name="Spawn4" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72571, -0.408282, 3.87356)
 mesh = SubResource("CylinderMesh_lc7k4")
 surface_material_override/0 = SubResource("StandardMaterial3D_jn4p2")
 
