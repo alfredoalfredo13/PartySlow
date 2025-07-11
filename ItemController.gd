@@ -26,7 +26,7 @@ func set_model(iName : String) -> void :
 		var model_scene : PackedScene = MODEL_PATHS[iName]
 		model_node = model_scene.instantiate()
 		add_child(model_node)
-		print("model instantiated: " + iName)
+		#print("model instantiated: " + iName)
 	else:
 		print("model not found for ingredient " + iName)
 

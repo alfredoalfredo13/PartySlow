@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://yl4brldpja76"]
+[gd_scene load_steps=11 format=3 uid="uid://yl4brldpja76"]
 
 [ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://platform.tscn" id="1_1kog2"]
 [ext_resource type="PackedScene" uid="uid://doec7p020t8dw" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_innercorner_backsplash.fbx" id="4_mvtj7"]
@@ -6,8 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://brvn2muy2wcmx" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_sink_backsplash.fbx" id="5_xlsm3"]
 [ext_resource type="PackedScene" uid="uid://cfduaebxwrugs" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_straight_decorated.fbx" id="6_4nl3v"]
 [ext_resource type="PackedScene" uid="uid://dxbonaomm4i7s" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_straight_A_decorated.fbx" id="7_vvvv7"]
+[ext_resource type="Script" uid="uid://bc1ma10jujxgw" path="res://deposit_zone.gd" id="8_hij1a"]
 [ext_resource type="PackedScene" uid="uid://87exa1vcs01d" path="res://Restaurant_Bits/Assets/fbx/floor_kitchen.fbx" id="8_vvvv7"]
 [ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Ingredient.tscn" id="9_hij1a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vvvv7"]
+size = Vector3(6.79889, 3.4054, 5.77466)
 
 [node name="TestLevel" type="Node3D"]
 
@@ -76,6 +80,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.047, -0.488281, -5.4003)
 
 [node name="floor_kitchen3" parent="Main_Room/Props" instance=ExtResource("8_vvvv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05502, -0.488281, -9.34683)
+
+[node name="DepositZone" type="Area3D" parent="Main_Room"]
+script = ExtResource("8_hij1a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main_Room/DepositZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.20391, 1.2027, -8.37001)
+shape = SubResource("BoxShape3D_vvvv7")
 
 [node name="North1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22.6678)
@@ -357,3 +368,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1754, -0.0148926, -31.8739
 
 [node name="Item4" parent="NorthWest/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64169, -0.0148926, -14.2118)
+
+[connection signal="body_entered" from="Main_Room/DepositZone" to="Main_Room/DepositZone" method="_on_body_entered"]

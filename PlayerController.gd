@@ -8,6 +8,8 @@ signal notify_movement(movement_direction : Vector3)
 
 var target_velocity = Vector3.ZERO
 var inventory : Array[String]
+var completed_recipes : int = 0
+var points : int = 0
 var move_dir : Vector3
 
 var sync_pos = Vector3.ZERO
@@ -34,8 +36,24 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 	sync_pos = global_position
 	sync_rot = $Pivot.rotation_degrees
+	detect_recipes()
 	if Input.is_action_just_pressed("interact"):
-		print(inventory)
+		print("points: " + str(points) + "completed recipes: " + str(completed_recipes) + " inventory: " + str(inventory))
+	if Input.is_action_just_pressed("give_ingredients"):
+		for i in GlobalData.currentRecipe.ingredients:
+			inventory.append(i.ingredient_name)
+		print("added ingredients")
+
+func detect_recipes():
+	# check for recipe's ingredients in player's inventory
+	for required in GlobalData.currentRecipe.ingredients:
+		if inventory.has(required.ingredient_name): continue # player has this ingredient, next
+		return # player does not have this ingredient, gtfo
+	
+	# player has all required ingredients, remove ingredients and add completed recipe
+	for required in GlobalData.currentRecipe.ingredients:
+		inventory.erase(required.ingredient_name)
+	completed_recipes += 1
 
 func move(delta: float) : 
 	move_dir = Vector3.ZERO

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://camera.gd" id="1_kj3p2"]
 [ext_resource type="Script" uid="uid://te1t8tjrmik5" path="res://Main.gd" id="1_lc7k4"]
-[ext_resource type="PackedScene" uid="uid://cr71sii8wcgy4" path="res://BarbarianPlayerModel.tscn" id="3_feb8i"]
+[ext_resource type="PackedScene" uid="uid://c3stx4op77vn0" path="res://Player.tscn" id="3_feb8i"]
 [ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Ingredient.tscn" id="3_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://yl4brldpja76" path="res://TestLevel.tscn" id="5_lc7k4"]
 
