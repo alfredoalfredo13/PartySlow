@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dbvtfekf6m716"]
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://camera.gd" id="1_kj3p2"]
-[ext_resource type="PackedScene" uid="uid://cr71sii8wcgy4" path="res://Player.tscn" id="3_feb8i"]
+[ext_resource type="PackedScene" uid="uid://cr71sii8wcgy4" path="res://BarbarianPlayerModel.tscn" id="3_feb8i"]
 [ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Ingredient.tscn" id="3_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://platform.tscn" id="4_kj3p2"]
 [ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://MultiplayerController.gd" id="5_lc7k4"]
