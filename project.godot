@@ -23,6 +23,7 @@ GameManager="*res://GameManager.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+GlobalData="*res://global_data.gd"
 
 [filesystem]
 
@@ -77,3 +78,4 @@ interact={
 
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Item"
+3d_physics/layer_3="World"
