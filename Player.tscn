@@ -12,6 +12,18 @@
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_m4myh"]
+properties/0/path = NodePath(".:sync_pos")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:sync_rot")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Pivot/Barbarian/AnimationPlayer:current_animation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Pivot/Barbarian/AnimationPlayer:playback_auto_capture")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
 collision_mask = 5
