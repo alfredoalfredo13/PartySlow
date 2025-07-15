@@ -12,5 +12,4 @@ size = Vector3(10, 1, 10)
 shape = SubResource("BoxShape3D_5ajho")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-layers = 0
 mesh = SubResource("BoxMesh_mi635")

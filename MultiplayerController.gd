@@ -31,28 +31,29 @@ func _ready() -> void:
 # this gets called on the server and clients
 func peer_connected(id):
 	self.id = str(id)
-	print("Player Connected ", id)
+	#print("Player Connected ", id)
 
 # this gets called on the server and clients	
 func peer_disconnected(id):
 	var player_data : PlayerData = GameManager.players[id]
 	GameManager.players.erase(id)
 	player_data.remove_player.emit()
-	print("Player Disconnected ", id)
+	#print("Player Disconnected ", id)
 
 #called only from clients
 func connected_to_server():
-	print("Connected to Server.....")
+	#print("Connected to Server.....")
 	send_player_information.rpc_id(1, local_player_data.name, local_player_data.char_classe, multiplayer.get_unique_id())
 
 #called only from clients	
 func connection_failed():
-	print("Couldn't Connect")
+	#print("Couldn't Connect")
+	pass
 
 #Roda toda vez que um novo player conecta no servidor
 @rpc("any_peer", "call_remote")
 func send_player_information(name, character, id):
-	print("is host = ", is_host)
+	#print("is host = ", is_host)
 	if !GameManager.players.has(id):
 		var new_player = PlayerData.new()
 		new_player.id = id
@@ -60,7 +61,7 @@ func send_player_information(name, character, id):
 		new_player.char_classe = character
 		GameManager.players.set(id, new_player)
 		
-	print(id)
+	#print(id)
 	if multiplayer.is_server():
 		for i in GameManager.players:
 			var player : PlayerData = GameManager.players[i]
@@ -96,12 +97,12 @@ func host_game():
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_PLAYERS)
 	if error != OK:
-		print("nao rolo")
+		#print("nao rolo")
 		return
 	multiplayer.multiplayer_peer = peer
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
-	print("ghost host is waiting...")
+	#print("ghost host is waiting...")
 
 func _on_host_pressed() -> void:
 	host_game()	
@@ -116,10 +117,8 @@ func _on_join_pressed() -> void:
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	
 func _on_start_pressed() -> void:
-	for i in GameManager.players:
-		print(i)
 	start_game.rpc()
-	print("start")
+	#print("start")
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	local_player_data.name = new_text

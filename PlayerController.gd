@@ -39,11 +39,12 @@ func _physics_process(delta: float) -> void:
 	sync_rot = $Pivot.rotation_degrees
 	detect_recipes()
 	if Input.is_action_just_pressed("interact"):
-		print("points: " + str(points) + "completed recipes: " + str(completed_recipes) + " inventory: " + str(inventory))
+		pass
+		#print("points: " + str(points) + "completed recipes: " + str(completed_recipes) + " inventory: " + str(inventory))
 	if Input.is_action_just_pressed("give_ingredients"):
 		for i in GlobalData.currentRecipe.ingredients:
 			inventory.append(i.ingredient_name)
-		print("added ingredients")
+		#print("added ingredients")
 
 func detect_recipes():
 	# check for recipe's ingredients in player's inventory

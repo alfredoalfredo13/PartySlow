@@ -438,3 +438,5 @@ layer = 8
 [editable path="North/RoomCameraColl"]
 [editable path="North2/RoomCameraColl"]
 [editable path="NorthEast/RoomCameraColl"]
+[editable path="SouthWest/RoomCameraColl"]
+[editable path="NorthWest/RoomCameraColl"]
