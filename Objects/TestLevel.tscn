@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://yl4brldpja76"]
+[gd_scene load_steps=12 format=3 uid="uid://yl4brldpja76"]
 
-[ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://platform.tscn" id="1_1kog2"]
+[ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://Objects/platform.tscn" id="1_1kog2"]
 [ext_resource type="PackedScene" uid="uid://doec7p020t8dw" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_innercorner_backsplash.fbx" id="4_mvtj7"]
 [ext_resource type="PackedScene" uid="uid://chgnm7buh47wl" path="res://Restaurant_Bits/Assets/fbx/stove_multi_decorated.fbx" id="5_mvtj7"]
 [ext_resource type="PackedScene" uid="uid://brvn2muy2wcmx" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_sink_backsplash.fbx" id="5_xlsm3"]
@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dxbonaomm4i7s" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_straight_A_decorated.fbx" id="7_vvvv7"]
 [ext_resource type="Script" uid="uid://bc1ma10jujxgw" path="res://deposit_zone.gd" id="8_hij1a"]
 [ext_resource type="PackedScene" uid="uid://87exa1vcs01d" path="res://Restaurant_Bits/Assets/fbx/floor_kitchen.fbx" id="8_vvvv7"]
-[ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Ingredient.tscn" id="9_hij1a"]
+[ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Objects/Ingredient.tscn" id="9_hij1a"]
+[ext_resource type="PackedScene" uid="uid://r7ho55e82jmr" path="res://Objects/room_camera_coll.tscn" id="9_w47ov"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvvv7"]
 size = Vector3(6.79889, 3.4054, 5.77466)
@@ -60,26 +61,50 @@ collision_layer = 4
 [node name="kitchencounter_innercorner_backsplash" parent="Main_Room/Props" instance=ExtResource("4_mvtj7")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.03659, -0.0499266, -10.4334)
 
+[node name="kitchencounter_innercorner_backsplash" parent="Main_Room/Props/kitchencounter_innercorner_backsplash" index="0"]
+layers = 1024
+
 [node name="kitchencounter_sink_backsplash" parent="Main_Room/Props" instance=ExtResource("5_xlsm3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98893, -0.0310668, -10.3674)
+
+[node name="kitchencounter_sink_backsplash" parent="Main_Room/Props/kitchencounter_sink_backsplash" index="0"]
+layers = 1024
 
 [node name="stove_multi_decorated" parent="Main_Room/Props" instance=ExtResource("5_mvtj7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99959, -0.0148925, -10.4556)
 
+[node name="stove_multi_decorated" parent="Main_Room/Props/stove_multi_decorated" index="0"]
+layers = 1024
+
 [node name="kitchencounter_straight_A_decorated" parent="Main_Room/Props" instance=ExtResource("7_vvvv7")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.01271, -0.0148925, -6.42397)
+
+[node name="kitchencounter_straight_A_decorated" parent="Main_Room/Props/kitchencounter_straight_A_decorated" index="0"]
+layers = 1024
 
 [node name="kitchencounter_straight_decorated" parent="Main_Room/Props" instance=ExtResource("6_4nl3v")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.01662, -0.0148925, -8.40614)
 
+[node name="kitchencounter_straight_decorated" parent="Main_Room/Props/kitchencounter_straight_decorated" index="0"]
+layers = 1024
+
 [node name="floor_kitchen" parent="Main_Room/Props" instance=ExtResource("8_vvvv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.047, -0.488281, -9.3522)
+
+[node name="floor_kitchen" parent="Main_Room/Props/floor_kitchen" index="0"]
+layers = 1024
 
 [node name="floor_kitchen2" parent="Main_Room/Props" instance=ExtResource("8_vvvv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.047, -0.488281, -5.4003)
 
+[node name="floor_kitchen" parent="Main_Room/Props/floor_kitchen2" index="0"]
+layers = 1024
+
 [node name="floor_kitchen3" parent="Main_Room/Props" instance=ExtResource("8_vvvv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05502, -0.488281, -9.34683)
+
+[node name="floor_kitchen" parent="Main_Room/Props/floor_kitchen3" index="0"]
+layers = 1024
 
 [node name="DepositZone" type="Area3D" parent="Main_Room"]
 script = ExtResource("8_hij1a")
@@ -88,46 +113,56 @@ script = ExtResource("8_hij1a")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.20391, 1.2027, -8.37001)
 shape = SubResource("BoxShape3D_vvvv7")
 
-[node name="North1" type="Node3D" parent="."]
+[node name="RoomCameraColl" parent="Main_Room" instance=ExtResource("9_w47ov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.337769, 4.13336, -0.451096)
+layer = 11
+
+[node name="North" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22.6678)
 
-[node name="ground" parent="North1" instance=ExtResource("1_1kog2")]
+[node name="ground" parent="North" instance=ExtResource("1_1kog2")]
 transform = Transform3D(2.085, 0, 0, 0, 1, 0, 0, 0, 2.27, 0.281067, -0.514893, -0.153442)
 collision_layer = 4
 
-[node name="Walls" type="Node3D" parent="North1"]
+[node name="Walls" type="Node3D" parent="North"]
 
-[node name="Platform2" parent="North1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform2" parent="North/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(0.05, 0, 0, 0, 8.665, 0, 0, 0, 1.76, 10.9357, -0.287604, 2.46414)
 collision_layer = 4
 
-[node name="Platform3" parent="North1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform3" parent="North/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(-2.18557e-09, 0, 1.415, 0, 8.665, 0, -0.05, 0, -6.18516e-08, 4.133, -0.297004, 4.84191)
 collision_layer = 4
 
-[node name="Platform4" parent="North1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform4" parent="North/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(-2.18557e-09, 0, 1.66, 0, 8.665, 0, -0.05, 0, -7.25609e-08, 2.90955, -0.297004, -11.6294)
 collision_layer = 4
 
-[node name="Platform5" parent="North1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform5" parent="North/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(0.05, 0, 0, 0, 8.665, 0, 0, 0, 2.255, -10.2829, -0.298224, -0.245857)
 collision_layer = 4
 
-[node name="Platform6" parent="North1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform6" parent="North/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(0.05, 0, 0, 0, 8.665, 0, 0, 0, 0.855, -3.19751, 0.0988092, 0.835648)
 collision_layer = 4
 
-[node name="Platform7" parent="North1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform7" parent="North/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(0.05, 0, 0, 0, 8.665, 0, 0, 0, 0.425, -3.19751, 0.0988092, -9.73241)
 collision_layer = 4
 
-[node name="Items" type="Node3D" parent="North1"]
+[node name="Items" type="Node3D" parent="North"]
 
-[node name="Item" parent="North1/Items" instance=ExtResource("9_hij1a")]
+[node name="Item" parent="North/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.17786, 0.436829, -1.09752)
 
-[node name="Item2" parent="North1/Items" instance=ExtResource("9_hij1a")]
+[node name="Item2" parent="North/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62967, 0.436829, -1.09752)
+
+[node name="RoomCameraColl" parent="North" instance=ExtResource("9_w47ov")]
+layer = 9
+
+[node name="CollisionShape3D" parent="North/RoomCameraColl" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.217804)
 
 [node name="North2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -45.216)
@@ -160,6 +195,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475555, -0.0147705, -0.7174
 
 [node name="Item2" parent="North2/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.15114, -0.0147705, -10.2271)
+
+[node name="RoomCameraColl" parent="North2" instance=ExtResource("9_w47ov")]
+layer = 2
 
 [node name="NorthEast" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7774, 0, -22.6261)
@@ -201,38 +239,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4987, -0.0148926, -10.0441)
 [node name="Item3" parent="NorthEast/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.80565, -0.0148926, 3.49153)
 
-[node name="East1" type="Node3D" parent="."]
+[node name="RoomCameraColl" parent="NorthEast" instance=ExtResource("9_w47ov")]
+layer = 3
+
+[node name="East" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7774, 0, -0.498543)
 
-[node name="ground" parent="East1" instance=ExtResource("1_1kog2")]
+[node name="ground" parent="East" instance=ExtResource("1_1kog2")]
 transform = Transform3D(2.085, 0, 0, 0, 1, 0, 0, 0, 2.27, 0.281067, -0.514893, -0.153442)
 collision_layer = 4
 
-[node name="Walls" type="Node3D" parent="East1"]
+[node name="Walls" type="Node3D" parent="East"]
 
-[node name="Platform2" parent="East1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform2" parent="East/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(0.05, 0, 0, 0, 8.665, 0, 0, 0, 2.245, 10.9403, -0.287604, 0.194302)
 collision_layer = 4
 
-[node name="Platform4" parent="East1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform4" parent="East/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(-2.18557e-09, 0, 2.07, 0, 8.665, 0, -0.05, 0, -9.04826e-08, 0.438007, -0.297004, -0.62989)
 collision_layer = 4
 
-[node name="Platform5" parent="East1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform5" parent="East/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(-2.18557e-09, 0, 1.25, 0, 8.665, 0, -0.05, 0, -5.46392e-08, -3.62479, -0.297004, 11.5376)
 collision_layer = 4
 
-[node name="Platform6" parent="East1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform6" parent="East/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(-2.18557e-09, 0, 0.395, 0, 8.665, 0, -0.05, 0, -1.7266e-08, 9.1989, -0.297004, 11.5376)
 collision_layer = 4
 
-[node name="Items" type="Node3D" parent="East1"]
+[node name="Items" type="Node3D" parent="East"]
 
-[node name="Item" parent="East1/Items" instance=ExtResource("9_hij1a")]
+[node name="Item" parent="East/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.12017, -0.0148926, -6.63813)
 
-[node name="Item2" parent="East1/Items" instance=ExtResource("9_hij1a")]
+[node name="Item2" parent="East/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00916, -0.0148926, 8.01487)
+
+[node name="RoomCameraColl" parent="East" instance=ExtResource("9_w47ov")]
+layer = 4
 
 [node name="SouthEast" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7774, 0, 22.1688)
@@ -266,6 +310,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0435, -0.0148926, -9.2554
 [node name="Item3" parent="SouthEast/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.521318, -0.0148926, -9.36299)
 
+[node name="RoomCameraColl" parent="SouthEast" instance=ExtResource("9_w47ov")]
+layer = 5
+
 [node name="SouthWest" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.0096, 0, 22.2472)
 
@@ -293,42 +340,48 @@ collision_layer = 4
 
 [node name="Items" type="Node3D" parent="SouthWest"]
 
-[node name="West1" type="Node3D" parent="."]
+[node name="RoomCameraColl" parent="SouthWest" instance=ExtResource("9_w47ov")]
+layer = 6
+
+[node name="West" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.7416, 0, -0.263893)
 
-[node name="ground" parent="West1" instance=ExtResource("1_1kog2")]
+[node name="ground" parent="West" instance=ExtResource("1_1kog2")]
 transform = Transform3D(2.085, 0, 0, 0, 1, 0, 0, 0, 2.27, 0.281067, -0.514893, -0.153442)
 collision_layer = 4
 
-[node name="Walls" type="Node3D" parent="West1"]
+[node name="Walls" type="Node3D" parent="West"]
 
-[node name="Platform3" parent="West1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform3" parent="West/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(-2.18557e-09, 0, 0.78, 0, 8.665, 0, -0.05, 0, -3.40949e-08, 7.03583, -0.297004, -11.1586)
 collision_layer = 4
 
-[node name="Platform4" parent="West1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform4" parent="West/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(-2.18557e-09, 0, 0.805, 0, 8.665, 0, -0.05, 0, -3.51877e-08, -6.44644, -0.297004, -11.1586)
 collision_layer = 4
 
-[node name="Platform6" parent="West1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform6" parent="West/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(-3.51877e-08, 0, 0.805, 0, 8.665, 0, -0.805, 0, -3.51877e-08, 0.333836, -0.297004, 0.46239)
 collision_layer = 4
 
-[node name="Platform5" parent="West1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform5" parent="West/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(0.05, 0, 0, 0, 8.665, 0, 0, 0, 0.8, -10.4043, -0.298224, 7.30072)
 collision_layer = 4
 
-[node name="Platform7" parent="West1/Walls" instance=ExtResource("1_1kog2")]
+[node name="Platform7" parent="West/Walls" instance=ExtResource("1_1kog2")]
 transform = Transform3D(0.05, 0, 0, 0, 8.665, 0, 0, 0, 0.915, -10.4043, -0.298224, -6.67439)
 collision_layer = 4
 
-[node name="Items" type="Node3D" parent="West1"]
+[node name="Items" type="Node3D" parent="West"]
 
-[node name="Item" parent="West1/Items" instance=ExtResource("9_hij1a")]
+[node name="Item" parent="West/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.24887, -0.0148926, 0.0286121)
 
-[node name="Item2" parent="West1/Items" instance=ExtResource("9_hij1a")]
+[node name="Item2" parent="West/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.969694, -0.0148926, -9.24633)
+
+[node name="RoomCameraColl" parent="West" instance=ExtResource("9_w47ov")]
+layer = 7
 
 [node name="NorthWest" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.627, 0, -0.263893)
@@ -369,4 +422,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1754, -0.0148926, -31.8739
 [node name="Item4" parent="NorthWest/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64169, -0.0148926, -14.2118)
 
+[node name="RoomCameraColl" parent="NorthWest" instance=ExtResource("9_w47ov")]
+layer = 8
+
 [connection signal="body_entered" from="Main_Room/DepositZone" to="Main_Room/DepositZone" method="_on_body_entered"]
+
+[editable path="Main_Room/Props/kitchencounter_innercorner_backsplash"]
+[editable path="Main_Room/Props/kitchencounter_sink_backsplash"]
+[editable path="Main_Room/Props/stove_multi_decorated"]
+[editable path="Main_Room/Props/kitchencounter_straight_A_decorated"]
+[editable path="Main_Room/Props/kitchencounter_straight_decorated"]
+[editable path="Main_Room/Props/floor_kitchen"]
+[editable path="Main_Room/Props/floor_kitchen2"]
+[editable path="Main_Room/Props/floor_kitchen3"]
+[editable path="North/RoomCameraColl"]
+[editable path="North2/RoomCameraColl"]
+[editable path="NorthEast/RoomCameraColl"]

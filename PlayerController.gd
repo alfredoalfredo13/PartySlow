@@ -4,6 +4,7 @@ class_name PlayerController extends CharacterBody3D
 @export var SPEED : float = 15.0
 @export var player_data : PlayerData
 @onready var id_label = $SubViewport/Label
+@onready var player_room_controller : PlayerRoomController = $PlayerRoomController
 signal notify_movement(movement_direction : Vector3)
 
 var target_velocity = Vector3.ZERO
@@ -55,7 +56,7 @@ func detect_recipes():
 		inventory.erase(required.ingredient_name)
 	completed_recipes += 1
 
-func move(delta: float) : 
+func move(delta: float) :
 	move_dir = Vector3.ZERO
 	# gets movement move_dir based on input
 	move_dir.z = Input.get_axis("forward", "backward")

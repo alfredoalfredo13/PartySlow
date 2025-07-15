@@ -81,6 +81,10 @@ func start_game():
 		remote_player_data.in_game = true
 		var player_instance :PlayerController = player.instantiate()
 		player_instance.player_data = remote_player_data
+		#GameManager.set_mesh_layer_recursive(player_instance, 1, false)
+		if remote_player_data.id == multiplayer.get_unique_id():
+			GameManager.set_mesh_layer_recursive(player_instance, 15, true)
+			remote_player_data.is_local = true
 		player_instance.seta_name(remote_player_data.name)
 		var spawn_pos = (get_tree().get_nodes_in_group("PlayerSpawn")[index] as Node3D).global_position
 		player_instance.position = Vector3(spawn_pos.x, 0.5, spawn_pos.z)

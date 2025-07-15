@@ -82,6 +82,17 @@ give_ingredients={
 
 [layer_names]
 
+3d_render/layer_1="All"
+3d_render/layer_2="North2"
+3d_render/layer_3="NorthEast"
+3d_render/layer_4="East"
+3d_render/layer_5="SouthEast"
+3d_render/layer_6="SouthWest"
+3d_render/layer_7="West"
+3d_render/layer_8="NorthWest"
+3d_render/layer_9="North"
+3d_render/layer_11="Center"
+3d_render/layer_15="Local Player"
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Item"
 3d_physics/layer_3="World"

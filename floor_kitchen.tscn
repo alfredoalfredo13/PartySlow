@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://db2attma4w44b"]
+
+[ext_resource type="PackedScene" uid="uid://87exa1vcs01d" path="res://Restaurant_Bits/Assets/fbx/floor_kitchen.fbx" id="1_5whoi"]
+
+[node name="floor_kitchen" instance=ExtResource("1_5whoi")]
+
+[node name="floor_kitchen" parent="." index="0"]
+layers = 1024

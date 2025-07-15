@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://vw4qi8do4suw"]
+
+[ext_resource type="PackedScene" uid="uid://doec7p020t8dw" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_innercorner_backsplash.fbx" id="1_uruqw"]
+
+[node name="kitchencounter_innercorner_backsplash" instance=ExtResource("1_uruqw")]
+
+[node name="kitchencounter_innercorner_backsplash" parent="." index="0"]
+layers = 1024
