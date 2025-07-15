@@ -16,10 +16,11 @@ func _on_body_entered(body: Node3D) -> void:
 	if !player.player_data.is_local:
 		GameManager.set_mesh_layer_recursive(body, layer, true)
 		return
-	print("Player entered ", get_parent().name)
+	print("collision entered ", get_parent().name)
 	player.player_room_controller.set_new_room(self)
 
 func enter_room(player : Node3D):
+	print("Player entered ", get_parent().name)
 	var camera = get_viewport().get_camera_3d()
 	camera.set_cull_mask_value(layer, true)
 	var tween = get_tree().create_tween()
@@ -39,7 +40,7 @@ func _on_body_exited(body: Node3D) -> void:
 		GameManager.set_mesh_layer_recursive(body, layer, false)
 		return
 	print("collision exited ", get_parent().name)
-	player.player_room_controller.enter_new_room()
+	player.player_room_controller.enter_new_room(self)
 
 # Example usage:
 # Assuming you have a root node called "SceneRoot"
