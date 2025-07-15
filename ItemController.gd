@@ -8,7 +8,12 @@ const MODEL_PATHS := {
 	"Bun": preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_bun.fbx"),
 	"Lettuce": preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_lettuce_slice.fbx"),
 	"Cheese": preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_cheese_slice.fbx"),
-	"Burger": preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_burger_cooked.fbx")
+	"Burger": preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_burger_cooked.fbx"),
+	"Potato":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_potato_chopped.fbx"),
+	"Onion":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_onion_chopped.fbx"),
+	"Carrot":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_carrot.fbx"),
+	"Chicken":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_ham.fbx"),
+	"Tomato":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_tomato.fbx")
 }
 
 func _ready() -> void:

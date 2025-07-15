@@ -9,23 +9,48 @@ func _ready() -> void:
 	createRecipes()
 	print("created recipes")
 	setCurrentRecipe()
-	print("set current")
+	print("set current: " + currentRecipe.recipe_name)
 
 func createIngredients():
 	ingredients.append(Ingredient.new("Bun", "Bread"))
 	ingredients.append(Ingredient.new("Lettuce", "Vegetable"))
 	ingredients.append(Ingredient.new("Cheese", "Dairy"))
 	ingredients.append(Ingredient.new("Burger", "Meat"))
+	ingredients.append(Ingredient.new("Potato", "Vegetable"))
+	ingredients.append(Ingredient.new("Onion", "Vegetable"))
+	ingredients.append(Ingredient.new("Carrot", "Vegetable"))
+	ingredients.append(Ingredient.new("Chicken", "Meat"))
+	ingredients.append(Ingredient.new("Tomato", "Vegetable"))
 
 func createRecipes():
-	recipes.append(Recipe.new("Hamburger",[
+	recipes.append(Recipe.new("Cheeseburger",[
 		get_ingredient("Bun"),
 		get_ingredient("Lettuce"),
 		get_ingredient("Cheese"),
 		get_ingredient("Burger")
 		]))
-	recipes.append(Recipe.new("TestRecipe", [
-		get_ingredient("Bun")
+	recipes.append(Recipe.new("Stew", [
+		get_ingredient("Potato"),
+		get_ingredient("Onion"),
+		get_ingredient("Carrot"),
+		get_ingredient("Tomato")
+	]))
+	recipes.append(Recipe.new("Hamburger", [
+		get_ingredient("Bun"),
+		get_ingredient("Onion"),
+		get_ingredient("Tomato"),
+		get_ingredient("Burger")
+	]))
+	recipes.append(Recipe.new("Chicken salad", [
+		get_ingredient("Chicken"),
+		get_ingredient("Lettuce"),
+		get_ingredient("Tomato"),
+		get_ingredient("Onion")
+	]))
+	recipes.append(Recipe.new("Stuffed potato", [
+		get_ingredient("Potato"),
+		get_ingredient("Burger"),
+		get_ingredient("Cheese")
 	]))
 
 func setCurrentRecipe() :
