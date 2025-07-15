@@ -7,6 +7,11 @@ class_name PlayerController extends CharacterBody3D
 @onready var player_room_controller : PlayerRoomController = $PlayerRoomController
 signal notify_movement(movement_direction : Vector3)
 
+var melee_cd : float = 0.0
+var melee_timer : float = 0.0
+var melee_hit : Array = []
+var stun : float = 0.0
+
 var target_velocity = Vector3.ZERO
 var inventory : Array[String]
 var completed_recipes : int = 0
@@ -34,17 +39,50 @@ func _physics_process(delta: float) -> void:
 		global_position = global_position.lerp(sync_pos, 0.5)
 		$Pivot.rotation_degrees.y = lerpf($Pivot.rotation_degrees.y, sync_rot.y, 0.5)
 		return
+	# melee cooldown
+	melee_cd -= delta
+	# melee duration
+	melee_timer -= delta
+	if melee_timer <= 0.0:
+		melee_hit.clear() # clears array containing hit players
+	# stunned, cant do anything
+	if stun > 0.0:
+		stun -= delta
+		return
+	# not stunned, continue
 	move(delta)
 	sync_pos = global_position
 	sync_rot = $Pivot.rotation_degrees
 	detect_recipes()
 	if Input.is_action_just_pressed("interact"):
-		pass
-		#print("points: " + str(points) + "completed recipes: " + str(completed_recipes) + " inventory: " + str(inventory))
+		melee()
+		print("points: " + str(points) + " completed recipes: " + str(completed_recipes) + " inventory: " + str(inventory))
 	if Input.is_action_just_pressed("give_ingredients"):
 		for i in GlobalData.currentRecipe.ingredients:
 			inventory.append(i.ingredient_name)
-		#print("added ingredients")
+		print("added ingredients")
+
+func melee() :
+	# punch what is ahead of you
+	# will stun hit players
+	if melee_cd > 0.0: return # already meleeing
+	print("punching...")
+	melee_timer = 0.3 # time that MeleeArea stays active
+	melee_cd = 1.0 # cooldown before being able to melee again
+	
+	# get bodies inside MeleeArea
+	var bodies = $Pivot/MeleeArea.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("Players") and body not in melee_hit: # hit a player
+			body.damaged() # stun them
+			melee_hit.append(body) # so they dont get hit repeatedly from one attack
+			print("HA! I hit someone!")
+	
+
+func damaged() :
+	# hit by another player, gets stunned for 1.5 second
+	stun = 0.5
+	print("AH! I've been stunned!")
 
 func detect_recipes():
 	# check for recipe's ingredients in player's inventory
@@ -54,7 +92,10 @@ func detect_recipes():
 	
 	# player has all required ingredients, remove ingredients and add completed recipe
 	for required in GlobalData.currentRecipe.ingredients:
-		inventory.erase(required.ingredient_name)
+		for ingredient in inventory:
+			if required.ingredient_name != ingredient: continue
+			inventory.erase(required.ingredient_name)
+			break
 	completed_recipes += 1
 
 func move(delta: float) :
