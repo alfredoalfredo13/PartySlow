@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3stx4op77vn0"]
+[gd_scene load_steps=10 format=3 uid="uid://c3stx4op77vn0"]
 
 [ext_resource type="Script" uid="uid://fref78n6qn24" path="res://PlayerController.gd" id="1_0ip8g"]
 [ext_resource type="PackedScene" uid="uid://dw7wb46a4kbl8" path="res://Characters/fbx/Barbarian.fbx" id="2_b0egn"]
@@ -26,6 +26,8 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("Pivot/Barbarian/AnimationPlayer:playback_auto_capture")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gijnf"]
 
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
 collision_mask = 5
@@ -185,9 +187,17 @@ texture = SubResource("ViewportTexture_vs3au")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_m4myh")
 
-[node name="PlayerRoomController" type="Node" parent="."]
+[node name="PlayerRoomController" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4096
 script = ExtResource("4_gijnf")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerRoomController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_gijnf")
+
 [connection signal="notify_movement" from="." to="Pivot/Barbarian" method="_on_player_notify_movement"]
+[connection signal="area_entered" from="PlayerRoomController" to="PlayerRoomController" method="_on_area_entered"]
+[connection signal="area_exited" from="PlayerRoomController" to="PlayerRoomController" method="_on_area_exited"]
 
 [editable path="Pivot/Barbarian"]

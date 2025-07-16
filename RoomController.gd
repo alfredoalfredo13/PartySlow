@@ -4,6 +4,8 @@ class_name RoomController extends Area3D
 var players_list = []
 var is_player_here = false
 
+#Script é desativo em players não locais
+
 func _ready() -> void:
 	GameManager.set_mesh_layer_recursive(get_parent(), 1, false)	
 	GameManager.set_mesh_layer_recursive(get_parent(), layer, true)	
@@ -16,11 +18,9 @@ func _on_body_entered(body: Node3D) -> void:
 	if !player.player_data.is_local:
 		GameManager.set_mesh_layer_recursive(body, layer, true)
 		return
-	print("collision entered ", get_parent().name)
-	player.player_room_controller.set_new_room(self)
 
-func enter_room(player : Node3D):
-	print("Player entered ", get_parent().name)
+func change_room():
+	#print("moving to room ", get_parent().name)
 	var camera = get_viewport().get_camera_3d()
 	camera.set_cull_mask_value(layer, true)
 	var tween = get_tree().create_tween()
@@ -28,7 +28,7 @@ func enter_room(player : Node3D):
 	tween.tween_property(camera, "position", next_pos, 0.2).set_ease(Tween.EASE_OUT_IN)
 	
 func exit_room():
-	print("Player exited ", get_parent().name)
+	#print("Player exited ", get_parent().name)
 	var camera = get_viewport().get_camera_3d()
 	camera.set_cull_mask_value(layer, false)
 
@@ -39,8 +39,6 @@ func _on_body_exited(body: Node3D) -> void:
 	if !player.player_data.is_local:
 		GameManager.set_mesh_layer_recursive(body, layer, false)
 		return
-	print("collision exited ", get_parent().name)
-	player.player_room_controller.enter_new_room(self)
 
 # Example usage:
 # Assuming you have a root node called "SceneRoot"

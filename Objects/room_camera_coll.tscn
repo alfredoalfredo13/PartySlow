@@ -6,6 +6,7 @@
 size = Vector3(20.7864, 9.26672, 22.2504)
 
 [node name="RoomCameraColl" type="Area3D"]
+collision_layer = 4096
 script = ExtResource("1_0b4gd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

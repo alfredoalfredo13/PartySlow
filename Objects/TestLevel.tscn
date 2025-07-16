@@ -423,6 +423,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1754, -0.0148926, -31.8739
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64169, -0.0148926, -14.2118)
 
 [node name="RoomCameraColl" parent="NorthWest" instance=ExtResource("9_w47ov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03333, 0, 0)
 layer = 8
 
 [connection signal="body_entered" from="Main_Room/DepositZone" to="Main_Room/DepositZone" method="_on_body_entered"]
@@ -439,4 +440,5 @@ layer = 8
 [editable path="North2/RoomCameraColl"]
 [editable path="NorthEast/RoomCameraColl"]
 [editable path="SouthWest/RoomCameraColl"]
+[editable path="West/RoomCameraColl"]
 [editable path="NorthWest/RoomCameraColl"]

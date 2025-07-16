@@ -33,6 +33,8 @@ func _ready() -> void:
 func seta_name(name):
 	$SubViewport/Label.text = name
 	$MultiplayerSynchronizer.set_multiplayer_authority(player_data.id)
+	if !player_data.is_local:
+		remove_child($PlayerRoomController)
 
 func _physics_process(delta: float) -> void:
 	if !$MultiplayerSynchronizer.is_multiplayer_authority():
