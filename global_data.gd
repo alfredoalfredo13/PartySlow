@@ -8,8 +8,7 @@ func _ready() -> void:
 	print("created ingredients")
 	createRecipes()
 	print("created recipes")
-	setCurrentRecipe()
-	print("set current: " + currentRecipe.recipe_name)
+
 
 func createIngredients():
 	ingredients.append(Ingredient.new("Bun", "Bread"))
@@ -53,8 +52,9 @@ func createRecipes():
 		get_ingredient("Cheese")
 	]))
 
-func setCurrentRecipe() :
-	currentRecipe = recipes[randi_range(0, recipes.size()-1)]
+func setCurrentRecipe(index):
+	currentRecipe = recipes[index]
+	print("set current: " + currentRecipe.recipe_name)
 
 func get_ingredient(iName : String) -> Ingredient:
 	for ingredient in ingredients:

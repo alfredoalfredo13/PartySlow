@@ -91,6 +91,8 @@ func start_game():
 		player_instance.position = Vector3(spawn_pos.x, 0.5, spawn_pos.z)
 		get_tree().root.add_child(player_instance)
 		index += 1
+	if is_host:
+		GameManager.host_randomize_items()
 		
 func host_game():
 	is_host = true

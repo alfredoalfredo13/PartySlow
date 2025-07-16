@@ -26,18 +26,20 @@ func _ready() -> void:
 		func():
 			queue_free()
 	)
+	if !player_data.is_local:
+		GameManager.set_mesh_layer_recursive(self, 1, false)
 	sync_pos = global_position
 	sync_rot = $Pivot.rotation_degrees
-	pass
+	
 
 func seta_name(name):
 	$SubViewport/Label.text = name
-	$MultiplayerSynchronizer.set_multiplayer_authority(player_data.id)
+	$InputSynchronizer.set_multiplayer_authority(player_data.id)
 	if !player_data.is_local:
 		remove_child($PlayerRoomController)
 
 func _physics_process(delta: float) -> void:
-	if !$MultiplayerSynchronizer.is_multiplayer_authority():
+	if !player_data.is_local:
 		global_position = global_position.lerp(sync_pos, 0.5)
 		$Pivot.rotation_degrees.y = lerpf($Pivot.rotation_degrees.y, sync_rot.y, 0.5)
 		return
@@ -52,10 +54,10 @@ func _physics_process(delta: float) -> void:
 		stun -= delta
 		return
 	# not stunned, continue
-	move(delta)
+	apply_mov_from_input(delta)
 	sync_pos = global_position
 	sync_rot = $Pivot.rotation_degrees
-	detect_recipes()
+	#detect_recipes()
 	if Input.is_action_just_pressed("interact"):
 		melee()
 		print("points: " + str(points) + " completed recipes: " + str(completed_recipes) + " inventory: " + str(inventory))
@@ -100,13 +102,11 @@ func detect_recipes():
 			break
 	completed_recipes += 1
 
-func move(delta: float) :
-	move_dir = Vector3.ZERO
-	# gets movement move_dir based on input
-	move_dir.z = Input.get_axis("forward", "backward")
-	move_dir.x = Input.get_axis("left", "right")
+@rpc("authority", "call_local")
+func apply_mov_from_input(delta: float) :
+	move_dir = $InputSynchronizer.input_direction
 	if move_dir != Vector3.ZERO:
-		# normalizes so that you don't move faster diagonally
+		# normalizes so that you don't apply_mov_from_input faster diagonally
 		move_dir = move_dir.normalized()
 		var lerp_rotation = rotate_toward($Pivot.rotation.y, atan2(move_dir.x, move_dir.z), delta * 5)
 		$Pivot.rotation.y = lerp_rotation

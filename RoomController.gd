@@ -5,8 +5,8 @@ var players_list = []
 var is_player_here = false
 
 func _ready() -> void:
-	GameManager.set_mesh_layer_recursive(get_parent(), 1, false)	
-	GameManager.set_mesh_layer_recursive(get_parent(), layer, true)	
+	GameManager.set_mesh_layer_recursive(get_parent(), 1, false)
+	GameManager.set_mesh_layer_recursive(get_parent(), layer, true)
 
 #Estritamente seta as camadas de Players não locais
 func _on_body_entered(body: Node3D) -> void:
@@ -16,7 +16,6 @@ func _on_body_entered(body: Node3D) -> void:
 	players_list.append(player)
 	if !player.player_data.is_local:
 		GameManager.set_mesh_layer_recursive(body, layer, true)
-		return
 		
 #Estritamente seta as camadas de Players não locais
 func _on_body_exited(body: Node3D) -> void:
@@ -25,7 +24,7 @@ func _on_body_exited(body: Node3D) -> void:
 	var player = body as PlayerController
 	if !player.player_data.is_local:
 		GameManager.set_mesh_layer_recursive(body, layer, false)
-		return
+
 
 #Seta a visibilidade da sala e o movimente de camera
 func enter_room():

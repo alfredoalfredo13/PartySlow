@@ -1,39 +1,33 @@
-extends Area3D
+class_name ItemController extends Area3D
 @export var ingredient_name : String = "Bun"
 @export var ingredient_type : String = "Bread"
 
-var model_node : Node3D
+var model_node : MeshInstance3D
 
 const MODEL_PATHS := {
-	"Bun": preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_bun.fbx"),
-	"Lettuce": preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_lettuce_slice.fbx"),
-	"Cheese": preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_cheese_slice.fbx"),
-	"Burger": preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_burger_cooked.fbx"),
-	"Potato":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_potato_chopped.fbx"),
-	"Onion":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_onion_chopped.fbx"),
-	"Carrot":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_carrot.fbx"),
-	"Chicken":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_ham.fbx"),
-	"Tomato":preload("res://Restaurant_Bits/Assets/fbx/food_ingredient_tomato.fbx")
+	"Bun": preload("res://Restaurant_Bits/Assets/obj/food_ingredient_bun.obj"),
+	"Lettuce": preload("res://Restaurant_Bits/Assets/obj/food_ingredient_lettuce_slice.obj"),
+	"Cheese": preload("res://Restaurant_Bits/Assets/obj/food_ingredient_cheese_slice.obj"),
+	"Burger": preload("res://Restaurant_Bits/Assets/obj/food_ingredient_burger_cooked.obj"),
+	"Potato":preload("res://Restaurant_Bits/Assets/obj/food_ingredient_potato_chopped.obj"),
+	"Onion":preload("res://Restaurant_Bits/Assets/obj/food_ingredient_onion_chopped.obj"),
+	"Carrot":preload("res://Restaurant_Bits/Assets/obj/food_ingredient_carrot.obj"),
+	"Chicken":preload("res://Restaurant_Bits/Assets/obj/food_ingredient_ham.obj"),
+	"Tomato":preload("res://Restaurant_Bits/Assets/obj/food_ingredient_tomato.obj")
 }
 
 func _ready() -> void:
-	$MeshInstance3D.visible = false
-	while GlobalData.currentRecipe == null:
-		await get_tree().create_timer(0.1).timeout
-	var random = randi_range(0, GlobalData.currentRecipe.ingredients.size()-1)
-	var ing : Ingredient = GlobalData.currentRecipe.ingredients[random]
-	ingredient_name = ing.ingredient_name
-	ingredient_type = ing.ingredient_type
-	set_model(ingredient_name)
+	GameManager.ingredients.append(self)
+	
 
-func set_model(iName : String) -> void : 
-	if MODEL_PATHS.has(iName):
-		var model_scene : PackedScene = MODEL_PATHS[iName]
-		model_node = model_scene.instantiate()
-		add_child(model_node)
+func set_model() -> void : 
+	print(ingredient_type, " ", ingredient_name)
+	if MODEL_PATHS.has(ingredient_name):
+		var model : Mesh = MODEL_PATHS[ingredient_name]
+		$MeshInstance3D.mesh = model
 		#print("model instantiated: " + iName)
 	else:
-		print("model not found for ingredient " + iName)
+		print("model not found for ingredient " + ingredient_name)
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Players"):

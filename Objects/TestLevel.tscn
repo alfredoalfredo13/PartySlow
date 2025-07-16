@@ -187,7 +187,7 @@ collision_layer = 4
 
 [node name="Items" type="Node3D" parent="North2"]
 
-[node name="Item" parent="North2/Items" instance=ExtResource("9_hij1a")]
+[node name="W" parent="North2/Items" instance=ExtResource("9_hij1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5399, -0.0147705, -9.2395)
 
 [node name="Item3" parent="North2/Items" instance=ExtResource("9_hij1a")]
