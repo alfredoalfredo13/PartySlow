@@ -11,6 +11,8 @@ func _ready() -> void:
 #Estritamente seta as camadas de Players não locais
 func _on_body_entered(body: Node3D) -> void:
 	if body is not PlayerController:
+		print(body.name)
+		GameManager.set_mesh_layer_recursive(body, layer, true)
 		return
 	var player = body as PlayerController
 	players_list.append(player)
@@ -25,13 +27,13 @@ func _on_body_exited(body: Node3D) -> void:
 	if !player.player_data.is_local:
 		GameManager.set_mesh_layer_recursive(body, layer, false)
 
-
 #Seta a visibilidade da sala e o movimente de camera
 func enter_room():
 	var camera = get_viewport().get_camera_3d()
 	camera.set_cull_mask_value(layer, true)
 	var tween = get_tree().create_tween()
-	var next_pos = Vector3.UP * 11 + Vector3.BACK * (12 + global_position.z) + Vector3.RIGHT * global_position.x
+	var next_pos = global_position + Vector3.UP * 18
+	#Vector3.UP * 11 + Vector3.BACK * (12 + global_position.z) + Vector3.RIGHT * global_position.x
 	tween.tween_property(camera, "position", next_pos, 0.2).set_ease(Tween.EASE_OUT_IN)
 	
 func exit_room():

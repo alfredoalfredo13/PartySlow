@@ -114,8 +114,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.20391, 1.2027, -8.37001)
 shape = SubResource("BoxShape3D_vvvv7")
 
 [node name="RoomCameraColl" parent="Main_Room" instance=ExtResource("9_w47ov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.337769, 4.13336, -0.451096)
 layer = 11
+
+[node name="CollisionShape3D" parent="Main_Room/RoomCameraColl" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.107636, 1.399, -0.199428)
 
 [node name="North" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22.6678)
@@ -162,7 +164,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62967, 0.436829, -1.09752)
 layer = 9
 
 [node name="CollisionShape3D" parent="North/RoomCameraColl" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.217804)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.112663)
 
 [node name="North2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -45.216)
@@ -240,6 +242,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4987, -0.0148926, -10.0441)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.80565, -0.0148926, 3.49153)
 
 [node name="RoomCameraColl" parent="NorthEast" instance=ExtResource("9_w47ov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0301208, 0.0671158, -0.129448)
 layer = 3
 
 [node name="East" type="Node3D" parent="."]
@@ -343,6 +346,9 @@ collision_layer = 4
 [node name="RoomCameraColl" parent="SouthWest" instance=ExtResource("9_w47ov")]
 layer = 6
 
+[node name="CollisionShape3D" parent="SouthWest/RoomCameraColl" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.318884, 3.59221, 0)
+
 [node name="West" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.7416, 0, -0.263893)
 
@@ -436,6 +442,7 @@ layer = 8
 [editable path="Main_Room/Props/floor_kitchen"]
 [editable path="Main_Room/Props/floor_kitchen2"]
 [editable path="Main_Room/Props/floor_kitchen3"]
+[editable path="Main_Room/RoomCameraColl"]
 [editable path="North/RoomCameraColl"]
 [editable path="North2/RoomCameraColl"]
 [editable path="NorthEast/RoomCameraColl"]

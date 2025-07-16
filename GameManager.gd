@@ -14,7 +14,6 @@ func host_randomize_items():
 	var recipe = randi_range(0, GlobalData.recipes.size()-1)
 	GlobalData.setCurrentRecipe(recipe)
 	var random_list = []
-	print("selecting items...")
 	for ingredient in ingredients:
 		var random = randi_range(0, GlobalData.currentRecipe.ingredients.size()-1)
 		random_list.append(random)
@@ -29,11 +28,8 @@ func set_items(random_list, recipe):
 		var ing : Ingredient = GlobalData.currentRecipe.ingredients[random]
 		ingredient.ingredient_name = ing.ingredient_name
 		ingredient.ingredient_type = ing.ingredient_type
-		print("%d: %d - %s" % [i, random, ing.ingredient_name])
 		ingredient.set_model()
 	
-	
-
 @rpc("any_peer", "call_local", "reliable")	
 func synchronize_ingredients():
 	pass

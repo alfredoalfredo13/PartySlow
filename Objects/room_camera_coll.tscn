@@ -3,13 +3,15 @@
 [ext_resource type="Script" uid="uid://nmo48avox0sr" path="res://RoomController.gd" id="1_0b4gd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hij1a"]
-size = Vector3(20.7864, 9.26672, 22.2504)
+size = Vector3(19.1693, 2.66705, 20.9289)
 
 [node name="RoomCameraColl" type="Area3D"]
 collision_layer = 4096
+collision_mask = 5
 script = ExtResource("1_0b4gd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0211515, 3.29983, 0.192913)
 shape = SubResource("BoxShape3D_hij1a")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
