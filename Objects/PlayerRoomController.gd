@@ -4,21 +4,7 @@ var current_room : RoomController
 var room_queue = []
 var new_room : RoomController
 
-
-func enter_new_room(room_exited_from : RoomController):
-	if room_exited_from == new_room:
-		print("oops room_exited_from ", room_exited_from.get_parent(), " == new_room ", new_room.get_parent())
-		return
-	if current_room != null:
-		current_room.exit_room()
-	current_room = new_room
-
-
-func set_new_room(new_room):
-	self.new_room = new_room
-	if current_room != null:	
-		return
-	current_room = new_room
+#Script é desativo em players não locais
 	
 func _on_area_entered(area: Area3D) -> void:
 	if area is not RoomController:
@@ -29,7 +15,7 @@ func _on_area_entered(area: Area3D) -> void:
 		if current_room != null:
 			current_room.exit_room()
 		current_room = room
-		room.change_room()
+		room.enter_room()
 
 func _on_area_exited(area: Area3D) -> void:
 	if area is not RoomController:
@@ -43,7 +29,7 @@ func _on_area_exited(area: Area3D) -> void:
 		return
 	room.exit_room()
 	current_room = room_queue[0]
-	current_room.change_room()
+	current_room.enter_room()
 	
 	
 	
