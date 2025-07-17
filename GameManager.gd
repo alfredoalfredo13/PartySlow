@@ -1,7 +1,12 @@
 extends Node
 
-var players : Dictionary = {}
-var ingredients: Array[ItemController] = []
+var players : Dictionary[int, PlayerData] = {}
+var ingredient_dictionary: Dictionary[int, ItemController] = {}
+
+func add_ingredient_to_list(ingredient : ItemController):
+	var id = ingredient_dictionary.size()
+	ingredient.id = id
+	ingredient_dictionary.set(id, ingredient)
 
 func set_mesh_layer_recursive(node: Node, layer: int, visible : bool):
 	if node is VisualInstance3D:
@@ -14,7 +19,7 @@ func host_randomize_items():
 	var recipe = randi_range(0, GlobalData.recipes.size()-1)
 	GlobalData.setCurrentRecipe(recipe)
 	var random_list = []
-	for ingredient in ingredients:
+	for ingredient in ingredient_dictionary.keys():
 		var random = randi_range(0, GlobalData.currentRecipe.ingredients.size()-1)
 		random_list.append(random)
 	set_items.rpc(random_list, recipe)
@@ -24,12 +29,25 @@ func set_items(random_list, recipe):
 	GlobalData.setCurrentRecipe(recipe)
 	for i in range(random_list.size()):
 		var random = random_list[i]
-		var ingredient = ingredients[i]
+		var ingredient = ingredient_dictionary[i]
 		var ing : Ingredient = GlobalData.currentRecipe.ingredients[random]
 		ingredient.ingredient_name = ing.ingredient_name
 		ingredient.ingredient_type = ing.ingredient_type
 		ingredient.set_model()
 	
 @rpc("any_peer", "call_local", "reliable")	
-func synchronize_ingredients():
-	pass
+func consume_item(item_id, player_id):
+	var item = ingredient_dictionary[item_id]
+	players[player_id].inventory.append(item.ingredient_name)
+	players[player_id].score += 5
+	item.queue_free()
+	
+@rpc("any_peer", "call_local")
+func print_stats():
+	print("STATS para PLAYER %d" % multiplayer.get_unique_id())
+	for player : PlayerData in players.values():
+		print("		%s TEM O SEGUINTE INVENTARIO" % player.name)
+		for item : String in player.inventory:
+			print("		%s" % item)
+		print("%s TEM O PLACAR DE %d" % [player.name, player.score])
+	

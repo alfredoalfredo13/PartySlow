@@ -1,6 +1,7 @@
 class_name ItemController extends Area3D
 @export var ingredient_name : String = "Bun"
 @export var ingredient_type : String = "Bread"
+var id : int
 
 var model_node : MeshInstance3D
 
@@ -17,7 +18,7 @@ const MODEL_PATHS := {
 }
 
 func _ready() -> void:
-	GameManager.ingredients.append(self)
+	GameManager.add_ingredient_to_list(self)
 	
 
 func set_model() -> void : 
@@ -31,5 +32,4 @@ func set_model() -> void :
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Players"):
-		body.inventory.append(ingredient_name)
-		queue_free()
+		GameManager.consume_item.rpc(id, body.player_data.id)

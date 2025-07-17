@@ -39,6 +39,7 @@ properties/4/replication_mode = 1
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
 collision_mask = 5
 script = ExtResource("1_0ip8g")
+SPEED = null
 
 [node name="Pivot" type="Node3D" parent="."]
 

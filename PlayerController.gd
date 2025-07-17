@@ -13,7 +13,6 @@ var melee_hit : Array = []
 var stun : float = 0.0
 
 var target_velocity = Vector3.ZERO
-var inventory : Array[String]
 var completed_recipes : int = 0
 var points : int = 0
 var move_dir : Vector3
@@ -43,6 +42,7 @@ func _physics_process(delta: float) -> void:
 		global_position = global_position.lerp(sync_pos, 0.5)
 		$Pivot.rotation_degrees.y = lerpf($Pivot.rotation_degrees.y, sync_rot.y, 0.5)
 		return
+	
 	# melee cooldown
 	melee_cd -= delta
 	# melee duration
@@ -53,6 +53,7 @@ func _physics_process(delta: float) -> void:
 	if stun > 0.0:
 		stun -= delta
 		return
+	
 	# not stunned, continue
 	apply_mov_from_input(delta)
 	sync_pos = global_position
@@ -60,10 +61,9 @@ func _physics_process(delta: float) -> void:
 	#detect_recipes()
 	if Input.is_action_just_pressed("interact"):
 		melee()
-		print("points: " + str(points) + " completed recipes: " + str(completed_recipes) + " inventory: " + str(inventory))
 	if Input.is_action_just_pressed("give_ingredients"):
 		for i in GlobalData.currentRecipe.ingredients:
-			inventory.append(i.ingredient_name)
+			player_data.inventory.append(i.ingredient_name)
 		print("added ingredients")
 
 func melee() :
@@ -91,14 +91,14 @@ func damaged() :
 func detect_recipes():
 	# check for recipe's ingredients in player's inventory
 	for required in GlobalData.currentRecipe.ingredients:
-		if inventory.has(required.ingredient_name): continue # player has this ingredient, next
+		if player_data.inventory.has(required.ingredient_name): continue # player has this ingredient, next
 		return # player does not have this ingredient, gtfo
 	
 	# player has all required ingredients, remove ingredients and add completed recipe
 	for required in GlobalData.currentRecipe.ingredients:
-		for ingredient in inventory:
+		for ingredient in player_data.inventory:
 			if required.ingredient_name != ingredient: continue
-			inventory.erase(required.ingredient_name)
+			player_data.inventory.erase(required)
 			break
 	completed_recipes += 1
 

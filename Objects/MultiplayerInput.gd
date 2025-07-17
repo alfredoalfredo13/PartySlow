@@ -12,3 +12,8 @@ func _physics_process(delta: float) -> void:
 	input_direction.z = Input.get_axis("forward", "backward")
 	input_direction.x = Input.get_axis("left", "right")
 	input_direction = input_direction.normalized()
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("1"):
+		GameManager.print_stats.rpc()
+		
