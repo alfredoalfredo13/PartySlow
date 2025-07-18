@@ -5,10 +5,7 @@ var currentRecipe : Recipe
 
 func _ready() -> void:
 	createIngredients()
-	print("created ingredients")
 	createRecipes()
-	print("created recipes")
-
 
 func createIngredients():
 	ingredients.append(Ingredient.new("Bun", "Bread"))
@@ -54,7 +51,6 @@ func createRecipes():
 
 func setCurrentRecipe(index):
 	currentRecipe = recipes[index]
-	print("set current: " + currentRecipe.recipe_name)
 
 func get_ingredient(iName : String) -> Ingredient:
 	for ingredient in ingredients:

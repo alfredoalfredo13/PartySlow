@@ -9,7 +9,10 @@ enum Characters_Enum
 @export var id : int
 @export var name : String
 @export var is_local : bool
-var inventory : Array[String]
+var spawn_point : Vector3
+var completed_recipes : int = 0
+var total_inventory : Array[String]
+var current_inventory : Array[String]
 var in_game = false
 var score : int = 0
 

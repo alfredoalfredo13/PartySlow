@@ -23,10 +23,11 @@ func _ready() -> void:
 		$Label.visible = false
 		$LineEdit.visible = false
 		host_game()
-	
-	var name = OS.get_cmdline_args()[1]
-	$LineEdit.text = name
-	local_player_data.name = name
+	else:
+		if OS.get_cmdline_args().size() > 0:
+			var name = OS.get_cmdline_args()[1]
+		$LineEdit.text = name
+		local_player_data.name = name
 	
 # this gets called on the server and clients
 func peer_connected(id):
@@ -60,8 +61,6 @@ func send_player_information(name, character, id):
 		new_player.name = name
 		new_player.char_classe = character
 		GameManager.players.set(id, new_player)
-		
-	#print(id)
 	if multiplayer.is_server():
 		for i in GameManager.players:
 			var player : PlayerData = GameManager.players[i]
@@ -75,6 +74,7 @@ func start_game():
 	$Label.visible = false
 	$LineEdit.visible = false
 	var index = 0
+	var local : PlayerController
 	for i in GameManager.players:
 		var remote_player_data : PlayerData = GameManager.players[i]
 		if remote_player_data.in_game:
@@ -84,15 +84,19 @@ func start_game():
 		player_instance.player_data = remote_player_data
 		#GameManager.set_mesh_layer_recursive(player_instance, 1, false)
 		if remote_player_data.id == multiplayer.get_unique_id():
+			local = player_instance
 			GameManager.set_mesh_layer_recursive(player_instance, 15, true)
 			remote_player_data.is_local = true
 		player_instance.seta_name(remote_player_data.name)
 		var spawn_pos = (get_tree().get_nodes_in_group("PlayerSpawn")[index] as Node3D).global_position
-		player_instance.position = Vector3(spawn_pos.x, 0.5, spawn_pos.z)
+		remote_player_data.spawn_point = Vector3(spawn_pos.x, 0.5, spawn_pos.z)
+		player_instance.position = remote_player_data.spawn_point
 		get_tree().root.add_child(player_instance)
 		index += 1
 	if is_host:
 		GameManager.host_randomize_items()
+		GameManager.StartTurn.emit()
+		
 		
 func host_game():
 	is_host = true

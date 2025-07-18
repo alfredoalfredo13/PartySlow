@@ -14,5 +14,18 @@ script = ExtResource("1_0b4gd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0211515, 3.29983, 0.192913)
 shape = SubResource("BoxShape3D_hij1a")
 
+[node name="Center" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.01163, 0)
+light_energy = 12.988
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_opacity = 0.0
+shadow_blur = 3.79
+distance_fade_enabled = true
+omni_range = 15.738
+omni_attenuation = 1.366
+omni_shadow_mode = 0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -21,21 +21,20 @@ var sync_pos = Vector3.ZERO
 var sync_rot = Vector3.ZERO
 
 func _ready() -> void:
-	player_data.remove_player.connect(
-		func():
-			queue_free()
-	)
+	player_data.remove_player.connect(func():queue_free())
+	GameManager.StartTurn.connect(func():global_position = player_data.spawn_point)
 	if !player_data.is_local:
 		GameManager.set_mesh_layer_recursive(self, 1, false)
 	sync_pos = global_position
 	sync_rot = $Pivot.rotation_degrees
-	
+	#print("in multiplayer im %d" % multiplayer.get_unique_id())
 
 func seta_name(name):
 	$SubViewport/Label.text = name
 	$InputSynchronizer.set_multiplayer_authority(player_data.id)
 	if !player_data.is_local:
 		remove_child($PlayerRoomController)
+	#print("CONTROLLER : i am %s, authority is %s" % [player_data.id, get_multiplayer_authority()])
 
 func _physics_process(delta: float) -> void:
 	if !player_data.is_local:
@@ -63,7 +62,7 @@ func _physics_process(delta: float) -> void:
 		melee()
 	if Input.is_action_just_pressed("give_ingredients"):
 		for i in GlobalData.currentRecipe.ingredients:
-			player_data.inventory.append(i.ingredient_name)
+			player_data.current_inventory.append(i.ingredient_name)
 		print("added ingredients")
 
 func melee() :
@@ -89,16 +88,16 @@ func damaged() :
 	print("AH! I've been stunned!")
 
 func detect_recipes():
-	# check for recipe's ingredients in player's inventory
+	# check for recipe's ingredients in player's current_inventory
 	for required in GlobalData.currentRecipe.ingredients:
-		if player_data.inventory.has(required.ingredient_name): continue # player has this ingredient, next
+		if player_data.current_inventory.has(required.ingredient_name): continue # player has this ingredient, next
 		return # player does not have this ingredient, gtfo
 	
 	# player has all required ingredients, remove ingredients and add completed recipe
 	for required in GlobalData.currentRecipe.ingredients:
-		for ingredient in player_data.inventory:
+		for ingredient in player_data.current_inventory:
 			if required.ingredient_name != ingredient: continue
-			player_data.inventory.erase(required)
+			player_data.current_inventory.erase(required)
 			break
 	completed_recipes += 1
 
@@ -108,7 +107,7 @@ func apply_mov_from_input(delta: float) :
 	if move_dir != Vector3.ZERO:
 		# normalizes so that you don't apply_mov_from_input faster diagonally
 		move_dir = move_dir.normalized()
-		var lerp_rotation = rotate_toward($Pivot.rotation.y, atan2(move_dir.x, move_dir.z), delta * 5)
+		var lerp_rotation = rotate_toward($Pivot.rotation.y, atan2(move_dir.x, move_dir.z), delta * SPEED * 0.8)
 		$Pivot.rotation.y = lerp_rotation
 	notify_movement.emit(move_dir)
 	target_velocity.x = move_dir.x

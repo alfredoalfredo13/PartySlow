@@ -18,15 +18,12 @@ const MODEL_PATHS := {
 }
 
 func _ready() -> void:
-	GameManager.add_ingredient_to_list(self)
+	GameManager.add_ingredient_to_dictionary(self)
 	
-
 func set_model() -> void : 
-	print(ingredient_type, " ", ingredient_name)
 	if MODEL_PATHS.has(ingredient_name):
 		var model : Mesh = MODEL_PATHS[ingredient_name]
 		$MeshInstance3D.mesh = model
-		#print("model instantiated: " + iName)
 	else:
 		print("model not found for ingredient " + ingredient_name)
 

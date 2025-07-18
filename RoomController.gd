@@ -11,7 +11,6 @@ func _ready() -> void:
 #Estritamente seta as camadas de Players não locais
 func _on_body_entered(body: Node3D) -> void:
 	if body is not PlayerController:
-		print(body.name)
 		GameManager.set_mesh_layer_recursive(body, layer, true)
 		return
 	var player = body as PlayerController

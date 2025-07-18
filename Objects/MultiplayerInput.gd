@@ -3,6 +3,7 @@ class_name MultiplayerInput extends MultiplayerSynchronizer
 var input_direction : Vector3
 
 func _ready() -> void:
+	#print("INPUT : i am %s, authority is %s" % [multiplayer.get_unique_id(), get_multiplayer_authority()])
 	if get_multiplayer_authority() != multiplayer.get_unique_id():
 		set_process(false)
 		set_physics_process(false)

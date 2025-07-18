@@ -39,7 +39,6 @@ properties/4/replication_mode = 1
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
 collision_mask = 5
 script = ExtResource("1_0ip8g")
-SPEED = null
 
 [node name="Pivot" type="Node3D" parent="."]
 
@@ -156,8 +155,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.73429, 0)
-layers = 0
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.87654, 0)
 texture = SubResource("ViewportTexture_vs3au")
 
 [node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]

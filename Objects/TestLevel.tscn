@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dxbonaomm4i7s" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_straight_A_decorated.fbx" id="7_vvvv7"]
 [ext_resource type="Script" uid="uid://bc1ma10jujxgw" path="res://deposit_zone.gd" id="8_hij1a"]
 [ext_resource type="PackedScene" uid="uid://87exa1vcs01d" path="res://Restaurant_Bits/Assets/fbx/floor_kitchen.fbx" id="8_vvvv7"]
-[ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Objects/Ingredient.tscn" id="9_hij1a"]
+[ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Objects/IngredientSpawner.tscn" id="9_hij1a"]
 [ext_resource type="PackedScene" uid="uid://r7ho55e82jmr" path="res://Objects/room_camera_coll.tscn" id="9_w47ov"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvvv7"]
