@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://rh7akru885k8"]
+
+[ext_resource type="PackedScene" uid="uid://q87nbgfrc8n1" path="res://Furniture_Bits/Assets/fbx/couch.fbx" id="1_f3q8s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kcg0r"]
+size = Vector3(3.02222, 1.26074, 1.60059)
+
+[node name="couch" instance=ExtResource("1_f3q8s")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00146782, 0.628229, 0.0544202)
+shape = SubResource("BoxShape3D_kcg0r")

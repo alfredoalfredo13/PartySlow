@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvqimd3ngfuwm"]
+
+[ext_resource type="PackedScene" uid="uid://65vog8j2sc5a" path="res://Furniture_Bits/Assets/fbx/cabinet_small_decorated.fbx" id="1_ht8ae"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1vyed"]
+size = Vector3(1, 1.60852, 1)
+
+[node name="cabinet_small_decorated" instance=ExtResource("1_ht8ae")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.804723, 0)
+shape = SubResource("BoxShape3D_1vyed")

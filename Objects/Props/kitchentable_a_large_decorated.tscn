@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://coubjgb0sx0u4"]
+
+[ext_resource type="PackedScene" uid="uid://crx2l7yvd8ow" path="res://Restaurant_Bits/Assets/fbx/kitchentable_A_large_decorated.fbx" id="1_2oala"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_st2s4"]
+size = Vector3(3, 1.92285, 2.00977)
+
+[node name="kitchentable_A_large_decorated" instance=ExtResource("1_2oala")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959444, 0)
+shape = SubResource("BoxShape3D_st2s4")
