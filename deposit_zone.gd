@@ -7,4 +7,4 @@ func _on_body_entered(body: Node3D) -> void:
 	var ingredients = player_data.current_inventory.size()
 	
 	var points = ingredients + ((player_data.completed_recipes + 1)* GlobalData.currentRecipe.ingredients.size()*2)
-	player_data += points
+	player_data.score += points
