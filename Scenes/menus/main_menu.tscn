@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ffncciksi1tw"]
+[gd_scene load_steps=5 format=3 uid="uid://ffncciksi1tw"]
 
 [ext_resource type="Script" uid="uid://c81h6sndg60is" path="res://Scripts/menus/main_menu.gd" id="1_1dabp"]
+[ext_resource type="PackedScene" uid="uid://bovdouhtnq13k" path="res://Scenes/menus/noray_menu.tscn" id="2_b55im"]
+[ext_resource type="Script" uid="uid://d0wyv8atjhlxe" path="res://Scenes/menus/Lobby.gd" id="3_6upyc"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_413xs"]
+[sub_resource type="LabelSettings" id="LabelSettings_b55im"]
+font_size = 32
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("host_game_button", "join_game_button", "secondary_network_menu_parent")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("host_game_button", "join_game_button", "start_button", "noray_menu", "lobby")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +17,9 @@ grow_vertical = 2
 script = ExtResource("1_1dabp")
 host_game_button = NodePath("Menu/HostGame")
 join_game_button = NodePath("Menu/JoinGame")
-secondary_network_menu_parent = NodePath("SecondaryNetworkMenuParent")
+start_button = NodePath("Menu/Start")
+noray_menu = NodePath("Menu/NorayMenu")
+lobby = NodePath("Menu/Lobby")
 
 [node name="Menu" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -28,6 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Exit" type="Button" parent="Menu"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -53,19 +59,6 @@ text = "Host Game"
 flat = true
 alignment = 0
 
-[node name="Start" type="Button" parent="Menu"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-offset_left = 55.0
-offset_top = 177.0
-offset_right = 308.0
-offset_bottom = 228.0
-theme_override_font_sizes/font_size = 0
-text = "Start
-"
-flat = true
-alignment = 0
-
 [node name="JoinGame" type="Button" parent="Menu"]
 layout_mode = 2
 offset_left = 55.0
@@ -76,18 +69,60 @@ text = "Join Game"
 flat = true
 alignment = 0
 
-[node name="SecondaryNetworkMenuParent" type="Panel" parent="."]
+[node name="NorayMenu" parent="Menu" instance=ExtResource("2_b55im")]
+visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 297.0
-offset_top = 195.0
-offset_right = -320.0
-offset_bottom = -192.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_413xs")
+offset_left = -250.0
+offset_top = 95.0
+offset_right = -250.0
+offset_bottom = 95.0
+
+[node name="Lobby" type="Panel" parent="Menu"]
+layout_mode = 0
+offset_left = 531.0
+offset_top = 98.0
+offset_right = 853.0
+offset_bottom = 411.0
+script = ExtResource("3_6upyc")
+
+[node name="Preset" type="Label" parent="Menu/Lobby"]
+layout_mode = 2
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 288.0
+offset_bottom = 43.0
+label_settings = SubResource("LabelSettings_b55im")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Menu/Lobby"]
+layout_mode = 2
+offset_left = 2.0
+offset_top = -52.0
+offset_right = 322.0
+offset_bottom = -7.0
+text = "Players Connected"
+label_settings = SubResource("LabelSettings_b55im")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Lobby"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 322.0
+offset_bottom = 300.0
+
+[node name="Start" type="Button" parent="Menu"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 55.0
+offset_top = 181.0
+offset_right = 308.0
+offset_bottom = 232.0
+theme_override_font_sizes/font_size = 0
+text = "Start
+"
+flat = true
+alignment = 0
 
 [connection signal="pressed" from="Menu/Exit" to="." method="exit_game"]
 [connection signal="pressed" from="Menu/HostGame" to="." method="host_game"]

@@ -24,7 +24,15 @@ var is_hosting_game = false
 var active_host_ip = ""
 var active_game_id = ""
 
+var name_tag : String
+
 signal set_host
+signal add_to_lobby(name, id)
+signal remove_from_lobby(id)
+
+func set_name_tag(name):
+	name_tag = name
+
 
 func host_game(network_connection_configs: NetworkConnectionConfigs):
 	print("Host game")
@@ -70,8 +78,7 @@ func set_selected_network(network_selected: AvailableNetworks):
 
 # Use this to kill the network connection and clean up for return to main menu
 func disconnect_from_game():
-	_load_main_menu_scene()
-	
+	NetworkManager.remove_from_lobby.emit(-1)
 	#NetworkTime.stop() # Stops the network type synchronizer from spamming ping RPCs after disconnect
 	multiplayer.multiplayer_peer = null # Disconnect peer
 	
@@ -93,15 +100,15 @@ func reset_network_properties():
 	active_host_ip = ""
 	active_game_id = ""
 	
-	active_network_node.queue_free()
-	active_network_node = null
+	#active_network_node.queue_free()
+	#active_network_node = null
 
 func _load_game_scene():
 	print("NetworkManager: Loading game scene...")
 	#get_tree().call_deferred(&"change_scene_to_packed", preload(GAME_SCENE))
 
-func _load_main_menu_scene():
-	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
+#func _load_main_menu_scene():
+#	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
 
 #func show_loading():
 #	print("Show loading")

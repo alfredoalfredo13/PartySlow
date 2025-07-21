@@ -28,12 +28,21 @@ func _ready():
 	else:
 		
 		host_gameid_input.visible = true
+		
+func shows(is_hosting):
+	_is_hosting = is_hosting
+	if _is_hosting:
+		
+		host_gameid_input.visible = false
+	else:
+		host_gameid_input.visible = true
 
 func _on_go_pressed():
 	print("On Noray go presssed")
 	if _is_hosting:
 		# Noray Host IP is required to host game
 		if host_ip_input.text && host_ip_input.text != "":
+			NetworkManager.set_name_tag(host_ip_input.text)
 			var network_connection_configs = NetworkConnectionConfigs.new("159.89.81.45")
 			secondary_menu_completed.emit(network_connection_configs)
 			await  Noray.on_oid
@@ -42,10 +51,12 @@ func _on_go_pressed():
 	else:
 		# Host IP AND Game ID required to join Noray as client
 		if host_ip_input.text && host_ip_input.text != "" && host_gameid_input.text && host_gameid_input.text != "":
+			NetworkManager.set_name_tag(host_ip_input.text)
 			var network_connection_configs = NetworkConnectionConfigs.new("159.89.81.45")
 			network_connection_configs.game_id = host_gameid_input.text
 			secondary_menu_completed.emit(network_connection_configs)
 
 func _on_back_pressed():
 	print("On back pressed")
+	NetworkManager.disconnect_from_game()
 	secondary_menu_cancelled.emit()

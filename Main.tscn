@@ -45,7 +45,7 @@ mesh = SubResource("CylinderMesh_3dxm6")
 environment = SubResource("Environment_fos0i")
 
 [node name="TurnTimer" type="Timer" parent="." node_paths=PackedStringArray("timer_ui")]
-wait_time = 15.0
+wait_time = 60.0
 script = ExtResource("6_3dxm6")
 timer_ui = NodePath("../UI/Label")
 metadata/_custom_type_script = "uid://nlkxa5847qkc"

@@ -41,20 +41,22 @@ func peer_connected(id):
 
 # this gets called on the server and clients	
 func peer_disconnected(id):
-	if !GameManager.players.keys().has(id):
-		print("HOST SERVER DISCONNECTED")
-		return
+#	if !GameManager.players.keys().has(id):
+#		print("HOST SERVER DISCONNECTED")
+#		return
 	var player_data : PlayerData = GameManager.players[id]
 	if player_data.is_host:
 		print("HOST PLAYER DISCONNECTED")
 	GameManager.players.erase(id)
 	player_data.remove_player.emit()
+	NetworkManager.remove_from_lobby.emit(id)
 	print("Player Disconnected ", id)
 
 #called only from clients
 func connected_to_server():
+	GameManager.players.clear()
 	print("Client %d Connected to Server" % multiplayer.get_unique_id())
-	send_player_information.rpc_id(1, local_player_data.name, local_player_data.char_classe, multiplayer.get_unique_id())
+	send_player_information.rpc_id(1, NetworkManager.name_tag, local_player_data.char_classe, multiplayer.get_unique_id())
 
 #called only from clients	
 func connection_failed():
@@ -63,7 +65,7 @@ func connection_failed():
 
 #Roda toda vez que um novo player conecta no servidor
 @rpc("any_peer", "call_remote")
-func send_player_information(name, character, id):
+func send_player_information(name, character, id : int):
 	is_host = multiplayer.is_server()
 	print("I AM %s : I RECEIVED %s is host = " % [multiplayer.get_unique_id(), id], is_host)
 	if !GameManager.players.has(id):
@@ -73,6 +75,7 @@ func send_player_information(name, character, id):
 		new_player.char_classe = character
 		new_player.is_host = is_host
 		GameManager.players.set(id, new_player)
+		NetworkManager.add_to_lobby.emit(name, id)
 	if multiplayer.is_server():
 		for i in GameManager.players:
 			var player : PlayerData = GameManager.players[i]
@@ -128,7 +131,7 @@ func host_game():
 func _on_host_pressed() -> void:
 	#host_game()	
 	#$Start.visible = true
-	send_player_information(local_player_data.name, local_player_data.char_classe, multiplayer.get_unique_id())
+	send_player_information(NetworkManager.name_tag, local_player_data.char_classe, multiplayer.get_unique_id())
 	
 func _on_join_pressed() -> void:
 	is_host = false

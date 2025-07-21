@@ -2,13 +2,16 @@ extends Control
 
 @export var host_game_button: Button
 @export var join_game_button: Button
-@export var secondary_network_menu_parent: Control
+@export var start_button : Button
+@export var noray_menu : Control
+@export var lobby : Control
 
 var _is_hosting = false
 
 func _ready():
+	start_button.visible = false
 	print("Main menu ready...")
-
+	
 	if OS.has_feature(NetworkManager.DEDICATED_SERVER_FEATURE_NAME):
 		print("Calling host game for dedicated server setup...")
 		NetworkManager.host_game(NetworkConnectionConfigs.new(NetworkManager.LOCALHOST))
@@ -29,17 +32,25 @@ func join_game():
 func _show_secondary_network_options(is_hosting: bool = false):
 	_hide_main_menu_options()
 	
-	var active_secondary_menu = NetworkManager._noray_newtork_menu.instantiate()
-	
 	# Add whatever necessary configuration is required in the sub menu
 	if _is_hosting:
-		active_secondary_menu.menu_config_options = { "is_hosting": is_hosting }
-		
-	secondary_network_menu_parent.add_child(active_secondary_menu)
+		print("IS HOSTING")
+		noray_menu.menu_config_options = { "is_hosting": is_hosting }
+	noray_menu.shows(_is_hosting)
+	noray_menu.visible = true
 	
 	# Wire up completed and cancelled secondary menu signals
-	active_secondary_menu.secondary_menu_completed.connect(_secondary_menu_submitted)
-	active_secondary_menu.secondary_menu_cancelled.connect(_cancel_secondary_menu)
+	noray_menu.secondary_menu_completed.connect(_secondary_menu_submitted)
+	noray_menu.secondary_menu_completed.connect(func(x): 
+		lobby.visible = true
+		if is_hosting: start_button.visible = true
+	)
+	
+	noray_menu.secondary_menu_cancelled.connect(_cancel_secondary_menu)
+	noray_menu.secondary_menu_cancelled.connect(func(x): 
+		lobby.visible = true
+		start_button.visible = false
+	)
 
 func _secondary_menu_submitted(network_connection_configs: NetworkConnectionConfigs):
 	if _is_hosting:
@@ -60,7 +71,7 @@ func _hide_main_menu_options():
 func _cancel_secondary_menu():
 	_reset_main_menu_options()
 	# Remove secondary menu
-	secondary_network_menu_parent.get_children()[0].queue_free()
+	noray_menu.visible = false
 
 func _on_secondary_toggle_toggled(noray_enabled):
 	print("Noray enabled %s" % noray_enabled)
