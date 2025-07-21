@@ -1,8 +1,9 @@
-extends Control
+extends Node
 @export var IP_ADDRESS = "127.0.0.1"
 @export var PORT = 8910
 @export var MAX_PLAYERS = 4
 @export var player : PackedScene
+@export var menu : Control
 
 var peer
 var id : String
@@ -17,22 +18,26 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(connected_to_server)
 	local_player_data = PlayerData.new()
 	if "--server" in OS.get_cmdline_args() or OS.has_feature("dedicated_server"):
-		$Host.visible = false
-		$Join.visible = false
-		$Start.visible = false
-		$Label.visible = false
-		$LineEdit.visible = false
-		host_game()
+		#$Host.visible = false
+		#$Join.visible = false
+		#$Start.visible = false
+		#$Label.visible = false
+		#$LineEdit.visible = false
+		#host_game()
+		pass
 	else:
 		if OS.get_cmdline_args().size() > 0:
 			var name = OS.get_cmdline_args()[1]
-		$LineEdit.text = name
+		#$LineEdit.text = name
 		local_player_data.name = name
 	
 # this gets called on the server and clients
 func peer_connected(id):
 	self.id = str(id)
-	#print("Player Connected ", id)
+	if id == get_multiplayer_authority():
+		is_host = true
+		send_player_information(local_player_data.name, local_player_data.char_classe, multiplayer.get_unique_id())
+	print("Player Connected ", id)
 
 # this gets called on the server and clients	
 func peer_disconnected(id):
@@ -48,7 +53,7 @@ func peer_disconnected(id):
 
 #called only from clients
 func connected_to_server():
-	#print("Connected to Server.....")
+	print("Client %d Connected to Server" % multiplayer.get_unique_id())
 	send_player_information.rpc_id(1, local_player_data.name, local_player_data.char_classe, multiplayer.get_unique_id())
 
 #called only from clients	
@@ -59,7 +64,7 @@ func connection_failed():
 #Roda toda vez que um novo player conecta no servidor
 @rpc("any_peer", "call_remote")
 func send_player_information(name, character, id):
-	#print("is host = ", is_host)
+	print("is host = ", is_host)
 	if !GameManager.players.has(id):
 		var new_player = PlayerData.new()
 		new_player.id = id
@@ -74,13 +79,16 @@ func send_player_information(name, character, id):
 
 @rpc("any_peer", "call_local")
 func start_game():
-	$Host.visible = false
-	$Join.visible = false
-	$Start.visible = false
-	$Label.visible = false
-	$LineEdit.visible = false
+	print("Game Starting for Player %s" % id)
+	menu.visible = false
+	#$Host.visible = false
+	#$Join.visible = false
+	#$Start.visible = false
+	#$Label.visible = false
+	#$LineEdit.visible = false
 	var index = 0
 	var local : PlayerController
+	print(GameManager.players.keys().size())
 	for i in GameManager.players:
 		var remote_player_data : PlayerData = GameManager.players[i]
 		if remote_player_data.in_game:
@@ -104,7 +112,6 @@ func start_game():
 		GameManager.host_randomize_items()
 		GameManager.StartTurn.emit()
 		
-		
 func host_game():
 	is_host = true
 	peer = ENetMultiplayerPeer.new()
@@ -118,8 +125,8 @@ func host_game():
 	#print("ghost host is waiting...")
 
 func _on_host_pressed() -> void:
-	host_game()	
-	$Start.visible = true
+	#host_game()	
+	#$Start.visible = true
 	send_player_information(local_player_data.name, local_player_data.char_classe, multiplayer.get_unique_id())
 	
 func _on_join_pressed() -> void:
@@ -135,5 +142,5 @@ func _on_start_pressed() -> void:
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	local_player_data.name = new_text
-	$Host.visible = true
-	$Join.visible = true
+	#$Host.visible = true
+	#$Join.visible = true

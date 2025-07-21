@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Scenes/IngredientSpawner.tscn" id="9_hij1a"]
 [ext_resource type="PackedScene" uid="uid://r7ho55e82jmr" path="res://Scenes/room_camera_coll.tscn" id="9_w47ov"]
 
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvvv7"]
 size = Vector3(6.79889, 3.4054, 5.77466)
 

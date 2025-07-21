@@ -2,7 +2,7 @@ extends Node
 
 signal network_server_disconnected
 
-var _port = 8910
+var _port = 8890
 var _current_host_oid = ""
 
 func _ready():

@@ -16,23 +16,6 @@ host_game_button = NodePath("Menu/HostGame")
 join_game_button = NodePath("Menu/JoinGame")
 secondary_network_menu_parent = NodePath("SecondaryNetworkMenuParent")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MenuBackground" type="TextureRect" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 2
-
 [node name="Menu" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -61,12 +44,27 @@ flat = true
 [node name="HostGame" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-offset_left = 61.0
-offset_top = 62.0
-offset_right = 314.0
-offset_bottom = 113.0
+offset_left = 55.0
+offset_top = 80.0
+offset_right = 308.0
+offset_bottom = 131.0
+theme_override_font_sizes/font_size = 0
 text = "Host Game"
 flat = true
+alignment = 0
+
+[node name="Start" type="Button" parent="Menu"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 55.0
+offset_top = 177.0
+offset_right = 308.0
+offset_bottom = 228.0
+theme_override_font_sizes/font_size = 0
+text = "Start
+"
+flat = true
+alignment = 0
 
 [node name="JoinGame" type="Button" parent="Menu"]
 layout_mode = 2
@@ -76,18 +74,19 @@ offset_right = 308.0
 offset_bottom = 176.0
 text = "Join Game"
 flat = true
+alignment = 0
 
 [node name="SecondaryNetworkMenuParent" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 376.0
-offset_top = 29.0
-offset_right = -241.0
-offset_bottom = -358.0
+offset_left = 297.0
+offset_top = 195.0
+offset_right = -320.0
+offset_bottom = -192.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_413xs")
 
 [connection signal="pressed" from="Menu/Exit" to="." method="exit_game"]

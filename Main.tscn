@@ -1,14 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1un8t8d1bnk4"]
+[gd_scene load_steps=9 format=3 uid="uid://d1un8t8d1bnk4"]
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://Scripts/camera.gd" id="1_cm0pq"]
-[ext_resource type="PackedScene" uid="uid://yl4brldpja76" path="res://Scenes/TestLevel.tscn" id="1_r0du0"]
+[ext_resource type="PackedScene" uid="uid://yl4brldpja76" path="res://TestLevel.tscn" id="1_r0du0"]
 [ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://Scripts/MultiplayerController.gd" id="2_cm0pq"]
-[ext_resource type="Script" uid="uid://dqxj4bbgnkgkc" path="res://Scripts/score.gd" id="3_fos0i"]
+[ext_resource type="PackedScene" uid="uid://ffncciksi1tw" path="res://Scenes/menus/main_menu.tscn" id="4_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://c3stx4op77vn0" path="res://Scenes/Player.tscn" id="4_fos0i"]
 [ext_resource type="Script" uid="uid://nlkxa5847qkc" path="res://Scripts/TimerPlayer.gd" id="6_3dxm6"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_fos0i"]
-font_size = 56
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3dxm6"]
 
@@ -23,86 +20,6 @@ cull_mask = 16385
 script = ExtResource("1_cm0pq")
 
 [node name="TestLevel" parent="." instance=ExtResource("1_r0du0")]
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_cm0pq")
-player = ExtResource("4_fos0i")
-
-[node name="Host" type="Button" parent="Control"]
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 56.0
-text = "Host"
-
-[node name="Join" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 156.0
-offset_top = 2.0
-offset_right = 284.0
-offset_bottom = 58.0
-text = "Join"
-
-[node name="Start" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 323.0
-offset_top = 2.0
-offset_right = 451.0
-offset_bottom = 58.0
-text = "Start"
-
-[node name="LineEdit" type="LineEdit" parent="Control"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 83.0
-offset_right = 410.0
-offset_bottom = 128.0
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 59.0
-offset_right = 148.0
-offset_bottom = 98.0
-text = "Nome"
-
-[node name="Timer" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 691.0
-offset_top = 14.0
-offset_right = 774.0
-offset_bottom = 91.0
-text = "60"
-label_settings = SubResource("LabelSettings_fos0i")
-
-[node name="Turno" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 1003.0
-offset_top = 14.0
-offset_right = 1228.0
-offset_bottom = 91.0
-text = "Turno:"
-label_settings = SubResource("LabelSettings_fos0i")
-
-[node name="Scores" type="Control" parent="Control"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="Control/Scores"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("3_fos0i")
-
-[node name="Label2" type="Label" parent="Control/Scores"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("3_fos0i")
 
 [node name="Spawns" type="Node3D" parent="."]
 
@@ -132,11 +49,32 @@ environment = SubResource("Environment_fos0i")
 [node name="TurnTimer" type="Timer" parent="." node_paths=PackedStringArray("timer_ui")]
 wait_time = 15.0
 script = ExtResource("6_3dxm6")
-timer_ui = NodePath("../Control/Timer")
+timer_ui = NodePath("../UI/Label")
 metadata/_custom_type_script = "uid://nlkxa5847qkc"
 
-[connection signal="pressed" from="Control/Host" to="Control" method="_on_host_pressed"]
-[connection signal="pressed" from="Control/Join" to="Control" method="_on_join_pressed"]
-[connection signal="pressed" from="Control/Start" to="Control" method="_on_start_pressed"]
-[connection signal="text_submitted" from="Control/LineEdit" to="Control" method="_on_line_edit_text_submitted"]
+[node name="MainMenu" parent="." instance=ExtResource("4_cm0pq")]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 461.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 53.0
+offset_right = 426.0
+offset_bottom = 102.0
+text = "TIMER
+"
+
+[node name="MultiplayerController" type="Node" parent="." node_paths=PackedStringArray("menu")]
+script = ExtResource("2_cm0pq")
+player = ExtResource("4_fos0i")
+menu = NodePath("../MainMenu")
+
 [connection signal="timeout" from="TurnTimer" to="TurnTimer" method="_on_timeout"]
+[connection signal="pressed" from="MainMenu/Menu/Start" to="MultiplayerController" method="_on_start_pressed"]
+
+[editable path="MainMenu"]

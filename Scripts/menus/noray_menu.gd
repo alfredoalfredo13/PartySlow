@@ -11,7 +11,6 @@ const NORAY_CLIENT_CONNECT_LABEL = "Connect to game on Noray!"
 @export var back_button: Button
 @export var host_ip_input: LineEdit
 @export var host_gameid_input: LineEdit
-@export var option_label: RichTextLabel
 
 var menu_config_options: Dictionary = {}
 var _is_hosting: bool = false
@@ -24,10 +23,10 @@ func _ready():
 		_is_hosting = true
 
 	if _is_hosting:
-		option_label.text = NORAY_HOSTING_LABEL
+		
 		host_gameid_input.visible = false
 	else:
-		option_label.text = NORAY_CLIENT_CONNECT_LABEL
+		
 		host_gameid_input.visible = true
 
 func _on_go_pressed():
@@ -35,12 +34,15 @@ func _on_go_pressed():
 	if _is_hosting:
 		# Noray Host IP is required to host game
 		if host_ip_input.text && host_ip_input.text != "":
-			var network_connection_configs = NetworkConnectionConfigs.new(host_ip_input.text)
+			var network_connection_configs = NetworkConnectionConfigs.new("159.89.81.45")
 			secondary_menu_completed.emit(network_connection_configs)
+			await  Noray.on_oid
+			host_gameid_input.text = Noray.oid
+			host_gameid_input.visible = true
 	else:
 		# Host IP AND Game ID required to join Noray as client
 		if host_ip_input.text && host_ip_input.text != "" && host_gameid_input.text && host_gameid_input.text != "":
-			var network_connection_configs = NetworkConnectionConfigs.new(host_ip_input.text)
+			var network_connection_configs = NetworkConnectionConfigs.new("159.89.81.45")
 			network_connection_configs.game_id = host_gameid_input.text
 			secondary_menu_completed.emit(network_connection_configs)
 
