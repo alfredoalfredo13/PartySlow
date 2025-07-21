@@ -8,3 +8,6 @@ func _on_player_notify_movement(dir: Vector3) -> void:
 		animation_player.play("Idle")
 	else: 
 		animation_player.play("Walking_A")
+		
+func _on_player_stagger():
+	animation_player.play("Hit_A")

@@ -10,13 +10,16 @@ signal notify_movement(movement_direction : Vector3)
 var melee_cd : float = 0.0
 var melee_timer : float = 0.0
 var melee_hit : Array = []
-var stun : float = 0.0
+var stun : bool = false
+
 var interrupt_movement : bool = false
 
 var target_velocity = Vector3.ZERO
 var completed_recipes : int = 0
 var points : int = 0
 var move_dir : Vector3
+
+var stun_dir : Vector3
 
 var sync_pos = Vector3.ZERO
 var sync_rot = Vector3.ZERO
@@ -61,10 +64,6 @@ func _physics_process(delta: float) -> void:
 	if melee_timer <= 0.0:
 		melee_hit.clear() # clears array containing hit players
 	# stunned, cant do anything
-	if stun > 0.0:
-		stun -= delta
-		return
-	
 	# not stunned, continue
 	apply_mov_from_input(delta)
 	sync_pos = global_position
@@ -86,18 +85,25 @@ func melee() :
 	melee_cd = 1.0 # cooldown before being able to melee again
 	
 	# get bodies inside MeleeArea
-	var bodies = $Pivot/MeleeArea.get_overlapping_bodies()
+	var bodies : Array[Node3D] = $Pivot/MeleeArea.get_overlapping_bodies()
 	for body in bodies:
 		if body == self: continue
 		if body.is_in_group("Players") and body not in melee_hit: # hit a player
-			body.damaged() # stun them
+			var player = body as PlayerController
+			var damage_direction = (body.global_position - global_position).normalized()
+			player.damaged.rpc_id(player.player_data.id, damage_direction)
 			melee_hit.append(body) # so they dont get hit repeatedly from one attack
 			print("HA! I hit someone!")
 	
-
-func damaged() :
+@rpc("any_peer", "call_remote")
+func damaged(direction) :
 	# hit by another player, gets stunned for 1.5 second
-	stun = 0.5
+	stun = true
+	stun_dir = direction
+	($Pivot/Barbarian as PlayerAnimator)._on_player_stagger()
+	await get_tree().create_timer(0.25).timeout
+	stun = false
+	stun_dir = Vector3.ZERO
 	print("AH! I've been stunned!")
 
 func detect_recipes():
@@ -106,7 +112,7 @@ func detect_recipes():
 		if player_data.current_inventory.has(required.ingredient_name): continue # player has this ingredient, next
 		return # player does not have this ingredient, gtfo
 	
-	# player has all required ingredients, remove ingredients and add completed recipe
+	# player has all required ingredients, remove ingrediwents and add completed recipe
 	for required in GlobalData.currentRecipe.ingredients:
 		for ingredient in player_data.current_inventory:
 			if required.ingredient_name != ingredient: continue
@@ -116,13 +122,16 @@ func detect_recipes():
 
 @rpc("authority", "call_local")
 func apply_mov_from_input(delta: float) :
-	move_dir = $InputSynchronizer.input_direction
-	if move_dir != Vector3.ZERO:
-		# normalizes so that you don't apply_mov_from_input faster diagonally
-		move_dir = move_dir.normalized()
-		var lerp_rotation = rotate_toward($Pivot.rotation.y, atan2(move_dir.x, move_dir.z), delta * SPEED * 0.8)
-		$Pivot.rotation.y = lerp_rotation
-	notify_movement.emit(move_dir)
+	if !stun:
+		move_dir = $InputSynchronizer.input_direction
+		if move_dir != Vector3.ZERO:
+			# normalizes so that you don't apply_mov_from_input faster diagonally
+			move_dir = move_dir.normalized()
+			var lerp_rotation = rotate_toward($Pivot.rotation.y, atan2(move_dir.x, move_dir.z), delta * SPEED * 0.8)
+			$Pivot.rotation.y = lerp_rotation
+		notify_movement.emit(move_dir)
+	else:
+		move_dir = stun_dir
 	target_velocity.x = move_dir.x
 	target_velocity.z = move_dir.z
 	target_velocity *= SPEED
