@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://d1un8t8d1bnk4"]
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://Scripts/camera.gd" id="1_cm0pq"]
-[ext_resource type="PackedScene" uid="uid://yl4brldpja76" path="res://TestLevel.tscn" id="1_r0du0"]
 [ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://Scripts/MultiplayerController.gd" id="2_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://ffncciksi1tw" path="res://Scenes/menus/main_menu.tscn" id="4_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://c3stx4op77vn0" path="res://Scenes/Player.tscn" id="4_fos0i"]
 [ext_resource type="Script" uid="uid://nlkxa5847qkc" path="res://Scripts/TimerPlayer.gd" id="6_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://yl4brldpja76" path="res://Scenes/TestLevel.tscn" id="6_lgr22"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3dxm6"]
 
@@ -18,8 +18,6 @@ background_mode = 1
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.49, 0)
 cull_mask = 16385
 script = ExtResource("1_cm0pq")
-
-[node name="TestLevel" parent="." instance=ExtResource("1_r0du0")]
 
 [node name="Spawns" type="Node3D" parent="."]
 
@@ -119,6 +117,8 @@ text = "TIMER
 script = ExtResource("2_cm0pq")
 player = ExtResource("4_fos0i")
 menu = NodePath("../MainMenu")
+
+[node name="TestLevel" parent="." instance=ExtResource("6_lgr22")]
 
 [connection signal="timeout" from="TurnTimer" to="TurnTimer" method="_on_timeout"]
 [connection signal="pressed" from="MainMenu/Menu/Start" to="MultiplayerController" method="_on_start_pressed"]

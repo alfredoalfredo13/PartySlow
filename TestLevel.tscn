@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://yl4brldpja76"]
+[gd_scene load_steps=12 format=3 uid="uid://dbyb2q6ff73f8"]
 
 [ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://Scenes/platform.tscn" id="1_1kog2"]
 [ext_resource type="PackedScene" uid="uid://doec7p020t8dw" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_innercorner_backsplash.fbx" id="4_mvtj7"]

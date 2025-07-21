@@ -88,6 +88,7 @@ func melee() :
 	# get bodies inside MeleeArea
 	var bodies = $Pivot/MeleeArea.get_overlapping_bodies()
 	for body in bodies:
+		if body == self: continue
 		if body.is_in_group("Players") and body not in melee_hit: # hit a player
 			body.damaged() # stun them
 			melee_hit.append(body) # so they dont get hit repeatedly from one attack
