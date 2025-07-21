@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbvtfekf6m716"]
+
+[ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://Scripts/camera.gd" id="1_kj3p2"]
+[ext_resource type="Script" uid="uid://te1t8tjrmik5" path="res://Scripts/Main.gd" id="1_lc7k4"]
+[ext_resource type="PackedScene" uid="uid://c3stx4op77vn0" path="res://Scenes/Player.tscn" id="3_feb8i"]
+[ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Scenes/IngredientSpawner.tscn" id="3_kj3p2"]
+[ext_resource type="PackedScene" uid="uid://yl4brldpja76" path="res://Scenes/TestLevel.tscn" id="5_lc7k4"]
+
+
+[sub_resource type="Environment" id="Environment_kj3p2"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.354096, 0.0663849, 0.31421, 1)
+ambient_light_energy = 2.23
+ssao_enabled = true
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_lc7k4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.71934, 0.694658, 0, -0.694658, 0.71934, 0, 11.105, 8.28)
+current = true
+script = ExtResource("1_kj3p2")
+pos1 = Vector3(0, 14, 0)
+pos2 = Vector3(0, 14, 5.42)
+rot1 = Vector3(-1.39626, 0, 0)
+rot2 = Vector3(-0.881391, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_feb8i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -2)
+
+[node name="Item" parent="." instance=ExtResource("3_kj3p2")]
+transform = Transform3D(0.999977, -0.00185969, 0.00651629, 0.00187706, 0.999995, -0.00266382, -0.00651129, 0.00267601, 0.999975, 2, 1.29602, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kj3p2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+light_color = Color(0.896348, 0.588473, 0.274185, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_lc7k4")
+player = ExtResource("3_feb8i")
+
+[node name="Host" type="Button" parent="Control"]
+layout_mode = 1
+offset_top = 207.0
+offset_right = 185.0
+offset_bottom = 251.0
+text = "Host
+"
+
+[node name="Join" type="Button" parent="Control"]
+layout_mode = 1
+offset_top = 295.0
+offset_right = 185.0
+offset_bottom = 339.0
+text = "Join
+"
+
+[node name="Start" type="Button" parent="Control"]
+layout_mode = 1
+offset_top = 380.0
+offset_right = 185.0
+offset_bottom = 424.0
+text = "Start
+"
+
+[node name="LineEdit" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_top = 86.0
+offset_right = 316.0
+offset_bottom = 128.0
+placeholder_text = "Fantasminha Camarada"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 50.0
+offset_right = 237.0
+offset_bottom = 73.0
+text = "Nome"
+
+[node name="Scores" type="Control" parent="Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control/Scores"]
+layout_mode = 0
+offset_left = 502.0
+offset_top = 124.0
+offset_right = 719.0
+offset_bottom = 193.0
+label_settings = SubResource("LabelSettings_lc7k4")
+script = ExtResource("6_jn4p2")
+
+[node name="Label2" type="Label" parent="Control/Scores"]
+layout_mode = 0
+offset_left = 1099.0
+offset_top = 124.0
+offset_right = 1316.0
+offset_bottom = 193.0
+label_settings = SubResource("LabelSettings_lc7k4")
+script = ExtResource("6_jn4p2")
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Spawn1" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.96515, -0.408282, -3.5143)
+mesh = SubResource("CylinderMesh_lc7k4")
+surface_material_override/0 = SubResource("StandardMaterial3D_jn4p2")
+
+[node name="Spawn2" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72571, -0.408282, -3.5143)
+mesh = SubResource("CylinderMesh_lc7k4")
+surface_material_override/0 = SubResource("StandardMaterial3D_jn4p2")
+
+[node name="Spawn3" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.96515, -0.408282, 3.87356)
+mesh = SubResource("CylinderMesh_lc7k4")
+surface_material_override/0 = SubResource("StandardMaterial3D_jn4p2")
+
+[node name="Spawn4" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72571, -0.408282, 3.87356)
+mesh = SubResource("CylinderMesh_lc7k4")
+surface_material_override/0 = SubResource("StandardMaterial3D_jn4p2")
+
+[connection signal="pressed" from="Control/Host" to="Control" method="_on_host_pressed"]
+[connection signal="pressed" from="Control/Join" to="Control" method="_on_join_pressed"]
+[connection signal="pressed" from="Control/Start" to="Control" method="_on_start_pressed"]
+[connection signal="text_submitted" from="Control/LineEdit" to="Control" method="_on_line_edit_text_submitted"]
+[node name="TestLevel" parent="." instance=ExtResource("5_lc7k4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04967, 0, 2.43165)

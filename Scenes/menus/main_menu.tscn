@@ -1,0 +1,95 @@
+[gd_scene load_steps=3 format=3 uid="uid://ffncciksi1tw"]
+
+[ext_resource type="Script" uid="uid://c81h6sndg60is" path="res://Scripts/menus/main_menu.gd" id="1_1dabp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_413xs"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("host_game_button", "join_game_button", "secondary_network_menu_parent")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1dabp")
+host_game_button = NodePath("Menu/HostGame")
+join_game_button = NodePath("Menu/JoinGame")
+secondary_network_menu_parent = NodePath("SecondaryNetworkMenuParent")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuBackground" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="Menu" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Exit" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -210.0
+offset_top = 52.0
+offset_right = -39.0
+offset_bottom = 103.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "Exit"
+flat = true
+
+[node name="HostGame" type="Button" parent="Menu"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 61.0
+offset_top = 62.0
+offset_right = 314.0
+offset_bottom = 113.0
+text = "Host Game"
+flat = true
+
+[node name="JoinGame" type="Button" parent="Menu"]
+layout_mode = 2
+offset_left = 55.0
+offset_top = 125.0
+offset_right = 308.0
+offset_bottom = 176.0
+text = "Join Game"
+flat = true
+
+[node name="SecondaryNetworkMenuParent" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 376.0
+offset_top = 29.0
+offset_right = -241.0
+offset_bottom = -358.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_413xs")
+
+[connection signal="pressed" from="Menu/Exit" to="." method="exit_game"]
+[connection signal="pressed" from="Menu/HostGame" to="." method="host_game"]
+[connection signal="pressed" from="Menu/JoinGame" to="." method="join_game"]

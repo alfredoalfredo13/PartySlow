@@ -11,21 +11,28 @@ config_version=5
 [application]
 
 config/name="Ghosts and Toasts"
-run/main_scene="uid://d1un8t8d1bnk4"
+run/main_scene="uid://ffncciksi1tw"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/flush_stdout_on_print=true
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://GameManager.gd"
-GlobalData="*res://global_data.gd"
+GameManager="*res://Scripts/GameManager.gd"
+GlobalData="*res://Scripts/global_data.gd"
+Noray="*res://addons/netfox.noray/noray.gd"
+PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
+NetworkManager="*res://Scripts/network/network_manager.gd"
 
 [display]
 
 window/size/viewport_width=960
 window/size/viewport_height=540
 GlobalData="*res://global_data.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/netfox.internals/plugin.cfg", "res://addons/netfox.noray/plugin.cfg")
 
 [filesystem]
 

@@ -1,15 +1,16 @@
 [gd_scene load_steps=12 format=3 uid="uid://yl4brldpja76"]
 
-[ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://Objects/platform.tscn" id="1_1kog2"]
+[ext_resource type="PackedScene" uid="uid://dom5gx5s7txo1" path="res://Scenes/platform.tscn" id="1_1kog2"]
 [ext_resource type="PackedScene" uid="uid://doec7p020t8dw" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_innercorner_backsplash.fbx" id="4_mvtj7"]
 [ext_resource type="PackedScene" uid="uid://chgnm7buh47wl" path="res://Restaurant_Bits/Assets/fbx/stove_multi_decorated.fbx" id="5_mvtj7"]
 [ext_resource type="PackedScene" uid="uid://brvn2muy2wcmx" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_sink_backsplash.fbx" id="5_xlsm3"]
 [ext_resource type="PackedScene" uid="uid://cfduaebxwrugs" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_straight_decorated.fbx" id="6_4nl3v"]
 [ext_resource type="PackedScene" uid="uid://dxbonaomm4i7s" path="res://Restaurant_Bits/Assets/fbx/kitchencounter_straight_A_decorated.fbx" id="7_vvvv7"]
-[ext_resource type="Script" uid="uid://bc1ma10jujxgw" path="res://deposit_zone.gd" id="8_hij1a"]
+[ext_resource type="Script" uid="uid://bc1ma10jujxgw" path="res://Scripts/deposit_zone.gd" id="8_hij1a"]
 [ext_resource type="PackedScene" uid="uid://87exa1vcs01d" path="res://Restaurant_Bits/Assets/fbx/floor_kitchen.fbx" id="8_vvvv7"]
-[ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Objects/IngredientSpawner.tscn" id="9_hij1a"]
-[ext_resource type="PackedScene" uid="uid://r7ho55e82jmr" path="res://Objects/room_camera_coll.tscn" id="9_w47ov"]
+[ext_resource type="PackedScene" uid="uid://cyg66g7drqs2h" path="res://Scenes/IngredientSpawner.tscn" id="9_hij1a"]
+[ext_resource type="PackedScene" uid="uid://r7ho55e82jmr" path="res://Scenes/room_camera_coll.tscn" id="9_w47ov"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvvv7"]
 size = Vector3(6.79889, 3.4054, 5.77466)

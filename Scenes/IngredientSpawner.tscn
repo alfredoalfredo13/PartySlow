@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyg66g7drqs2h"]
+
+[ext_resource type="Script" uid="uid://gip00bw6o4m2" path="res://Scripts/IngredientSpawner.gd" id="1_hrcaf"]
+
+[node name="SpawnPoint" type="Node3D" groups=["IngredientSpawn"]]
+transform = Transform3D(1.33, 0, 0, 0, 1.33, 0, 0, 0, 1.33, 0, 0, 0)
+script = ExtResource("1_hrcaf")
