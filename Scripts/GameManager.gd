@@ -30,11 +30,11 @@ func host_randomize_items():
 
 @rpc("authority", "call_local")
 func end_turn():
+	StartTurn.emit()
 	ingredient_dictionary.clear()
 	SpawnIngredient.emit()
 	if multiplayer.get_unique_id() == get_multiplayer_authority():
 		host_randomize_items()
-	StartTurn.emit()
 
 @rpc("any_peer", "call_local")
 func set_items(random_list, recipe):
@@ -50,9 +50,11 @@ func set_items(random_list, recipe):
 @rpc("any_peer", "call_local", "reliable")	
 func consume_item(item_id, player_id):
 	var item = ingredient_dictionary[item_id]
+	if item == null:
+		return
 	players[player_id].current_inventory.append(item.ingredient_name)
 	players[player_id].score += 5
-	item.queue_free()
+	item.position = Vector3.FORWARD * 100000
 	
 @rpc("any_peer", "call_local")
 func print_stats():
@@ -61,4 +63,4 @@ func print_stats():
 		print("		%s TEM O SEGUINTE INVENTARIO" % player.name)
 		for item : String in player.current_inventory:
 			print("		%s" % item)
-		print("%s TEM O PLACAR DE %d" % [player.name, player.score])
+		print("%s		TEM O PLACAR DE %d" % [player.name, player.score])

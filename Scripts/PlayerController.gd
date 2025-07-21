@@ -11,6 +11,7 @@ var melee_cd : float = 0.0
 var melee_timer : float = 0.0
 var melee_hit : Array = []
 var stun : float = 0.0
+var interrupt_movement : bool = false
 
 var target_velocity = Vector3.ZERO
 var completed_recipes : int = 0
@@ -22,7 +23,16 @@ var sync_rot = Vector3.ZERO
 
 func _ready() -> void:
 	player_data.remove_player.connect(func():queue_free())
-	GameManager.StartTurn.connect(func():global_position = player_data.spawn_point)
+	GameManager.StartTurn.connect(func():
+		interrupt_movement = true
+		set_collision_layer_value(0, false)
+		global_position = player_data.spawn_point
+		sync_pos = global_position
+		sync_rot = $Pivot.rotation_degrees
+		await get_tree().create_timer(1, true).timeout
+		set_collision_layer_value(0, true)
+		interrupt_movement = false
+	)
 	if !player_data.is_local:
 		GameManager.set_mesh_layer_recursive(self, 1, false)
 	sync_pos = global_position
@@ -37,6 +47,8 @@ func seta_name(name):
 	#print("CONTROLLER : i am %s, authority is %s" % [player_data.id, get_multiplayer_authority()])
 
 func _physics_process(delta: float) -> void:
+	if interrupt_movement:
+		return
 	if !player_data.is_local:
 		global_position = global_position.lerp(sync_pos, 0.5)
 		$Pivot.rotation_degrees.y = lerpf($Pivot.rotation_degrees.y, sync_rot.y, 0.5)

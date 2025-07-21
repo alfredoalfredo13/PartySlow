@@ -30,3 +30,4 @@ func set_model() -> void :
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Players"):
 		GameManager.consume_item.rpc(id, body.player_data.id)
+		

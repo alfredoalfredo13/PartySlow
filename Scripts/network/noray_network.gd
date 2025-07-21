@@ -1,6 +1,7 @@
 extends Node
 
 signal network_server_disconnected
+signal set_host
 
 var _port = 8890
 var _current_host_oid = ""
@@ -64,7 +65,7 @@ func _start_noray_host():
 	var noray_network_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 	err = noray_network_peer.create_server(Noray.local_port)
 	multiplayer.multiplayer_peer = noray_network_peer
-	
+	NetworkManager.set_host.emit()
 	if err != OK:
 		print("Failed to listen on port %s with error: %s" % [Noray.local_port, err])
 

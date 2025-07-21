@@ -9,7 +9,7 @@ func _ready():
 	
 func spawn():
 	if ingredient_object != null:
-		ingredient_object.queue_free()
+		ingredient_object.global_position = Vector3.FORWARD * 100000
 	ingredient_object = INGREDIENT_SCENE.instantiate()
 	add_child(ingredient_object)
 	

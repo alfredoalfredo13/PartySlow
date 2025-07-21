@@ -24,6 +24,8 @@ var is_hosting_game = false
 var active_host_ip = ""
 var active_game_id = ""
 
+signal set_host
+
 func host_game(network_connection_configs: NetworkConnectionConfigs):
 	print("Host game")
 	if not OS.has_feature(DEDICATED_SERVER_FEATURE_NAME):

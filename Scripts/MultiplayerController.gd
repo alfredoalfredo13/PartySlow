@@ -16,6 +16,7 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connection_failed.connect(connection_failed)
 	multiplayer.connected_to_server.connect(connected_to_server)
+	NetworkManager.set_host.connect(_on_host_pressed)
 	local_player_data = PlayerData.new()
 	if "--server" in OS.get_cmdline_args() or OS.has_feature("dedicated_server"):
 		#$Host.visible = false
@@ -36,7 +37,6 @@ func peer_connected(id):
 	self.id = str(id)
 	if id == get_multiplayer_authority():
 		is_host = true
-		send_player_information(local_player_data.name, local_player_data.char_classe, multiplayer.get_unique_id())
 	print("Player Connected ", id)
 
 # this gets called on the server and clients	
@@ -64,13 +64,14 @@ func connection_failed():
 #Roda toda vez que um novo player conecta no servidor
 @rpc("any_peer", "call_remote")
 func send_player_information(name, character, id):
-	print("is host = ", is_host)
+	is_host = multiplayer.is_server()
+	print("I AM %s : I RECEIVED %s is host = " % [multiplayer.get_unique_id(), id], is_host)
 	if !GameManager.players.has(id):
 		var new_player = PlayerData.new()
 		new_player.id = id
 		new_player.name = name
 		new_player.char_classe = character
-		new_player.is_host = (id == get_multiplayer_authority())
+		new_player.is_host = is_host
 		GameManager.players.set(id, new_player)
 	if multiplayer.is_server():
 		for i in GameManager.players:
