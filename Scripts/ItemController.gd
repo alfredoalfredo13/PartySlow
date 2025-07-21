@@ -1,6 +1,7 @@
 class_name ItemController extends Area3D
 @export var ingredient_name : String = "Bun"
 @export var ingredient_type : String = "Bread"
+var consumed = false
 var id : int
 
 var model_node : MeshInstance3D
@@ -29,5 +30,6 @@ func set_model() -> void :
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Players"):
+		consumed = true
 		GameManager.consume_item.rpc(id, body.player_data.id)
 		
