@@ -5,6 +5,10 @@ func _on_body_entered(body: Node3D) -> void:
 	if not body.is_in_group("Players"): return
 	var player_data :PlayerData = body.player_data
 	var ingredients = player_data.current_inventory.size()
-	
-	var points = ingredients + ((player_data.completed_recipes + 1)* GlobalData.currentRecipe.ingredients.size()*2)
+	print()
+	var points = ingredients + ((player_data.completed_recipes) * GlobalData.currentRecipe.ingredients.size()*2)
 	player_data.score += points
+	player_data.total_inventory.append_array(player_data.current_inventory)
+	player_data.current_inventory.clear()
+	GameManager.AddIngredientToInventory.emit(-1, "")
+	GameManager.set_score.rpc(player_data.id, player_data.score)

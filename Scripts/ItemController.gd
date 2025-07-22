@@ -30,6 +30,8 @@ func set_model() -> void :
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Players"):
+		if !body.player_data.is_local:
+			return
 		consumed = true
 		GameManager.consume_item.rpc(id, body.player_data.id)
 		

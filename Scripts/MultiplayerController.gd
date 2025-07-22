@@ -112,6 +112,7 @@ func start_game():
 		player_instance.position = remote_player_data.spawn_point
 		get_tree().root.add_child(player_instance)
 		index += 1
+		get_parent().get_node("UI").visible = true
 	if is_host:
 		GameManager.host_randomize_items()
 		GameManager.StartTurn.emit()
@@ -143,7 +144,6 @@ func _on_join_pressed() -> void:
 func _on_start_pressed() -> void:
 	start_game.rpc()
 	#print("start")
-	get_parent().get_node("UI").visible = true
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	local_player_data.name = new_text

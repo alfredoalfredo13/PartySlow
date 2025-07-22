@@ -1,13 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://ffncciksi1tw"]
+[gd_scene load_steps=6 format=3 uid="uid://ffncciksi1tw"]
 
 [ext_resource type="Script" uid="uid://c81h6sndg60is" path="res://Scripts/menus/main_menu.gd" id="1_1dabp"]
-[ext_resource type="PackedScene" uid="uid://bovdouhtnq13k" path="res://Scenes/menus/noray_menu.tscn" id="2_b55im"]
+[ext_resource type="Script" uid="uid://bldfn628fqvel" path="res://Scripts/menus/noray_menu.gd" id="2_6upyc"]
 [ext_resource type="Script" uid="uid://d0wyv8atjhlxe" path="res://Scenes/menus/Lobby.gd" id="3_6upyc"]
+
+[sub_resource type="FontFile" id="FontFile_3e0mp"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_b55im"]
 font_size = 32
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("host_game_button", "join_game_button", "start_button", "noray_menu", "lobby")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("host_game_button", "join_game_button", "noray_menu", "lobby")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,11 +30,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1dabp")
-host_game_button = NodePath("Menu/HostGame")
-join_game_button = NodePath("Menu/JoinGame")
-start_button = NodePath("Menu/Start")
-noray_menu = NodePath("Menu/NorayMenu")
-lobby = NodePath("Menu/Lobby")
+host_game_button = NodePath("Menu/NotTutorial/HostGame")
+join_game_button = NodePath("Menu/NotTutorial/JoinGame")
+noray_menu = NodePath("Menu/NotTutorial/NorayMenu")
+lobby = NodePath("Menu/NotTutorial/Lobby")
 
 [node name="Menu" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -41,13 +55,36 @@ anchor_right = 1.0
 offset_left = -210.0
 offset_top = 52.0
 offset_right = -39.0
-offset_bottom = 103.0
+offset_bottom = 127.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 48
 text = "Exit"
 flat = true
 
-[node name="HostGame" type="Button" parent="Menu"]
+[node name="Tutorial" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -228.0
+offset_top = 52.0
+offset_right = -39.0
+offset_bottom = 127.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "Tutorial
+"
+flat = true
+
+[node name="NotTutorial" type="Control" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostGame" type="Button" parent="Menu/NotTutorial"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 offset_left = 55.0
@@ -59,7 +96,7 @@ text = "Host Game"
 flat = true
 alignment = 0
 
-[node name="JoinGame" type="Button" parent="Menu"]
+[node name="JoinGame" type="Button" parent="Menu/NotTutorial"]
 layout_mode = 2
 offset_left = 55.0
 offset_top = 125.0
@@ -69,23 +106,69 @@ text = "Join Game"
 flat = true
 alignment = 0
 
-[node name="NorayMenu" parent="Menu" instance=ExtResource("2_b55im")]
-visible = false
+[node name="NorayMenu" type="VBoxContainer" parent="Menu/NotTutorial" node_paths=PackedStringArray("go_button", "back_button", "start_button", "host_ip_input", "host_gameid_input")]
 layout_mode = 1
-offset_left = -250.0
-offset_top = 95.0
-offset_right = -250.0
-offset_bottom = 95.0
+offset_top = 253.0
+offset_right = 407.0
+offset_bottom = 440.0
+theme_override_constants/separation = 10
+script = ExtResource("2_6upyc")
+go_button = NodePath("BoxContainer/Go")
+back_button = NodePath("BoxContainer/Back")
+start_button = NodePath("BoxContainer/Start")
+host_ip_input = NodePath("Name")
+host_gameid_input = NodePath("GameId")
 
-[node name="Lobby" type="Panel" parent="Menu"]
+[node name="Name" type="LineEdit" parent="Menu/NotTutorial/NorayMenu"]
+layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.631373, 0.556863, 0, 1)
+theme_override_colors/font_color = Color(0.631373, 0.556863, 0, 1)
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Name"
+
+[node name="GameId" type="LineEdit" parent="Menu/NotTutorial/NorayMenu"]
+layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.631373, 0.556863, 0, 1)
+theme_override_colors/font_color = Color(0.631373, 0.556863, 0, 1)
+theme_override_fonts/font = SubResource("FontFile_3e0mp")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Enter Host's Game ID"
+
+[node name="BoxContainer" type="BoxContainer" parent="Menu/NotTutorial/NorayMenu"]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="Menu/NotTutorial/NorayMenu/BoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Back"
+flat = true
+
+[node name="Go" type="Button" parent="Menu/NotTutorial/NorayMenu/BoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0.819608, 0, 1)
+text = "Go!"
+flat = true
+
+[node name="Start" type="Button" parent="Menu/NotTutorial/NorayMenu/BoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0.819608, 0, 1)
+text = "Start!"
+flat = true
+
+[node name="Lobby" type="Panel" parent="Menu/NotTutorial"]
 layout_mode = 0
 offset_left = 531.0
-offset_top = 98.0
+offset_top = 189.0
 offset_right = 853.0
-offset_bottom = 411.0
+offset_bottom = 502.0
 script = ExtResource("3_6upyc")
 
-[node name="Preset" type="Label" parent="Menu/Lobby"]
+[node name="Preset" type="Label" parent="Menu/NotTutorial/Lobby"]
 layout_mode = 2
 offset_left = 2.0
 offset_top = -2.0
@@ -94,7 +177,7 @@ offset_bottom = 43.0
 label_settings = SubResource("LabelSettings_b55im")
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="Menu/Lobby"]
+[node name="Label" type="Label" parent="Menu/NotTutorial/Lobby"]
 layout_mode = 2
 offset_left = 2.0
 offset_top = -52.0
@@ -104,26 +187,14 @@ text = "Players Connected"
 label_settings = SubResource("LabelSettings_b55im")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Lobby"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/NotTutorial/Lobby"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = -2.0
 offset_right = 322.0
 offset_bottom = 300.0
 
-[node name="Start" type="Button" parent="Menu"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-offset_left = 55.0
-offset_top = 181.0
-offset_right = 308.0
-offset_bottom = 232.0
-theme_override_font_sizes/font_size = 0
-text = "Start
-"
-flat = true
-alignment = 0
-
-[connection signal="pressed" from="Menu/Exit" to="." method="exit_game"]
-[connection signal="pressed" from="Menu/HostGame" to="." method="host_game"]
-[connection signal="pressed" from="Menu/JoinGame" to="." method="join_game"]
+[connection signal="pressed" from="Menu/NotTutorial/HostGame" to="." method="host_game"]
+[connection signal="pressed" from="Menu/NotTutorial/JoinGame" to="." method="join_game"]
+[connection signal="pressed" from="Menu/NotTutorial/NorayMenu/BoxContainer/Back" to="Menu/NotTutorial/NorayMenu" method="_on_back_pressed"]
+[connection signal="pressed" from="Menu/NotTutorial/NorayMenu/BoxContainer/Go" to="Menu/NotTutorial/NorayMenu" method="_on_go_pressed"]

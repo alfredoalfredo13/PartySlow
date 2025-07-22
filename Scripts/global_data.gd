@@ -51,6 +51,7 @@ func createRecipes():
 
 func setCurrentRecipe(index):
 	currentRecipe = recipes[index]
+	GameManager.SetRecipeUI.emit(currentRecipe)
 
 func get_ingredient(iName : String) -> Ingredient:
 	for ingredient in ingredients:

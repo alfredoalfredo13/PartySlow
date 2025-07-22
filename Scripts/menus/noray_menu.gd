@@ -9,6 +9,7 @@ const NORAY_CLIENT_CONNECT_LABEL = "Connect to game on Noray!"
 
 @export var go_button: Button
 @export var back_button: Button
+@export var start_button : Button
 @export var host_ip_input: LineEdit
 @export var host_gameid_input: LineEdit
 
@@ -48,6 +49,9 @@ func _on_go_pressed():
 			await  Noray.on_oid
 			host_gameid_input.text = Noray.oid
 			host_gameid_input.visible = true
+			
+			start_button.visible = true
+			go_button.visible = false
 	else:
 		# Host IP AND Game ID required to join Noray as client
 		if host_ip_input.text && host_ip_input.text != "" && host_gameid_input.text && host_gameid_input.text != "":
@@ -55,8 +59,10 @@ func _on_go_pressed():
 			var network_connection_configs = NetworkConnectionConfigs.new("159.89.81.45")
 			network_connection_configs.game_id = host_gameid_input.text
 			secondary_menu_completed.emit(network_connection_configs)
+			go_button.visible = false
 
 func _on_back_pressed():
 	print("On back pressed")
 	NetworkManager.disconnect_from_game()
+	start_button.visible = false
 	secondary_menu_cancelled.emit()

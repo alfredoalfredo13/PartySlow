@@ -46,6 +46,7 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="Name" type="LineEdit" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_placeholder_color = Color(0.631373, 0.556863, 0, 1)
 theme_override_colors/font_color = Color(0.631373, 0.556863, 0, 1)
@@ -53,6 +54,7 @@ theme_override_font_sizes/font_size = 32
 placeholder_text = "Name"
 
 [node name="GameId" type="LineEdit" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_placeholder_color = Color(0.631373, 0.556863, 0, 1)
 theme_override_colors/font_color = Color(0.631373, 0.556863, 0, 1)
@@ -64,6 +66,7 @@ placeholder_text = "Enter Host's Game ID"
 layout_mode = 2
 
 [node name="Back" type="Button" parent="VBoxContainer/BoxContainer"]
+visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -71,11 +74,21 @@ text = "Back"
 flat = true
 
 [node name="Go" type="Button" parent="VBoxContainer/BoxContainer"]
+visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0, 0.819608, 0, 1)
 text = "Go!"
+flat = true
+
+[node name="Start" type="Button" parent="VBoxContainer/BoxContainer"]
+visible = false
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0.819608, 0, 1)
+text = "Start!"
 flat = true
 
 [connection signal="pressed" from="VBoxContainer/BoxContainer/Back" to="." method="_on_back_pressed"]

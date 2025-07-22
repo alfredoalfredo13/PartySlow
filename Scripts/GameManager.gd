@@ -4,6 +4,10 @@ signal TimeOut
 signal StartTurn
 signal SpawnIngredient
 
+signal SetRecipeUI(recipe : Recipe)
+signal AddIngredientToInventory(count, name)
+signal AddScore(score)
+
 var players : Dictionary[int, PlayerData] = {}
 var ingredient_dictionary: Dictionary[int, ItemController] = {}
 
@@ -31,6 +35,8 @@ func host_randomize_items():
 @rpc("authority", "call_local")
 func end_turn():
 	StartTurn.emit()
+	for player : PlayerData in players.values():
+		player.current_inventory.clear()
 	ingredient_dictionary.clear()
 	SpawnIngredient.emit()
 	if multiplayer.get_unique_id() == get_multiplayer_authority():
@@ -52,9 +58,21 @@ func consume_item(item_id, player_id):
 	var item = ingredient_dictionary[item_id]
 	if item == null:
 		return
-	players[player_id].current_inventory.append(item.ingredient_name)
-	players[player_id].score += 5
+	var player = players[player_id]
+	player.current_inventory.append(item.ingredient_name)
+	#player.score += 5
 	item.position = Vector3.FORWARD * 100000
+	if player.is_local:
+		var count = player.current_inventory.count(item.ingredient_name)
+		AddIngredientToInventory.emit(count, item.ingredient_name)
+
+@rpc("any_peer", "call_local")
+func set_score(player_id, score):
+	var player = players[player_id]
+	player.score = score
+	if player.is_local:
+		AddScore.emit(score)
+	
 	
 @rpc("any_peer", "call_local")
 func print_stats():

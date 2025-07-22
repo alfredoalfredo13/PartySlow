@@ -9,7 +9,6 @@ extends Control
 var _is_hosting = false
 
 func _ready():
-	start_button.visible = false
 	print("Main menu ready...")
 	
 	if OS.has_feature(NetworkManager.DEDICATED_SERVER_FEATURE_NAME):
@@ -43,13 +42,11 @@ func _show_secondary_network_options(is_hosting: bool = false):
 	noray_menu.secondary_menu_completed.connect(_secondary_menu_submitted)
 	noray_menu.secondary_menu_completed.connect(func(x): 
 		lobby.visible = true
-		if is_hosting: start_button.visible = true
 	)
 	
 	noray_menu.secondary_menu_cancelled.connect(_cancel_secondary_menu)
 	noray_menu.secondary_menu_cancelled.connect(func(x): 
 		lobby.visible = true
-		start_button.visible = false
 	)
 
 func _secondary_menu_submitted(network_connection_configs: NetworkConnectionConfigs):

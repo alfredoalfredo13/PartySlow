@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1un8t8d1bnk4"]
+[gd_scene load_steps=10 format=3 uid="uid://d1un8t8d1bnk4"]
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://Scripts/camera.gd" id="1_cm0pq"]
 [ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://Scripts/MultiplayerController.gd" id="2_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://ffncciksi1tw" path="res://Scenes/menus/main_menu.tscn" id="4_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://c3stx4op77vn0" path="res://Scenes/Player.tscn" id="4_fos0i"]
+[ext_resource type="Script" uid="uid://tfqkce65ocur" path="res://ui.gd" id="4_lgr22"]
 [ext_resource type="Script" uid="uid://nlkxa5847qkc" path="res://Scripts/TimerPlayer.gd" id="6_3dxm6"]
 [ext_resource type="PackedScene" uid="uid://yl4brldpja76" path="res://Scenes/TestLevel.tscn" id="6_lgr22"]
 
@@ -50,13 +51,161 @@ script = ExtResource("6_3dxm6")
 timer_ui = NodePath("../UI/Timer")
 metadata/_custom_type_script = "uid://nlkxa5847qkc"
 
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("recipe_label", "score")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_lgr22")
+recipe_label = NodePath("Recipe")
+score = NodePath("Score")
+
+[node name="Timer" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 255.0
+offset_top = 24.0
+offset_right = 303.0
+offset_bottom = 73.0
+text = "0
+
+"
+
+[node name="Label2" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 24.0
+offset_right = 250.0
+offset_bottom = 73.0
+text = "TIME LEFT:
+"
+
+[node name="Score" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 702.0
+offset_top = 24.0
+offset_right = 750.0
+offset_bottom = 73.0
+text = "0
+
+"
+
+[node name="Label3" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 615.0
+offset_top = 24.0
+offset_right = 697.0
+offset_bottom = 73.0
+text = "SCORE:
+"
+
+[node name="Recipe" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 126.0
+offset_right = 227.0
+offset_bottom = 350.0
+text = "Current recipe:"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PlayerInventory" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 446.0
+offset_right = 462.0
+offset_bottom = 533.0
+text = "Inventory:"
+
+[node name="Ingrediente1" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 472.0
+offset_right = 505.0
+offset_bottom = 559.0
+
+[node name="Ingrediente2" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 508.0
+offset_right = 505.0
+offset_bottom = 595.0
+
+[node name="Ingrediente3" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 508.0
+offset_right = 680.0
+offset_bottom = 595.0
+
+[node name="Ingrediente4" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 470.0
+offset_right = 679.0
+offset_bottom = 557.0
+
+[node name="Quantidade" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 472.0
+offset_right = 556.0
+offset_bottom = 559.0
+
+[node name="Quantidade2" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 508.0
+offset_right = 556.0
+offset_bottom = 595.0
+
+[node name="Quantidade3" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = 508.0
+offset_right = 731.0
+offset_bottom = 595.0
+
+[node name="Quantidade4" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 470.0
+offset_right = 730.0
+offset_bottom = 557.0
+
 [node name="MainMenu" parent="." instance=ExtResource("4_cm0pq")]
+
+[node name="Exit" parent="MainMenu/Menu" index="0"]
+offset_left = -323.0
+offset_right = -35.0
+text = "Exit Tutorial
+"
+
+[node name="NotTutorial" parent="MainMenu/Menu" index="2"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="NorayMenu" parent="MainMenu/Menu/NotTutorial" index="2"]
+visible = false
+
+[node name="GameId" parent="MainMenu/Menu/NotTutorial/NorayMenu" index="1"]
+visible = false
+
+[node name="Start" parent="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer" index="2"]
+visible = false
+
+[node name="Lobby" parent="MainMenu/Menu/NotTutorial" index="3"]
+visible = false
 
 [node name="Tutorials" type="Control" parent="MainMenu"]
 visible = false
+layout_mode = 1
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="HowToPlay" type="Label" parent="MainMenu/Tutorials"]
 layout_mode = 0
@@ -98,50 +247,6 @@ text = "RECIPES:
 - Delivering a full recipe will earn you double the points as from the standalone ingredients!"
 autowrap_mode = 3
 
-[node name="UI" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Timer" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 393.0
-offset_top = 53.0
-offset_right = 441.0
-offset_bottom = 102.0
-text = "TIMER
-"
-
-[node name="Label2" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 306.0
-offset_top = 53.0
-offset_right = 354.0
-offset_bottom = 102.0
-text = "TIME LEFT:
-"
-
-[node name="Recipe" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 126.0
-offset_right = 218.0
-offset_bottom = 350.0
-text = "Current recipe:"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="PlayerInventory" type="Label" parent="UI"]
-layout_mode = 0
-offset_top = 446.0
-offset_right = 384.0
-offset_bottom = 533.0
-text = "Inventory:"
-
 [node name="MultiplayerController" type="Node" parent="." node_paths=PackedStringArray("menu")]
 script = ExtResource("2_cm0pq")
 player = ExtResource("4_fos0i")
@@ -150,6 +255,14 @@ menu = NodePath("../MainMenu")
 [node name="TestLevel" parent="." instance=ExtResource("6_lgr22")]
 
 [connection signal="timeout" from="TurnTimer" to="TurnTimer" method="_on_timeout"]
-[connection signal="pressed" from="MainMenu/Menu/Start" to="MultiplayerController" method="_on_start_pressed"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Exit" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Tutorial" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/NotTutorial" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Tutorials" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Exit" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Tutorial" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/NotTutorial" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Tutorials" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MultiplayerController" method="_on_start_pressed"]
 
 [editable path="MainMenu"]
