@@ -1,0 +1,138 @@
+[gd_scene load_steps=2 format=3 uid="uid://qun8frh5axci"]
+
+[ext_resource type="Script" uid="uid://tfqkce65ocur" path="res://ui.gd" id="1_jxero"]
+
+[node name="UI" type="Control" node_paths=PackedStringArray("recipe_label", "score")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jxero")
+recipe_label = NodePath("Panel/Recipe")
+score = NodePath("Score")
+
+[node name="Timer" type="Label" parent="."]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 27.0
+offset_right = 446.0
+offset_bottom = 102.0
+text = "0
+
+"
+
+[node name="TimeLeft" type="Label" parent="."]
+layout_mode = 0
+offset_left = 311.0
+offset_top = 27.0
+offset_right = 393.0
+offset_bottom = 76.0
+text = "TIME LEFT:
+"
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 777.0
+offset_top = 27.0
+offset_right = 825.0
+offset_bottom = 102.0
+text = "0
+
+"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 716.0
+offset_top = 27.0
+offset_right = 798.0
+offset_bottom = 76.0
+text = "SCORE:
+"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 196.0
+offset_bottom = 273.0
+
+[node name="Recipe" type="Label" parent="Panel"]
+layout_mode = 0
+offset_top = 13.0
+offset_right = 173.0
+offset_bottom = 237.0
+text = "Current recipe:"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerInventory" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 446.0
+offset_right = 462.0
+offset_bottom = 533.0
+text = "Inventory:"
+
+[node name="Ingrediente1" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 472.0
+offset_right = 505.0
+offset_bottom = 559.0
+
+[node name="Ingrediente2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 508.0
+offset_right = 505.0
+offset_bottom = 595.0
+
+[node name="Ingrediente3" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 508.0
+offset_right = 680.0
+offset_bottom = 595.0
+
+[node name="Ingrediente4" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 470.0
+offset_right = 679.0
+offset_bottom = 557.0
+
+[node name="Quantidade" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 472.0
+offset_right = 556.0
+offset_bottom = 559.0
+
+[node name="Quantidade2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 508.0
+offset_right = 556.0
+offset_bottom = 595.0
+
+[node name="Quantidade3" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = 508.0
+offset_right = 731.0
+offset_bottom = 595.0
+
+[node name="Quantidade4" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 470.0
+offset_right = 730.0
+offset_bottom = 557.0

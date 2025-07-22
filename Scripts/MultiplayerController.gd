@@ -18,19 +18,7 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(connected_to_server)
 	NetworkManager.set_host.connect(_on_host_pressed)
 	local_player_data = PlayerData.new()
-	if "--server" in OS.get_cmdline_args() or OS.has_feature("dedicated_server"):
-		#$Host.visible = false
-		#$Join.visible = false
-		#$Start.visible = false
-		#$Label.visible = false
-		#$LineEdit.visible = false
-		#host_game()
-		pass
-	else:
-		if OS.get_cmdline_args().size() > 0:
-			var name = OS.get_cmdline_args()[1]
-		#$LineEdit.text = name
-		local_player_data.name = name
+	local_player_data.name = name
 	
 # this gets called on the server and clients
 func peer_connected(id):
@@ -56,7 +44,7 @@ func peer_disconnected(id):
 func connected_to_server():
 	GameManager.players.clear()
 	print("Client %d Connected to Server" % multiplayer.get_unique_id())
-	send_player_information.rpc_id(1, NetworkManager.name_tag, local_player_data.char_classe, multiplayer.get_unique_id())
+	GameManager.send_player_information.rpc_id(1, NetworkManager.name_tag, local_player_data.char_classe, multiplayer.get_unique_id())
 
 #called only from clients	
 func connection_failed():
@@ -79,17 +67,12 @@ func send_player_information(name, character, id : int):
 	if multiplayer.is_server():
 		for i in GameManager.players:
 			var player : PlayerData = GameManager.players[i]
-			send_player_information.rpc(player.name, player.char_classe, player.id)
+			GameManager.send_player_information.rpc(player.name, player.char_classe, player.id)
 
 @rpc("any_peer", "call_local")
 func start_game():
 	print("Game Starting for Player %s" % id)
 	menu.visible = false
-	#$Host.visible = false
-	#$Join.visible = false
-	#$Start.visible = false
-	#$Label.visible = false
-	#$LineEdit.visible = false
 	var index = 0
 	var local : PlayerController
 	print(GameManager.players.keys().size())
@@ -117,35 +100,11 @@ func start_game():
 		GameManager.host_randomize_items()
 		GameManager.StartTurn.emit()
 		
-func host_game():
-	is_host = true
-	peer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(PORT, MAX_PLAYERS)
-	if error != OK:
-		#print("nao rolo")
-		return
-	multiplayer.multiplayer_peer = peer
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	multiplayer.set_multiplayer_peer(peer)
-	#print("ghost host is waiting...")
-
 func _on_host_pressed() -> void:
 	#host_game()	
 	#$Start.visible = true
-	send_player_information(NetworkManager.name_tag, local_player_data.char_classe, multiplayer.get_unique_id())
+	GameManager.send_player_information(NetworkManager.name_tag, local_player_data.char_classe, multiplayer.get_unique_id())
 	
-func _on_join_pressed() -> void:
-	is_host = false
-	peer = ENetMultiplayerPeer.new()
-	peer.create_client(IP_ADDRESS, PORT)
-	multiplayer.multiplayer_peer = peer
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	
 func _on_start_pressed() -> void:
 	start_game.rpc()
-	#print("start")
-
-func _on_line_edit_text_submitted(new_text: String) -> void:
-	local_player_data.name = new_text
-	#$Host.visible = true
-	#$Join.visible = true

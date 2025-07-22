@@ -30,7 +30,7 @@ func join_game():
 
 func _show_secondary_network_options(is_hosting: bool = false):
 	_hide_main_menu_options()
-	
+	noray_menu.go_button.visible = true
 	# Add whatever necessary configuration is required in the sub menu
 	if _is_hosting:
 		print("IS HOSTING")

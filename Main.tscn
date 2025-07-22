@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://Scripts/camera.gd" id="1_cm0pq"]
 [ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://Scripts/MultiplayerController.gd" id="2_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://qun8frh5axci" path="res://Scenes/ui.tscn" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://ffncciksi1tw" path="res://Scenes/menus/main_menu.tscn" id="4_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://c3stx4op77vn0" path="res://Scenes/Player.tscn" id="4_fos0i"]
-[ext_resource type="Script" uid="uid://tfqkce65ocur" path="res://ui.gd" id="4_lgr22"]
 [ext_resource type="Script" uid="uid://nlkxa5847qkc" path="res://Scripts/TimerPlayer.gd" id="6_3dxm6"]
 [ext_resource type="PackedScene" uid="uid://yl4brldpja76" path="res://Scenes/TestLevel.tscn" id="6_lgr22"]
 
@@ -51,129 +51,7 @@ script = ExtResource("6_3dxm6")
 timer_ui = NodePath("../UI/Timer")
 metadata/_custom_type_script = "uid://nlkxa5847qkc"
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("recipe_label", "score")]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("4_lgr22")
-recipe_label = NodePath("Recipe")
-score = NodePath("Score")
-
-[node name="Timer" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 255.0
-offset_top = 24.0
-offset_right = 303.0
-offset_bottom = 73.0
-text = "0
-
-"
-
-[node name="Label2" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 168.0
-offset_top = 24.0
-offset_right = 250.0
-offset_bottom = 73.0
-text = "TIME LEFT:
-"
-
-[node name="Score" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 702.0
-offset_top = 24.0
-offset_right = 750.0
-offset_bottom = 73.0
-text = "0
-
-"
-
-[node name="Label3" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 615.0
-offset_top = 24.0
-offset_right = 697.0
-offset_bottom = 73.0
-text = "SCORE:
-"
-
-[node name="Recipe" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 54.0
-offset_top = 126.0
-offset_right = 227.0
-offset_bottom = 350.0
-text = "Current recipe:"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="PlayerInventory" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 78.0
-offset_top = 446.0
-offset_right = 462.0
-offset_bottom = 533.0
-text = "Inventory:"
-
-[node name="Ingrediente1" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 121.0
-offset_top = 472.0
-offset_right = 505.0
-offset_bottom = 559.0
-
-[node name="Ingrediente2" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 121.0
-offset_top = 508.0
-offset_right = 505.0
-offset_bottom = 595.0
-
-[node name="Ingrediente3" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 296.0
-offset_top = 508.0
-offset_right = 680.0
-offset_bottom = 595.0
-
-[node name="Ingrediente4" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 295.0
-offset_top = 470.0
-offset_right = 679.0
-offset_bottom = 557.0
-
-[node name="Quantidade" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 172.0
-offset_top = 472.0
-offset_right = 556.0
-offset_bottom = 559.0
-
-[node name="Quantidade2" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 172.0
-offset_top = 508.0
-offset_right = 556.0
-offset_bottom = 595.0
-
-[node name="Quantidade3" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 347.0
-offset_top = 508.0
-offset_right = 731.0
-offset_bottom = 595.0
-
-[node name="Quantidade4" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 346.0
-offset_top = 470.0
-offset_right = 730.0
-offset_bottom = 557.0
+[node name="UI" parent="." instance=ExtResource("3_lgr22")]
 
 [node name="MainMenu" parent="." instance=ExtResource("4_cm0pq")]
 
@@ -265,4 +143,5 @@ menu = NodePath("../MainMenu")
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Tutorials" method="show"]
 [connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MultiplayerController" method="_on_start_pressed"]
 
+[editable path="UI"]
 [editable path="MainMenu"]

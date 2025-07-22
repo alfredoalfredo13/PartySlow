@@ -2,8 +2,8 @@ extends Control
 
 @export var recipe_label : Label
 @export var score : Label
-@onready var item_list : Array[Label] = [$Quantidade, $Quantidade2, $Quantidade3, $Quantidade4]
-@onready var quantity_list : Array[Label] = [$Ingrediente1, $Ingrediente2, $Ingrediente3, $Ingrediente4]
+@onready var item_list : Array[Label] = [$Control/Quantidade, $Control/Quantidade2, $Control/Quantidade3, $Control/Quantidade4]
+@onready var quantity_list : Array[Label] = [$Control/Ingrediente1, $Control/Ingrediente2, $Control/Ingrediente3, $Control/Ingrediente4]
 var ingredient_dictionary : Dictionary[String, Label]
 
 func _ready() -> void:

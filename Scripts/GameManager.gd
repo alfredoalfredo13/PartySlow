@@ -72,7 +72,23 @@ func set_score(player_id, score):
 	player.score = score
 	if player.is_local:
 		AddScore.emit(score)
-	
+
+@rpc("any_peer", "call_remote")
+func send_player_information(name, character, id : int):
+	var is_host = multiplayer.is_server()
+	print("I AM %s : I RECEIVED %s is host = " % [multiplayer.get_unique_id(), id], is_host)
+	if !GameManager.players.has(id):
+		var new_player = PlayerData.new()
+		new_player.id = id
+		new_player.name = name
+		new_player.char_classe = character
+		new_player.is_host = is_host
+		GameManager.players.set(id, new_player)
+		NetworkManager.add_to_lobby.emit(name, id)
+	if multiplayer.is_server():
+		for i in GameManager.players:
+			var player : PlayerData = GameManager.players[i]
+			send_player_information.rpc(player.name, player.char_classe, player.id)
 	
 @rpc("any_peer", "call_local")
 func print_stats():

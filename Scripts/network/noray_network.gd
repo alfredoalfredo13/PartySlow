@@ -1,7 +1,6 @@
 extends Node
 
 signal network_server_disconnected
-signal set_host
 
 var _port = 8890
 var _current_host_oid = ""
