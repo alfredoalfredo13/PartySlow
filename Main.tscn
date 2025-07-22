@@ -125,6 +125,23 @@ offset_bottom = 102.0
 text = "TIME LEFT:
 "
 
+[node name="Recipe" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 126.0
+offset_right = 218.0
+offset_bottom = 350.0
+text = "Current recipe:"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PlayerInventory" type="Label" parent="UI"]
+layout_mode = 0
+offset_top = 446.0
+offset_right = 384.0
+offset_bottom = 533.0
+text = "Inventory:"
+
 [node name="MultiplayerController" type="Node" parent="." node_paths=PackedStringArray("menu")]
 script = ExtResource("2_cm0pq")
 player = ExtResource("4_fos0i")
