@@ -143,6 +143,7 @@ func _on_join_pressed() -> void:
 func _on_start_pressed() -> void:
 	start_game.rpc()
 	#print("start")
+	get_parent().get_node("UI").visible = true
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	local_player_data.name = new_text
