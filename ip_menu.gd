@@ -38,7 +38,7 @@ func join_game() -> void:
 
 func shows(is_host):
 	self.is_host = is_host
-	ip_line.visible = false
+	ip_line.visible = !is_host
 	name_line.visible = true
 	go.show()
 	back.show()
