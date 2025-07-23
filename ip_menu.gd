@@ -14,7 +14,6 @@ var is_host : bool = false
 
 func host_game():
 	peer = ENetMultiplayerPeer.new()
-	peer.set_bind_ip(ip_line.text)
 	var error = peer.create_server(PORT, MAX_PLAYERS)
 	if error != OK:
 		print("nao rolo")
@@ -33,13 +32,13 @@ func join_game() -> void:
 	go.hide()
 	is_host = false
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(IP_ADDRESS, PORT)
+	peer.create_client(ip_line.text, PORT)
 	multiplayer.multiplayer_peer = peer
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 
 func shows(is_host):
 	self.is_host = is_host
-	ip_line.visible = true
+	ip_line.visible = false
 	name_line.visible = true
 	go.show()
 	back.show()
@@ -56,13 +55,13 @@ func _on_back_pressed() -> void:
 	hide()
 
 func _on_go_pressed() -> void:
-	if name_line.text.is_empty() || ip_line.text.is_empty():
-		print("Empty")
+	if name_line.text.is_empty():
 		return
 	if is_host:
 		host_game()
 	else:
-		join_game()
+		if !ip_line.text.is_empty():
+			join_game()
 
 func _on_start_pressed() -> void:
 	GameManager.start_game.rpc()
