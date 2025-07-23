@@ -52,6 +52,10 @@ timer_ui = NodePath("../UI/Timer")
 metadata/_custom_type_script = "uid://nlkxa5847qkc"
 
 [node name="UI" parent="." instance=ExtResource("3_lgr22")]
+visible = false
+
+[node name="Control" parent="UI" index="5"]
+visible = true
 
 [node name="MainMenu" parent="." instance=ExtResource("4_cm0pq")]
 
@@ -68,17 +72,18 @@ anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="NorayMenu" parent="MainMenu/Menu/NotTutorial" index="2"]
+[node name="NorayMenu" parent="MainMenu/Menu/NotTutorial" index="2" node_paths=PackedStringArray("name_input")]
+name_input = NodePath("Name")
+
+[node name="Go" parent="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer" index="1"]
 visible = false
 
-[node name="GameId" parent="MainMenu/Menu/NotTutorial/NorayMenu" index="1"]
-visible = false
+[node name="IPMenu" parent="MainMenu/Menu/NotTutorial" index="3"]
+offset_left = 31.0
+offset_right = 438.0
 
-[node name="Start" parent="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer" index="2"]
-visible = false
-
-[node name="Lobby" parent="MainMenu/Menu/NotTutorial" index="3"]
-visible = false
+[node name="Name" parent="MainMenu/Menu/NotTutorial/IPMenu" index="1"]
+visible = true
 
 [node name="Tutorials" type="Control" parent="MainMenu"]
 visible = false
@@ -141,7 +146,10 @@ menu = NodePath("../MainMenu")
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Tutorial" method="hide"]
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/NotTutorial" method="hide"]
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Tutorials" method="show"]
-[connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MultiplayerController" method="_on_start_pressed"]
+[connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Go" to="MainMenu/Menu/NotTutorial/Lobby" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="UI" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MainMenu" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MainMenu/Menu/NotTutorial/NorayMenu" method="_on_start_pressed"]
 
 [editable path="UI"]
 [editable path="MainMenu"]

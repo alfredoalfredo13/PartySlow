@@ -8,6 +8,7 @@ var ingredient_dictionary : Dictionary[String, Label]
 
 func _ready() -> void:
 	GameManager.SetRecipeUI.connect(set_recipe)
+	GameManager.GameStart.connect(show)
 	GameManager.AddIngredientToInventory.connect(add_inventory)
 	GameManager.AddScore.connect(add_score)
 	
@@ -24,12 +25,10 @@ func set_recipe(recipe):
 	if i < 4:
 		item_list[i].text = ""
 		quantity_list[i].text = ""
-
-		
+	
 func add_score(score):
 	self.score.text = str(score)
 	
-
 func add_inventory(count, nome_ingrediente):
 	if count == -1:
 		var i = 0

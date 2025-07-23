@@ -2,7 +2,7 @@ extends Control
 
 @export var host_game_button: Button
 @export var join_game_button: Button
-@export var start_button : Button
+@export var ip_menu : Control
 @export var noray_menu : Control
 @export var lobby : Control
 
@@ -10,12 +10,15 @@ var _is_hosting = false
 
 func _ready():
 	print("Main menu ready...")
-	
+	GameManager.GameStart.connect(hide)
 	if OS.has_feature(NetworkManager.DEDICATED_SERVER_FEATURE_NAME):
 		print("Calling host game for dedicated server setup...")
 		NetworkManager.host_game(NetworkConnectionConfigs.new(NetworkManager.LOCALHOST))
 
 func host_game():
+	if (GameManager.multiplayer_mode == GameManager.MultiplayerMode.Direct):
+		ip_menu.shows(true)
+		return
 	print("Host game pressed")
 	_is_hosting = true
 	
@@ -26,6 +29,9 @@ func host_game():
 		NetworkManager.host_game(NetworkConnectionConfigs.new(NetworkManager.LOCALHOST))
 
 func join_game():
+	if (GameManager.multiplayer_mode == GameManager.MultiplayerMode.Direct):
+		ip_menu.shows(false)
+		return
 	_show_secondary_network_options()
 
 func _show_secondary_network_options(is_hosting: bool = false):
@@ -35,19 +41,14 @@ func _show_secondary_network_options(is_hosting: bool = false):
 	if _is_hosting:
 		print("IS HOSTING")
 		noray_menu.menu_config_options = { "is_hosting": is_hosting }
-	noray_menu.shows(_is_hosting)
+	noray_menu.shows(is_hosting)
 	noray_menu.visible = true
-	
 	# Wire up completed and cancelled secondary menu signals
 	noray_menu.secondary_menu_completed.connect(_secondary_menu_submitted)
-	noray_menu.secondary_menu_completed.connect(func(x): 
-		lobby.visible = true
-	)
+	noray_menu.secondary_menu_completed.connect(lobby.show)
 	
 	noray_menu.secondary_menu_cancelled.connect(_cancel_secondary_menu)
-	noray_menu.secondary_menu_cancelled.connect(func(x): 
-		lobby.visible = true
-	)
+	noray_menu.secondary_menu_cancelled.connect(lobby.hide)
 
 func _secondary_menu_submitted(network_connection_configs: NetworkConnectionConfigs):
 	if _is_hosting:

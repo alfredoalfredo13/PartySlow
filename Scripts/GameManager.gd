@@ -1,8 +1,13 @@
 extends Node
 
+enum MultiplayerMode {Noray, Direct}
+
+var multiplayer_mode : MultiplayerMode = MultiplayerMode.Direct
+
 signal TimeOut
 signal StartTurn
 signal SpawnIngredient
+signal GameStart
 
 signal SetRecipeUI(recipe : Recipe)
 signal AddIngredientToInventory(count, name)
@@ -74,21 +79,45 @@ func set_score(player_id, score):
 		AddScore.emit(score)
 
 @rpc("any_peer", "call_remote")
-func send_player_information(name, character, id : int):
+func send_player_information(player_name, character, id : int):
 	var is_host = multiplayer.is_server()
 	print("I AM %s : I RECEIVED %s is host = " % [multiplayer.get_unique_id(), id], is_host)
-	if !GameManager.players.has(id):
+	if !players.has(id):
 		var new_player = PlayerData.new()
 		new_player.id = id
-		new_player.name = name
+		new_player.name = player_name
 		new_player.char_classe = character
 		new_player.is_host = is_host
-		GameManager.players.set(id, new_player)
-		NetworkManager.add_to_lobby.emit(name, id)
+		players.set(id, new_player)
+		NetworkManager.add_to_lobby.emit(player_name, id)
 	if multiplayer.is_server():
-		for i in GameManager.players:
-			var player : PlayerData = GameManager.players[i]
+		for i in players:
+			var player : PlayerData = players[i]
 			send_player_information.rpc(player.name, player.char_classe, player.id)
+
+@rpc("any_peer", "call_local")
+func start_game():
+	GameStart.emit()
+	var index = 0
+	for i in players:
+		var remote_player_data : PlayerData = players[i]
+		if remote_player_data.in_game:
+			continue
+		remote_player_data.in_game = true
+		var player_instance :PlayerController = preload("res://Scenes/Player.tscn").instantiate()
+		player_instance.player_data = remote_player_data
+		if remote_player_data.id == multiplayer.get_unique_id():
+			set_mesh_layer_recursive(player_instance, 15, true)
+			remote_player_data.is_local = true
+		player_instance.seta_name(remote_player_data.name)
+		var spawn_pos = (get_tree().get_nodes_in_group("PlayerSpawn")[index] as Node3D).global_position
+		remote_player_data.spawn_point = Vector3(spawn_pos.x, 0.5, spawn_pos.z)
+		player_instance.position = remote_player_data.spawn_point
+		get_tree().root.add_child(player_instance)
+		index += 1
+	if multiplayer.is_server():
+		host_randomize_items()
+		StartTurn.emit()
 	
 @rpc("any_peer", "call_local")
 func print_stats():

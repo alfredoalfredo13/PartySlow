@@ -12,13 +12,13 @@ func _ready():
 	else:
 		setup_client_noray_connection_signals()
 
-# Hosting Noray - entry point
+# Hosting Noray - entry point CALLED FROM network_manager
 func create_server_peer(network_connection_configs: NetworkConnectionConfigs):
 	print("Create Noray server peer")
 	await _register_with_noray(network_connection_configs.host_ip)
 	_start_noray_host()
 	
-# Joining Noray as client - entry point
+# Joining Noray as client - entry point CALLED FROM network_manager
 func create_client_peer(network_connection_configs: NetworkConnectionConfigs):
 	print("create Noray client peer")
 	
@@ -64,7 +64,7 @@ func _start_noray_host():
 	var noray_network_peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 	err = noray_network_peer.create_server(Noray.local_port)
 	multiplayer.multiplayer_peer = noray_network_peer
-	NetworkManager.set_host.emit()
+	GameManager.send_player_information(NetworkManager.name_tag, PlayerData.Characters_Enum.Barbaro, multiplayer.get_unique_id())
 	if err != OK:
 		print("Failed to listen on port %s with error: %s" % [Noray.local_port, err])
 

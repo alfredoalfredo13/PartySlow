@@ -42,7 +42,7 @@ func _add_player_to_game(network_id: int):
 			_player_spawn_point.add_child(player_to_add)
 		else:
 			print("Warning! Attempted to add existing player to game: %s" % network_id)
-	
+
 func _remove_player_from_game(network_id: int):
 	if is_multiplayer_authority():
 		print("Removing player from game: %s" % network_id)

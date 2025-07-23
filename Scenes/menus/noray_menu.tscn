@@ -17,7 +17,7 @@ cache/0/32/0/underline_position = 0.0
 cache/0/32/0/underline_thickness = 0.0
 cache/0/32/0/scale = 1.0
 
-[node name="NorayMenu" type="Control" node_paths=PackedStringArray("go_button", "back_button", "host_ip_input", "host_gameid_input")]
+[node name="NorayMenu" type="Control" node_paths=PackedStringArray("go_button", "back_button", "host_gameid_input")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,6 @@ grow_vertical = 2
 script = ExtResource("1_v4v6j")
 go_button = NodePath("VBoxContainer/BoxContainer/Go")
 back_button = NodePath("VBoxContainer/BoxContainer/Back")
-host_ip_input = NodePath("VBoxContainer/Name")
 host_gameid_input = NodePath("VBoxContainer/GameId")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

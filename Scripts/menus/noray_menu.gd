@@ -10,7 +10,7 @@ const NORAY_CLIENT_CONNECT_LABEL = "Connect to game on Noray!"
 @export var go_button: Button
 @export var back_button: Button
 @export var start_button : Button
-@export var host_ip_input: LineEdit
+@export var name_input: LineEdit
 @export var host_gameid_input: LineEdit
 
 var menu_config_options: Dictionary = {}
@@ -19,31 +19,21 @@ var _is_hosting: bool = false
 func _ready():
 	host_gameid_input.placeholder_text = NORAY_CLIENT_PLACEHOLDER_TEXT
 	host_gameid_input.text = ""
-
-	if menu_config_options.has("is_hosting") && menu_config_options.get("is_hosting") == true:
-		_is_hosting = true
-
-	if _is_hosting:
 		
+func shows(is_host : bool):
+	_is_hosting = is_host
+	if _is_hosting:
 		host_gameid_input.visible = false
 	else:
-		
-		host_gameid_input.visible = true
-		
-func shows(is_hosting):
-	_is_hosting = is_hosting
-	if _is_hosting:
-		
-		host_gameid_input.visible = false
-	else:
-		host_gameid_input.visible = true
+		host_gameid_input.visible = true  
+	name_input.show()  
 
 func _on_go_pressed():
 	print("On Noray go presssed")
 	if _is_hosting:
 		# Noray Host IP is required to host game
-		if host_ip_input.text && host_ip_input.text != "":
-			NetworkManager.set_name_tag(host_ip_input.text)
+		if name_input.text && name_input.text != "":
+			NetworkManager.set_name_tag(name_input.text)
 			var network_connection_configs = NetworkConnectionConfigs.new("159.89.81.45")
 			secondary_menu_completed.emit(network_connection_configs)
 			await  Noray.on_oid
@@ -54,8 +44,8 @@ func _on_go_pressed():
 			go_button.visible = false
 	else:
 		# Host IP AND Game ID required to join Noray as client
-		if host_ip_input.text && host_ip_input.text != "" && host_gameid_input.text && host_gameid_input.text != "":
-			NetworkManager.set_name_tag(host_ip_input.text)
+		if name_input.text && name_input.text != "" && host_gameid_input.text && host_gameid_input.text != "":
+			NetworkManager.set_name_tag(name_input.text)
 			var network_connection_configs = NetworkConnectionConfigs.new("159.89.81.45")
 			network_connection_configs.game_id = host_gameid_input.text
 			secondary_menu_completed.emit(network_connection_configs)
@@ -66,3 +56,7 @@ func _on_back_pressed():
 	NetworkManager.disconnect_from_game()
 	start_button.visible = false
 	secondary_menu_cancelled.emit()
+
+func _on_start_pressed() -> void:
+	if multiplayer.is_server():
+		GameManager.start_game.rpc()

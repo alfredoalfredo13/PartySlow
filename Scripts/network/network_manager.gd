@@ -26,7 +26,6 @@ var active_game_id = ""
 
 var name_tag : String
 
-signal set_host
 signal add_to_lobby(name, id)
 signal remove_from_lobby(id)
 
@@ -39,7 +38,6 @@ func host_game(network_connection_configs: NetworkConnectionConfigs):
 	if not OS.has_feature(DEDICATED_SERVER_FEATURE_NAME):
 		#show_loading()
 		pass
-	
 
 	
 	# Keep these before the network scene is instantiated, to allow its _ready function to correctly read these properties.

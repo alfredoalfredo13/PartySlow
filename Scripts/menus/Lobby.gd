@@ -10,6 +10,7 @@ func _ready() -> void:
 	NetworkManager.remove_from_lobby.connect(remove)
 	
 func add_new(name, id):
+	print("LOBBY")
 	var new_tag : Label = tag.duplicate()
 	$VBoxContainer.add_child(new_tag)
 	new_tag.text = name
