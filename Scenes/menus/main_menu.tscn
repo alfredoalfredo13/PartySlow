@@ -89,10 +89,12 @@ grow_vertical = 2
 [node name="HostGame" type="Button" parent="Menu/NotTutorial"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+anchor_top = 0.195
+anchor_bottom = 0.195
 offset_left = 55.0
-offset_top = 80.0
+offset_top = -25.3
 offset_right = 308.0
-offset_bottom = 131.0
+offset_bottom = 25.7
 theme_override_font_sizes/font_size = 0
 text = "Host Game"
 flat = true
@@ -100,10 +102,12 @@ alignment = 0
 
 [node name="JoinGame" type="Button" parent="Menu/NotTutorial"]
 layout_mode = 2
+anchor_top = 0.279
+anchor_bottom = 0.279
 offset_left = 55.0
-offset_top = 125.0
+offset_top = -25.66
 offset_right = 308.0
-offset_bottom = 176.0
+offset_bottom = 25.34
 text = "Join Game"
 flat = true
 alignment = 0
@@ -111,9 +115,13 @@ alignment = 0
 [node name="NorayMenu" type="VBoxContainer" parent="Menu/NotTutorial" node_paths=PackedStringArray("go_button", "back_button", "start_button", "name_input", "host_gameid_input")]
 visible = false
 layout_mode = 1
-offset_top = 253.0
-offset_right = 407.0
-offset_bottom = 440.0
+anchors_preset = -1
+anchor_top = 0.642
+anchor_bottom = 0.642
+offset_left = 61.0
+offset_top = -93.68
+offset_right = 468.0
+offset_bottom = 93.32
 theme_override_constants/separation = 10
 script = ExtResource("2_6upyc")
 go_button = NodePath("BoxContainer/Go")
@@ -168,9 +176,13 @@ flat = true
 [node name="IPMenu" type="VBoxContainer" parent="Menu/NotTutorial" node_paths=PackedStringArray("ip_line", "name_line")]
 visible = false
 layout_mode = 1
-offset_top = 253.0
-offset_right = 407.0
-offset_bottom = 440.0
+anchors_preset = -1
+anchor_top = 0.642
+anchor_bottom = 0.642
+offset_left = 61.0
+offset_top = -93.68
+offset_right = 468.0
+offset_bottom = 93.32
 theme_override_constants/separation = 10
 script = ExtResource("3_6p7ge")
 ip_line = NodePath("IP")
@@ -223,11 +235,16 @@ flat = true
 
 [node name="Lobby" type="Panel" parent="Menu/NotTutorial"]
 visible = false
-layout_mode = 0
-offset_left = 531.0
-offset_top = 189.0
-offset_right = 853.0
-offset_bottom = 502.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.889
+anchor_top = 1.0
+anchor_right = 0.889
+anchor_bottom = 1.0
+offset_left = -322.44
+offset_top = -351.0
+offset_right = -0.440063
+offset_bottom = -38.0
 script = ExtResource("3_6upyc")
 
 [node name="Preset" type="Label" parent="Menu/NotTutorial/Lobby"]

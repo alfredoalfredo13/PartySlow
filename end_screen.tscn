@@ -1,0 +1,217 @@
+[gd_scene load_steps=12 format=3 uid="uid://h31yg76uhafr"]
+
+[ext_resource type="Script" uid="uid://ox8g0byrvqrr" path="res://end_screen.gd" id="1_my301"]
+
+[sub_resource type="Theme" id="Theme_my301"]
+
+[sub_resource type="SystemFont" id="SystemFont_3iaq5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xu7hh"]
+font = SubResource("SystemFont_3iaq5")
+font_size = 31
+font_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_my301"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.117647, 0.0470588, 0.235294, 0.992157)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_abjgy"]
+Panel/styles/panel = SubResource("StyleBoxFlat_my301")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3iaq5"]
+font = SubResource("SystemFont_3iaq5")
+font_size = 31
+
+[sub_resource type="LabelSettings" id="LabelSettings_abjgy"]
+font = SubResource("SystemFont_3iaq5")
+font_size = 31
+
+[sub_resource type="LabelSettings" id="LabelSettings_pmjk2"]
+font = SubResource("SystemFont_3iaq5")
+font_size = 31
+
+[sub_resource type="LabelSettings" id="LabelSettings_d75mr"]
+font = SubResource("SystemFont_3iaq5")
+font_size = 31
+
+[sub_resource type="LabelSettings" id="LabelSettings_my301"]
+font = SubResource("SystemFont_3iaq5")
+font_size = 31
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -24.0
+offset_right = 5.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_my301")
+new_color = Color(0.305882, 0.0156863, 0.207843, 1)
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -132.5
+offset_right = 147.0
+offset_bottom = 132.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_my301")
+text = "1º  "
+label_settings = SubResource("LabelSettings_xu7hh")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="HBoxContainer/HBoxContainer/MarginContainer/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+text = "Score"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Player" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Player"
+label_settings = SubResource("LabelSettings_abjgy")
+
+[node name="FirstPlace" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/FirstPlace"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "1º  "
+label_settings = SubResource("LabelSettings_pmjk2")
+
+[node name="Label2" type="Label" parent="HBoxContainer/FirstPlace"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+text = "373"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer/FirstPlace"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "17001       "
+label_settings = SubResource("LabelSettings_abjgy")
+
+[node name="SecondPlace" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/SecondPlace"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "2º  "
+label_settings = SubResource("LabelSettings_d75mr")
+
+[node name="Label2" type="Label" parent="HBoxContainer/SecondPlace"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+text = "20"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer/SecondPlace"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "13841       "
+label_settings = SubResource("LabelSettings_abjgy")
+
+[node name="ThirdPlace" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/ThirdPlace"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "3º  "
+label_settings = SubResource("LabelSettings_my301")
+
+[node name="Label2" type="Label" parent="HBoxContainer/ThirdPlace"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+text = "428"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer/ThirdPlace"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "16332       "
+label_settings = SubResource("LabelSettings_abjgy")
+
+[node name="LastPlace" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/LastPlace"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "4º  "
+label_settings = SubResource("LabelSettings_my301")
+
+[node name="Label2" type="Label" parent="HBoxContainer/LastPlace"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+text = "426"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer/LastPlace"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "14050       "
+label_settings = SubResource("LabelSettings_abjgy")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "New Game"
+
+[node name="Button2" type="Button" parent="HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "Exit"
