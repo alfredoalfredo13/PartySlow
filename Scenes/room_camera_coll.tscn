@@ -17,7 +17,7 @@ shape = SubResource("BoxShape3D_hij1a")
 [node name="Center" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.01163, 0)
 light_color = Color(0.833014, 0.699768, 0.45752, 1)
-light_energy = 5.548
+light_energy = 10.816
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 0.0

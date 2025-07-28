@@ -13,6 +13,7 @@ signal SetRecipeUI(recipe : Recipe)
 signal AddIngredientToInventory(count, name)
 signal AddScore(score)
 
+var current_turn = 0
 var players : Dictionary[int, PlayerData] = {}
 var ingredient_dictionary: Dictionary[int, ItemController] = {}
 
@@ -39,6 +40,9 @@ func host_randomize_items():
 
 @rpc("authority", "call_local")
 func end_turn():
+	if current_turn == 1:
+		get_tree().change_scene_to_file("res://end_screen.tscn")
+		return
 	StartTurn.emit()
 	for player : PlayerData in players.values():
 		player.current_inventory.clear()
@@ -46,6 +50,7 @@ func end_turn():
 	SpawnIngredient.emit()
 	if multiplayer.get_unique_id() == get_multiplayer_authority():
 		host_randomize_items()
+	current_turn += 1
 
 @rpc("any_peer", "call_local")
 func set_items(random_list, recipe):
