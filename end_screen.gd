@@ -28,6 +28,7 @@ extends Control
 	"R4" : $R4
 }
 var random_names : Array[String] = ["Harry", "Jonas", "Sonic", "Serjev", "Dontatello"]
+var players_list : Array[PlayerData] = []
 
 @export var new_color : Color:
 	get:
@@ -46,6 +47,23 @@ var color_button = _call_my_function.bind(self, new_color)
 @export_tool_button("RandomScore", "Callable")
 var random_button = _random
 
+func _ready() -> void:
+	players_list = GameManager.players.values()
+	players_list.sort_custom(func(a : PlayerData, b : PlayerData):
+		return a.score > b.score	
+	)
+	var row_keys : Array[String] = ["R1", "R2", "R3", "R4"]
+	for i in range(rows.size() - 1, -1, -1):
+		print(i, " bigger than ", players_list.size(), " ", i > players_list.size())
+		if i >= players_list.size():
+			rows[row_keys[i]].hide()
+	var i = 0
+	for player in players_list: 
+		var key = row_keys[i]
+		names[key].text = player.name
+		scores[key].text = str(player.score)
+		i += 1
+		
 func _random():
 	var scores_values : Array[Rank] = []
 	for score_key in scores.keys():
@@ -94,6 +112,10 @@ func _call_my_function(node : Node, new_color):
 	for child in node.get_children(true):
 		_call_my_function(child, new_color)
 
+func _on_button_2_pressed() -> void:
+	NetworkManager.disconnect_from_game()
+	get_tree().change_scene_to_file("res://Main.tscn")
+
 class Rank:
 	var score : int
 	var label_key : String
@@ -105,6 +127,4 @@ class Rank:
 		
 	func _to_string() -> String:
 		return "key : %s pos : %d" % [label_key, place]
-		
-	
 	

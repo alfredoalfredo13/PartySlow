@@ -138,7 +138,7 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "3rd"
+text = "1st"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
@@ -156,7 +156,6 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "Jonas"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
@@ -174,7 +173,6 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "200"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
@@ -217,7 +215,6 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "Dontatello"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
@@ -235,7 +232,6 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "315"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
@@ -260,7 +256,7 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "1st"
+text = "3rd"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
@@ -278,7 +274,6 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "Sonic"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
@@ -296,7 +291,6 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "420"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
@@ -339,7 +333,6 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "Serjev"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
@@ -357,25 +350,20 @@ z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_abjgy")
-text = "166"
 label_settings = SubResource("LabelSettings_3iaq5")
 horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 2
 offset_left = 263.0
-offset_top = 362.5
+offset_top = 380.0
 offset_right = 697.0
-offset_bottom = 417.5
+offset_bottom = 435.0
 alignment = 1
-
-[node name="Button" type="Button" parent="HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 34
-text = "New Game"
 
 [node name="Button2" type="Button" parent="HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "Exit"
+
+[connection signal="pressed" from="HBoxContainer2/Button2" to="." method="_on_button_2_pressed"]

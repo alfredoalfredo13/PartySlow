@@ -40,7 +40,9 @@ func host_randomize_items():
 
 @rpc("authority", "call_local")
 func end_turn():
-	if current_turn == 1:
+	if current_turn == 0:
+		for c in get_tree().root.get_children():
+			print(c.name)
 		get_tree().change_scene_to_file("res://end_screen.tscn")
 		return
 	StartTurn.emit()

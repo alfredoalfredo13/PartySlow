@@ -11,6 +11,8 @@ var _is_hosting = false
 func _ready():
 	print("Main menu ready...")
 	GameManager.GameStart.connect(hide)
+	noray_menu.hide()
+	ip_menu.hide()
 	if OS.has_feature(NetworkManager.DEDICATED_SERVER_FEATURE_NAME):
 		print("Calling host game for dedicated server setup...")
 		NetworkManager.host_game(NetworkConnectionConfigs.new(NetworkManager.LOCALHOST))

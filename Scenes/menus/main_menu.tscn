@@ -137,6 +137,12 @@ theme_override_colors/font_color = Color(0.631373, 0.556863, 0, 1)
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Name"
 
+[node name="Label" type="Label" parent="Menu/NotTutorial/NorayMenu"]
+visible = false
+layout_mode = 2
+text = "
+Copy the code below and share with your friends"
+
 [node name="GameId" type="LineEdit" parent="Menu/NotTutorial/NorayMenu"]
 visible = false
 layout_mode = 2
