@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1un8t8d1bnk4"]
+[gd_scene load_steps=10 format=3 uid="uid://d1un8t8d1bnk4"]
 
 [ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://Scripts/camera.gd" id="1_cm0pq"]
-[ext_resource type="Script" uid="uid://d4lva3hhck6i6" path="res://main.gd" id="1_trn2v"]
 [ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://Scripts/MultiplayerController.gd" id="2_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://qun8frh5axci" path="res://Scenes/ui.tscn" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://ffncciksi1tw" path="res://Scenes/menus/main_menu.tscn" id="4_cm0pq"]
@@ -15,7 +14,6 @@
 background_mode = 1
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_trn2v")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.49, 0)
