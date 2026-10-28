@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpfk0ia4k1q6y"]
+
+[ext_resource type="PackedScene" uid="uid://cu4tdsskkmq3p" path="res://Restaurant_Bits/Assets/fbx/kitchentable_sink_large_decorated.fbx" id="1_rby4h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_24wiv"]
+size = Vector3(3.00024, 1.97458, 1.99191)
+
+[node name="kitchentable_sink_large_decorated" instance=ExtResource("1_rby4h")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00476074, 0.98212, -0.000686646)
+shape = SubResource("BoxShape3D_24wiv")

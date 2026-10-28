@@ -1,0 +1,187 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1un8t8d1bnk4"]
+
+[ext_resource type="Script" uid="uid://ru77hjm3erav" path="res://Scripts/camera.gd" id="1_cm0pq"]
+[ext_resource type="Script" uid="uid://bqtyftsbglxt" path="res://Scripts/MultiplayerController.gd" id="2_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://qun8frh5axci" path="res://Scenes/ui.tscn" id="3_lgr22"]
+[ext_resource type="PackedScene" uid="uid://ffncciksi1tw" path="res://Scenes/menus/main_menu.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://c3stx4op77vn0" path="res://Scenes/Player.tscn" id="4_fos0i"]
+[ext_resource type="Script" uid="uid://nlkxa5847qkc" path="res://Scripts/TimerPlayer.gd" id="6_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://yl4brldpja76" path="res://Scenes/TestLevel.tscn" id="6_lgr22"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3dxm6"]
+
+[sub_resource type="Environment" id="Environment_fos0i"]
+background_mode = 1
+
+[node name="Main" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.49, 0)
+cull_mask = 16385
+script = ExtResource("1_cm0pq")
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Spawn1" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78004, -0.850069, 1.63321)
+layers = 0
+mesh = SubResource("CylinderMesh_3dxm6")
+
+[node name="Spawn2" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78004, -0.850069, -1.84872)
+layers = 0
+mesh = SubResource("CylinderMesh_3dxm6")
+
+[node name="Spawn3" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71875, -0.850069, 1.63321)
+layers = 0
+mesh = SubResource("CylinderMesh_3dxm6")
+
+[node name="Spawn4" type="MeshInstance3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71875, -0.850069, -1.84872)
+layers = 0
+mesh = SubResource("CylinderMesh_3dxm6")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fos0i")
+
+[node name="TurnTimer" type="Timer" parent="." node_paths=PackedStringArray("timer_ui")]
+wait_time = 40.0
+script = ExtResource("6_3dxm6")
+timer_ui = NodePath("../UI/Timer")
+metadata/_custom_type_script = "uid://nlkxa5847qkc"
+
+[node name="UI" parent="." instance=ExtResource("3_lgr22")]
+visible = false
+
+[node name="Control" parent="UI" index="5"]
+visible = true
+
+[node name="MainMenu" parent="." instance=ExtResource("4_cm0pq")]
+
+[node name="Exit" parent="MainMenu/Menu" index="0"]
+offset_left = -323.0
+offset_right = -35.0
+text = "Exit Tutorial
+"
+
+[node name="NotTutorial" parent="MainMenu/Menu" index="2"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="HostGame" parent="MainMenu/Menu/NotTutorial" index="0"]
+layout_mode = 1
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 24.0
+offset_top = 142.0
+offset_right = 277.0
+offset_bottom = 193.0
+
+[node name="JoinGame" parent="MainMenu/Menu/NotTutorial" index="1"]
+offset_left = 24.0
+offset_top = 183.0
+offset_right = 277.0
+offset_bottom = 234.0
+
+[node name="NorayMenu" parent="MainMenu/Menu/NotTutorial" index="2" node_paths=PackedStringArray("name_input")]
+offset_top = 275.0
+offset_bottom = 462.0
+name_input = NodePath("Name")
+
+[node name="Go" parent="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer" index="1"]
+visible = false
+
+[node name="IPMenu" parent="MainMenu/Menu/NotTutorial" index="3"]
+offset_left = 31.0
+offset_top = 284.0
+offset_right = 438.0
+offset_bottom = 471.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Name" parent="MainMenu/Menu/NotTutorial/IPMenu" index="1"]
+visible = true
+
+[node name="Lobby" parent="MainMenu/Menu/NotTutorial" index="4"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 603.0
+offset_top = 182.0
+offset_right = 925.0
+offset_bottom = 495.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Tutorials" type="Control" parent="MainMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+
+[node name="HowToPlay" type="Label" parent="MainMenu/Tutorials"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 256.0
+offset_right = 327.0
+offset_bottom = 539.0
+text = "HOW TO PLAY:
+
+- Collect ingredients scattered around the house to complete recipes!
+- Deposit the ingredients and recipes collected in the kitchen (starting point) to score.
+- Hit other players by pressing E to steal and stun them!
+- The player with the biggest score by the end of three rounds wins!"
+autowrap_mode = 3
+
+[node name="Rounds" type="Label" parent="MainMenu/Tutorials"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 256.0
+offset_right = 637.0
+offset_bottom = 513.0
+text = "ROUNDS:
+
+- Every match is composed of three rounds of (time limit) seconds.
+- Whenever the timer hits zero, a new round starts, with a new randomly selected recipe and new ingredients.
+- Any ingredients and recipes not delivered by the end of the round will not count towards scoring!"
+autowrap_mode = 3
+
+[node name="Recipes" type="Label" parent="MainMenu/Tutorials"]
+layout_mode = 0
+offset_left = 653.0
+offset_top = 256.0
+offset_right = 950.0
+offset_bottom = 513.0
+text = "RECIPES:
+
+- Every round there will be a new recipe chosen by random.
+- The ingredients in the level will correspond to the current recipe.
+- Delivering a full recipe will earn you double the points as from the standalone ingredients!"
+autowrap_mode = 3
+
+[node name="MultiplayerController" type="Node" parent="." node_paths=PackedStringArray("menu")]
+script = ExtResource("2_cm0pq")
+player = ExtResource("4_fos0i")
+menu = NodePath("../MainMenu")
+
+[node name="TestLevel" parent="." instance=ExtResource("6_lgr22")]
+
+[connection signal="timeout" from="TurnTimer" to="TurnTimer" method="_on_timeout"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Exit" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Tutorial" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/NotTutorial" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Tutorials" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Exit" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Tutorial" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/NotTutorial" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Tutorials" method="show"]
+[connection signal="lobby_show" from="MainMenu/Menu/NotTutorial/NorayMenu" to="MainMenu/Menu/NotTutorial/Lobby" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="UI" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MainMenu" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MainMenu/Menu/NotTutorial/NorayMenu" method="_on_start_pressed"]
+
+[editable path="UI"]
+[editable path="MainMenu"]

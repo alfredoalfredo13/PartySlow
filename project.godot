@@ -11,18 +11,29 @@ config_version=5
 [application]
 
 config/name="Ghosts and Toasts"
-run/main_scene="uid://dbvtfekf6m716"
+run/main_scene="uid://d1un8t8d1bnk4"
 config/features=PackedStringArray("4.4", "Forward Plus")
+run/flush_stdout_on_print=true
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://GameManager.gd"
+GameManager="*res://Scripts/GameManager.gd"
+GlobalData="*res://Scripts/global_data.gd"
+Noray="*res://addons/netfox.noray/noray.gd"
+PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
+NetworkManager="*res://Scripts/network/network_manager.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/size/resizable=false
+GlobalData="*res://global_data.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/netfox.internals/plugin.cfg", "res://addons/netfox.noray/plugin.cfg")
 
 [filesystem]
 
@@ -72,8 +83,26 @@ interact={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":50,"key_label":0,"unicode":50,"location":0,"echo":false,"script":null)
 ]
 }
+give_ingredients={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":71,"key_label":0,"unicode":103,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
+3d_render/layer_1="All"
+3d_render/layer_2="North2"
+3d_render/layer_3="NorthEast"
+3d_render/layer_4="East"
+3d_render/layer_5="SouthEast"
+3d_render/layer_6="SouthWest"
+3d_render/layer_7="West"
+3d_render/layer_8="NorthWest"
+3d_render/layer_9="North"
+3d_render/layer_11="Center"
+3d_render/layer_15="Local Player"
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Item"
+3d_physics/layer_3="World"
+3d_physics/layer_13="RoomColl"

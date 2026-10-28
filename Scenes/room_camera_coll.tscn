@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://r7ho55e82jmr"]
+
+[ext_resource type="Script" uid="uid://nmo48avox0sr" path="res://Scripts/RoomController.gd" id="1_0b4gd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hij1a"]
+size = Vector3(19.1693, 2.66705, 20.9289)
+
+[node name="RoomCameraColl" type="Area3D"]
+collision_layer = 4096
+collision_mask = 5
+script = ExtResource("1_0b4gd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0211515, 3.29983, 0.192913)
+shape = SubResource("BoxShape3D_hij1a")
+
+[node name="Center" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.01163, 0)
+light_color = Color(0.833014, 0.699768, 0.45752, 1)
+light_energy = 10.816
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_opacity = 0.0
+shadow_blur = 3.79
+distance_fade_enabled = true
+omni_range = 15.738
+omni_attenuation = 1.366
+omni_shadow_mode = 0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

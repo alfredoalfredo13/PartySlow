@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c620eskst21tn"]
+
+[ext_resource type="PackedScene" uid="uid://bjewmti5bvt3g" path="res://Restaurant_Bits/Assets/fbx/fridge_A.fbx" id="1_hs63p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_si4xf"]
+size = Vector3(1.99219, 2.50879, 1.98328)
+
+[node name="fridge_A" instance=ExtResource("1_hs63p")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00878906, 1.24561, -0.00445557)
+shape = SubResource("BoxShape3D_si4xf")

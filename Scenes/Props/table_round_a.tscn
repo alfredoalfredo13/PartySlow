@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://lcuo4ltjwwc8"]
+
+[ext_resource type="PackedScene" uid="uid://b8jxwaccsd4wg" path="res://Restaurant_Bits/Assets/fbx/table_round_A.fbx" id="1_ekatm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7xgir"]
+height = 1.01758
+radius = 1.50439
+
+[node name="table_round_A" instance=ExtResource("1_ekatm")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.491211, 0)
+shape = SubResource("CylinderShape3D_7xgir")

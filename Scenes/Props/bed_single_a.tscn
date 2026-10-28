@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbmsd1iwbd1bp"]
+
+[ext_resource type="PackedScene" uid="uid://qvxst75tiy1x" path="res://Furniture_Bits/Assets/fbx/bed_single_A.fbx" id="1_wajuy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bk3g2"]
+size = Vector3(1.58301, 1, 3.02954)
+
+[node name="bed_single_A" instance=ExtResource("1_wajuy")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00732422, 0.498018, 0.0159912)
+shape = SubResource("BoxShape3D_bk3g2")

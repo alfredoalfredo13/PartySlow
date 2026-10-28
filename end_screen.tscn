@@ -1,0 +1,369 @@
+[gd_scene load_steps=10 format=3 uid="uid://h31yg76uhafr"]
+
+[ext_resource type="Script" uid="uid://ox8g0byrvqrr" path="res://end_screen.gd" id="1_my301"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abjgy"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.176471, 0.176471, 0.176471, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_my301"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.117647, 0.0470588, 0.235294, 0.992157)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_abjgy"]
+Panel/styles/panel = SubResource("StyleBoxFlat_my301")
+
+[sub_resource type="SystemFont" id="SystemFont_3iaq5"]
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_my301"]
+font = SubResource("SystemFont_3iaq5")
+font_size = 31
+font_color = Color(1, 1, 1, 0)
+
+[sub_resource type="Theme" id="Theme_my301"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmjk2"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.176471, 0.176471, 0.176471, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3iaq5"]
+font = SubResource("SystemFont_3iaq5")
+font_size = 31
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -24.0
+offset_right = 5.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_my301")
+new_color = Color(0.305882, 0.0156863, 0.207843, 1)
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 263.0
+offset_top = 122.5
+offset_right = 697.0
+offset_bottom = 166.5
+
+[node name="Place" type="MarginContainer" parent="Header"]
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="Header/Place"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_abjgy")
+
+[node name="Place" type="Label" parent="Header/Place/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+text = "1st"
+label_settings = SubResource("LabelSettings_my301")
+horizontal_alignment = 1
+
+[node name="Player" type="MarginContainer" parent="Header"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Header/Player"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme = SubResource("Theme_my301")
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Score" type="Label" parent="Header/Player/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+text = "Player"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Score" type="MarginContainer" parent="Header"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Header/Score"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Score" type="Label" parent="Header/Score/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+text = "Score"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="R1" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 263.0
+offset_top = 170.5
+offset_right = 697.0
+offset_bottom = 214.5
+
+[node name="Place" type="MarginContainer" parent="R1"]
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="R1/Place"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Place" type="Label" parent="R1/Place/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+text = "1st"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Player" type="MarginContainer" parent="R1"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="R1/Player"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Player" type="Label" parent="R1/Player/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Score" type="MarginContainer" parent="R1"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="R1/Score"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Score" type="Label" parent="R1/Score/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="R2" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 263.0
+offset_top = 220.5
+offset_right = 716.0
+offset_bottom = 264.5
+
+[node name="Place" type="MarginContainer" parent="R2"]
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="R2/Place"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Place" type="Label" parent="R2/Place/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+text = "2nd"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Player" type="MarginContainer" parent="R2"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="R2/Player"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Player" type="Label" parent="R2/Player/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Score" type="MarginContainer" parent="R2"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="R2/Score"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Score" type="Label" parent="R2/Score/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="R3" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 263.0
+offset_top = 270.5
+offset_right = 716.0
+offset_bottom = 314.5
+
+[node name="Place" type="MarginContainer" parent="R3"]
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="R3/Place"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Place" type="Label" parent="R3/Place/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+text = "3rd"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Player" type="MarginContainer" parent="R3"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="R3/Player"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Player" type="Label" parent="R3/Player/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Score" type="MarginContainer" parent="R3"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="R3/Score"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Score" type="Label" parent="R3/Score/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="R4" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 263.0
+offset_top = 320.5
+offset_right = 716.0
+offset_bottom = 364.5
+
+[node name="Place" type="MarginContainer" parent="R4"]
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="R4/Place"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Place" type="Label" parent="R4/Place/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+text = "4th"
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Player" type="MarginContainer" parent="R4"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="R4/Player"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Player" type="Label" parent="R4/Player/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="Score" type="MarginContainer" parent="R4"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="R4/Score"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmjk2")
+
+[node name="Score" type="Label" parent="R4/Score/PanelContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_abjgy")
+label_settings = SubResource("LabelSettings_3iaq5")
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 263.0
+offset_top = 380.0
+offset_right = 697.0
+offset_bottom = 435.0
+alignment = 1
+
+[node name="Button2" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "Exit"
+
+[connection signal="pressed" from="HBoxContainer2/Button2" to="." method="_on_button_2_pressed"]
