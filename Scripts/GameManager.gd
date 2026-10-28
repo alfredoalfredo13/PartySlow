@@ -2,7 +2,7 @@ extends Node
 
 enum MultiplayerMode {Noray, Direct}
 
-var multiplayer_mode : MultiplayerMode = MultiplayerMode.Noray
+var multiplayer_mode : MultiplayerMode = MultiplayerMode.Direct
 
 signal TimeOut
 signal StartTurn

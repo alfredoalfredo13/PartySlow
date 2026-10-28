@@ -53,8 +53,8 @@ func _physics_process(delta: float) -> void:
 	if interrupt_movement:
 		return
 	if !player_data.is_local:
-		global_position = global_position.lerp(sync_pos, 0.5)
-		$Pivot.rotation_degrees.y = lerpf($Pivot.rotation_degrees.y, sync_rot.y, 0.5)
+		global_position = sync_pos
+		$Pivot.rotation_degrees.y = sync_rot.y
 		return
 	
 	# melee cooldown

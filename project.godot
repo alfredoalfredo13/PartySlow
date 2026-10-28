@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ghosts and Toasts"
-run/main_scene="uid://d1un8t8d1bnk4"
+run/main_scene="uid://mi7juh66700g"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/flush_stdout_on_print=true
 config/icon="res://icon.svg"
@@ -28,7 +28,8 @@ NetworkManager="*res://Scripts/network/network_manager.gd"
 
 window/size/viewport_width=960
 window/size/viewport_height=540
-window/size/resizable=false
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_width"
 GlobalData="*res://global_data.gd"
 
 [editor_plugins]
