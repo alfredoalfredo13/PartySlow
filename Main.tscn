@@ -18,6 +18,7 @@ background_mode = 1
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.49, 0)
 cull_mask = 16385
+size = 23.222
 script = ExtResource("1_cm0pq")
 
 [node name="Spawns" type="Node3D" parent="."]

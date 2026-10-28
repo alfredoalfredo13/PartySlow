@@ -113,8 +113,7 @@ func _call_my_function(node : Node, new_color):
 		_call_my_function(child, new_color)
 
 func _on_button_2_pressed() -> void:
-	NetworkManager.disconnect_from_game()
-	get_tree().change_scene_to_file("res://Main.tscn")
+	GameManager.clear()
 
 class Rank:
 	var score : int

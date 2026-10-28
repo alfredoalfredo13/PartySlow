@@ -10,4 +10,4 @@ func _process(delta: float) -> void:
 
 
 func _on_timeout() -> void:
-	GameManager.end_turn.rpc()
+	GameManager.authority_end_turn()

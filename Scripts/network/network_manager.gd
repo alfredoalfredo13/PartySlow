@@ -28,6 +28,7 @@ var name_tag : String
 
 signal add_to_lobby(name, id)
 signal remove_from_lobby(id)
+signal failed_to_connect
 
 func set_name_tag(name):
 	name_tag = name

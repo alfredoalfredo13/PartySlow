@@ -38,6 +38,7 @@ func _register_with_noray(host_ip: String):
 	# connect to Noray
 	err = await Noray.connect_to_host(host_ip, _port)
 	if err != OK:
+		NetworkManager.failed_to_connect.emit()
 		print("Failed to connect to Noray for registration at %s:%s with ERROR %s" % [host_ip, _port, err])
 		return err
 		

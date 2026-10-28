@@ -17,19 +17,7 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(connection_failed)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	local_player_data = PlayerData.new()
-	if "--server" in OS.get_cmdline_args() or OS.has_feature("dedicated_server"):
-		#$Host.visible = false
-		#$Join.visible = false
-		#$Start.visible = false
-		#$Label.visible = false
-		#$LineEdit.visible = false
-		#host_game()
-		pass
-	else:
-		if OS.get_cmdline_args().size() > 0:
-			var name = OS.get_cmdline_args()[1]
-		#$LineEdit.text = name
-		local_player_data.name = name
+	local_player_data.name = name
 	
 # this gets called on the server and clients
 func peer_connected(id):

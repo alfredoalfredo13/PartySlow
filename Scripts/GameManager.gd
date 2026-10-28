@@ -37,18 +37,25 @@ func host_randomize_items():
 		var random = randi_range(0, GlobalData.currentRecipe.ingredients.size()-1)
 		random_list.append(random)
 	set_items.rpc(random_list, recipe)
-
-@rpc("authority", "call_local")
-func end_turn():
-	if current_turn == 0:
-		for c in get_tree().root.get_children():
-			print(c.name)
-		get_tree().change_scene_to_file("res://end_screen.tscn")
+	
+func authority_end_turn():
+	if multiplayer.get_unique_id() != get_multiplayer_authority():
 		return
+	if current_turn == 2:
+		authority_end_game.rpc()
+	else:
+		end_turn.rpc()
+
+@rpc("authority", "call_local", "reliable")
+func authority_end_game():
+	get_tree().change_scene_to_file("res://end_screen.tscn")
+
+@rpc("authority", "call_local", "reliable")
+func end_turn():
+	ingredient_dictionary.clear()
 	StartTurn.emit()
 	for player : PlayerData in players.values():
 		player.current_inventory.clear()
-	ingredient_dictionary.clear()
 	SpawnIngredient.emit()
 	if multiplayer.get_unique_id() == get_multiplayer_authority():
 		host_randomize_items()
@@ -104,6 +111,7 @@ func send_player_information(player_name, character, id : int):
 
 @rpc("any_peer", "call_local")
 func start_game():
+	multiplayer.multiplayer_peer.refuse_new_connections = true
 	GameStart.emit()
 	var index = 0
 	for i in players:
@@ -124,7 +132,7 @@ func start_game():
 		index += 1
 	if multiplayer.is_server():
 		host_randomize_items()
-		StartTurn.emit()
+	StartTurn.emit()
 	
 @rpc("any_peer", "call_local")
 func print_stats():
@@ -134,3 +142,10 @@ func print_stats():
 		for item : String in player.current_inventory:
 			print("		%s" % item)
 		print("%s		TEM O PLACAR DE %d" % [player.name, player.score])
+
+func clear():
+	for player: PlayerData in players.values():
+		player.remove_player.emit()
+	players.clear()
+	NetworkManager.disconnect_from_game()
+	get_tree().change_scene_to_file("res://Main.tscn")

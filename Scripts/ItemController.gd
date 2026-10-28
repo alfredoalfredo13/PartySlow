@@ -20,7 +20,6 @@ const MODEL_PATHS := {
 
 func _ready() -> void:
 	GameManager.add_ingredient_to_dictionary(self)
-	var tween = get_tree().create_tween()
 	
 func set_model() -> void : 
 	if MODEL_PATHS.has(ingredient_name):
