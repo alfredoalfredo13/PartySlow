@@ -60,21 +60,77 @@ visible = true
 
 [node name="MainMenu" parent="." instance=ExtResource("4_cm0pq")]
 
-[node name="Exit" type="Button" parent="MainMenu/Menu" index="1"]
+[node name="Tutorials" type="Control" parent="MainMenu/Menu" index="0"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HowToPlay" type="Label" parent="MainMenu/Menu/Tutorials"]
+layout_mode = 1
+offset_left = 13.0
+offset_top = 100.0
+offset_right = 327.0
+offset_bottom = 461.0
+text = "HOW TO PLAY:
+
+- Collect ingredients scattered around the house to complete recipes!
+- Score points by depositing the collected ingredients at the Kitchen Counter in the Starting Room.
+- Ingredients are deposited automatically upon aproaching the Kitchen Counter, not input is necessary.
+- Hit other players by pressing E to s stun them!
+- The player with the biggest score by the end of three rounds wins!"
+autowrap_mode = 3
+
+[node name="Rounds" type="Label" parent="MainMenu/Menu/Tutorials"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 100.0
+offset_right = 637.0
+offset_bottom = 383.0
+text = "ROUNDS:
+
+- A match is composed of three rounds lasting 40 seconds each.
+- Whenever the timer hits zero, a new round starts, all players a brought back to the starting room and a new recipee is selected.
+- Any ingredients and recipes not delivered by the end of the round will not count towards scoring!"
+autowrap_mode = 3
+
+[node name="Recipes" type="Label" parent="MainMenu/Menu/Tutorials"]
+layout_mode = 0
+offset_left = 653.0
+offset_top = 100.0
+offset_right = 950.0
+offset_bottom = 357.0
+text = "RECIPES:
+
+- Every round there will be a new recipe chosen by random.
+- The ingredients in the level will correspond to the current recipe.
+- Delivering a full recipe will earn you double the points as from the standalone ingredients!"
+autowrap_mode = 3
+
+[node name="Tutorial" parent="MainMenu/Menu" index="1"]
+offset_left = -189.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 75.0
+
+[node name="Exit" type="Button" parent="MainMenu/Menu" index="2"]
 visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -228.0
-offset_top = 52.0
-offset_right = -39.0
-offset_bottom = 127.0
+offset_left = -189.0
+offset_bottom = 75.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 48
 text = "Exit"
 
-[node name="NotTutorial" parent="MainMenu/Menu" index="3"]
+[node name="NotTutorial" parent="MainMenu/Menu" index="4"]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -127,51 +183,6 @@ offset_bottom = 495.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Tutorials" type="Control" parent="MainMenu"]
-visible = false
-layout_mode = 1
-anchors_preset = 0
-
-[node name="HowToPlay" type="Label" parent="MainMenu/Tutorials"]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 256.0
-offset_right = 327.0
-offset_bottom = 539.0
-text = "HOW TO PLAY:
-
-- Collect ingredients scattered around the house to complete recipes!
-- Deposit the ingredients and recipes collected in the kitchen (starting point) to score.
-- Hit other players by pressing E to steal and stun them!
-- The player with the biggest score by the end of three rounds wins!"
-autowrap_mode = 3
-
-[node name="Rounds" type="Label" parent="MainMenu/Tutorials"]
-layout_mode = 0
-offset_left = 340.0
-offset_top = 256.0
-offset_right = 637.0
-offset_bottom = 513.0
-text = "ROUNDS:
-
-- Every match is composed of three rounds of (time limit) seconds.
-- Whenever the timer hits zero, a new round starts, with a new randomly selected recipe and new ingredients.
-- Any ingredients and recipes not delivered by the end of the round will not count towards scoring!"
-autowrap_mode = 3
-
-[node name="Recipes" type="Label" parent="MainMenu/Tutorials"]
-layout_mode = 0
-offset_left = 653.0
-offset_top = 256.0
-offset_right = 950.0
-offset_bottom = 513.0
-text = "RECIPES:
-
-- Every round there will be a new recipe chosen by random.
-- The ingredients in the level will correspond to the current recipe.
-- Delivering a full recipe will earn you double the points as from the standalone ingredients!"
-autowrap_mode = 3
-
 [node name="MultiplayerController" type="Node" parent="." node_paths=PackedStringArray("menu")]
 script = ExtResource("2_cm0pq")
 player = ExtResource("4_fos0i")
@@ -183,11 +194,11 @@ menu = NodePath("../MainMenu")
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Tutorial" method="hide"]
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/NotTutorial" method="hide"]
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Exit" method="show"]
-[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Tutorials" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Tutorials" method="show"]
 [connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Tutorial" method="show"]
 [connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/NotTutorial" method="show"]
 [connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Exit" method="hide"]
-[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Tutorials" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Tutorials" method="hide"]
 [connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="UI" method="show"]
 [connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MainMenu" method="hide"]
 [connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MainMenu/Menu/NotTutorial/NorayMenu" method="_on_start_pressed"]

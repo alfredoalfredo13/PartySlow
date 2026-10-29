@@ -15,7 +15,7 @@ func _ready():
 	GameManager.secondary_menu_completed.connect(_secondary_menu_submitted)
 	GameManager.lobby_show.connect(lobby.show)
 	GameManager.secondary_menu_cancelled.connect(_cancel_secondary_menu)
-	GameManager.secondary_menu_cancelled.connect(lobby.hide)
+	GameManager.lobby_hide.connect(lobby.hide)
 	if GameManager.multiplayer_mode == GameManager.MultiplayerMode.Noray:
 		connection_type.text = "Connection Mode: SERVER"
 	else:
@@ -67,7 +67,6 @@ func _reset_main_menu_options():
 func _hide_main_menu_options():
 	host_game_button.visible = false
 	join_game_button.visible = false
-
 
 func _cancel_secondary_menu():
 	_reset_main_menu_options()

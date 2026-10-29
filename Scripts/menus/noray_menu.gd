@@ -66,6 +66,7 @@ func _on_back_pressed():
 	copy_label.hide()
 	failed_to_connect.hide()
 	GameManager.secondary_menu_cancelled.emit()
+	GameManager.lobby_hide.emit()
 
 func _on_start_pressed() -> void:
 	if multiplayer.is_server():

@@ -45,10 +45,44 @@ custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 text = "Server Connection"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/ServerConnection"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = 8.0
+offset_right = 124.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Higher Latency  
+Connection is Dependent on external server"
+horizontal_alignment = 1
+
 [node name="P2P" type="Button" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 text = "P2P Connection"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/P2P"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = 8.0
+offset_right = 124.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Low Latency  
+Host's IP Address is Required"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ServerConnection" to="." method="set_noray"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/P2P" to="." method="set_p2p"]

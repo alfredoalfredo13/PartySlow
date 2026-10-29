@@ -12,6 +12,7 @@ signal GameStart
 signal secondary_menu_completed
 signal secondary_menu_cancelled
 signal lobby_show
+signal lobby_hide
 
 signal SetRecipeUI(recipe : Recipe)
 signal AddIngredientToInventory(count, name)
@@ -96,7 +97,7 @@ func set_score(player_id, score):
 	if player.is_local:
 		AddScore.emit(score)
 
-@rpc("any_peer", "call_remote")
+@rpc("any_peer", "call_remote", "reliable")
 func send_player_information(player_name, character, id : int):
 	var is_host = multiplayer.is_server()
 	print("I AM %s : I RECEIVED %s is host = " % [multiplayer.get_unique_id(), id], is_host)
@@ -107,13 +108,32 @@ func send_player_information(player_name, character, id : int):
 		new_player.char_classe = character
 		new_player.is_host = is_host
 		players.set(id, new_player)
-		NetworkManager.add_to_lobby.emit(player_name, id)
+		# Remote names on the host wait for the client to acknowledge the roster.
+		if not is_host or id == multiplayer.get_unique_id():
+			NetworkManager.add_to_lobby.emit(player_name, id)
 	if multiplayer.is_server():
 		for i in players:
 			var player : PlayerData = players[i]
 			send_player_information.rpc(player.name, player.char_classe, player.id)
+		# This marker follows the roster on the same reliable channel.
+		var sender_id = multiplayer.get_remote_sender_id()
+		if sender_id > 1:
+			request_registration_confirmation.rpc_id(sender_id)
 
-@rpc("any_peer", "call_local")
+@rpc("authority", "call_remote", "reliable")
+func request_registration_confirmation():
+	confirm_registration.rpc_id(1)
+
+@rpc("any_peer", "call_remote", "reliable")
+func confirm_registration():
+	if not multiplayer.is_server():
+		return
+	var sender_id = multiplayer.get_remote_sender_id()
+	if players.has(sender_id):
+		var player: PlayerData = players[sender_id]
+		NetworkManager.add_to_lobby.emit(player.name, sender_id)
+
+@rpc("authority", "call_local", "reliable")
 func start_game():
 	multiplayer.multiplayer_peer.refuse_new_connections = true
 	GameStart.emit()

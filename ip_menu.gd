@@ -47,6 +47,7 @@ func shows(is_host):
 	
 func _on_back_pressed() -> void:
 	GameManager.reset_session()
+	GameManager.lobby_hide.emit()
 	peer = null
 	is_host = false
 	ip_line.hide()
@@ -59,6 +60,7 @@ func _on_back_pressed() -> void:
 func _on_go_pressed() -> void:
 	if name_line.text.is_empty():
 		return
+	GameManager.lobby_show.emit()
 	if is_host:
 		host_game()
 	else:
