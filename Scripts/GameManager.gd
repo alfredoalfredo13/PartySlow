@@ -9,6 +9,10 @@ signal StartTurn
 signal SpawnIngredient
 signal GameStart
 
+signal secondary_menu_completed
+signal secondary_menu_cancelled
+signal lobby_show
+
 signal SetRecipeUI(recipe : Recipe)
 signal AddIngredientToInventory(count, name)
 signal AddScore(score)
@@ -143,9 +147,15 @@ func print_stats():
 			print("		%s" % item)
 		print("%s		TEM O PLACAR DE %d" % [player.name, player.score])
 
-func clear():
+# Keep the current scene and its ingredients available when leaving a lobby.
+func reset_session():
+	NetworkManager.disconnect_from_game()
 	for player: PlayerData in players.values():
 		player.remove_player.emit()
 	players.clear()
-	NetworkManager.disconnect_from_game()
-	get_tree().change_scene_to_file("res://Main.tscn")
+	current_turn = 0
+
+func clear():
+	reset_session()
+	ingredient_dictionary.clear()
+	get_tree().change_scene_to_file("res://initial_screen.tscn")

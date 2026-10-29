@@ -79,7 +79,10 @@ func set_selected_network(network_selected: AvailableNetworks):
 func disconnect_from_game():
 	NetworkManager.remove_from_lobby.emit(-1)
 	#NetworkTime.stop() # Stops the network type synchronizer from spamming ping RPCs after disconnect
-	multiplayer.multiplayer_peer = null # Disconnect peer
+	if multiplayer.multiplayer_peer:
+		multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = null
+	Noray.disconnect_from_host()
 	
 	# Remove any child networks nodes
 	for child in get_children():
@@ -99,8 +102,7 @@ func reset_network_properties():
 	active_host_ip = ""
 	active_game_id = ""
 	
-	#active_network_node.queue_free()
-	#active_network_node = null
+	active_network_node = null
 
 func _load_game_scene():
 	print("NetworkManager: Loading game scene...")

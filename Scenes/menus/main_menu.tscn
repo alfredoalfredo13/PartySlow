@@ -23,7 +23,7 @@ cache/0/32/0/scale = 1.0
 [sub_resource type="LabelSettings" id="LabelSettings_b55im"]
 font_size = 32
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("host_game_button", "join_game_button", "ip_menu", "noray_menu", "lobby")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("host_game_button", "join_game_button", "ip_menu", "noray_menu", "lobby", "connection_type")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,6 +36,7 @@ join_game_button = NodePath("Menu/NotTutorial/JoinGame")
 ip_menu = NodePath("Menu/NotTutorial/IPMenu")
 noray_menu = NodePath("Menu/NotTutorial/NorayMenu")
 lobby = NodePath("Menu/NotTutorial/Lobby")
+connection_type = NodePath("Menu/Connection Mode")
 
 [node name="Menu" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -47,21 +48,6 @@ offset_top = 1.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Exit" type="Button" parent="Menu"]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -210.0
-offset_top = 52.0
-offset_right = -39.0
-offset_bottom = 127.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 48
-text = "Exit"
-flat = true
 
 [node name="Tutorial" type="Button" parent="Menu"]
 layout_mode = 1
@@ -76,18 +62,26 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 48
 text = "Tutorial
 "
-flat = true
+
+[node name="Change Connection Mode" type="Button" parent="Menu"]
+layout_mode = 1
+offset_left = 282.1
+offset_right = 885.1
+offset_bottom = 75.0
+scale = Vector2(0.43, 0.43)
+theme_override_font_sizes/font_size = 48
+text = "Change Connection Mode"
 
 [node name="NotTutorial" type="Control" parent="Menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -89.515
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HostGame" type="Button" parent="Menu/NotTutorial"]
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 anchor_top = 0.195
 anchor_bottom = 0.195
@@ -97,20 +91,16 @@ offset_right = 308.0
 offset_bottom = 25.7
 theme_override_font_sizes/font_size = 0
 text = "Host Game"
-flat = true
-alignment = 0
 
 [node name="JoinGame" type="Button" parent="Menu/NotTutorial"]
 layout_mode = 2
 anchor_top = 0.279
 anchor_bottom = 0.279
 offset_left = 55.0
-offset_top = -25.66
+offset_top = -5.185
 offset_right = 308.0
-offset_bottom = 25.34
+offset_bottom = 45.815
 text = "Join Game"
-flat = true
-alignment = 0
 
 [node name="NorayMenu" type="VBoxContainer" parent="Menu/NotTutorial" node_paths=PackedStringArray("go_button", "back_button", "start_button", "name_input", "host_gameid_input")]
 visible = false
@@ -131,6 +121,7 @@ name_input = NodePath("../IPMenu/Name")
 host_gameid_input = NodePath("GameId")
 
 [node name="Name" type="LineEdit" parent="Menu/NotTutorial/NorayMenu"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_placeholder_color = Color(0.631373, 0.556863, 0, 1)
 theme_override_colors/font_color = Color(0.631373, 0.556863, 0, 1)
@@ -220,7 +211,6 @@ placeholder_text = "Name"
 layout_mode = 2
 
 [node name="Back" type="Button" parent="Menu/NotTutorial/IPMenu/BoxContainer"]
-visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -285,6 +275,14 @@ offset_top = -2.0
 offset_right = 322.0
 offset_bottom = 300.0
 
+[node name="Connection Mode" type="RichTextLabel" parent="Menu"]
+layout_mode = 0
+offset_right = 216.0
+offset_bottom = 40.0
+scale = Vector2(1.31, 1.31)
+text = "Connection Mode: SERVER"
+
+[connection signal="pressed" from="Menu/Change Connection Mode" to="." method="_on_change_connection_mode"]
 [connection signal="pressed" from="Menu/NotTutorial/HostGame" to="." method="host_game"]
 [connection signal="pressed" from="Menu/NotTutorial/JoinGame" to="." method="join_game"]
 [connection signal="pressed" from="Menu/NotTutorial/NorayMenu/BoxContainer/Back" to="Menu/NotTutorial/NorayMenu" method="_on_back_pressed"]

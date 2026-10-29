@@ -1,9 +1,5 @@
 extends Control
 
-signal secondary_menu_completed
-signal secondary_menu_cancelled
-signal lobby_show
-
 const NORAY_CLIENT_PLACEHOLDER_TEXT = "Enter Host's Game ID"
 const NORAY_HOSTING_LABEL = "Host Game with Noray!"
 const NORAY_CLIENT_CONNECT_LABEL = "Connect to game on Noray!"
@@ -42,9 +38,9 @@ func _on_go_pressed():
 		if name_input.text && name_input.text != "":
 			NetworkManager.set_name_tag(name_input.text)
 			var network_connection_configs = NetworkConnectionConfigs.new("foxssake.studio")
-			secondary_menu_completed.emit(network_connection_configs)
+			GameManager.secondary_menu_completed.emit(network_connection_configs)
 			await Noray.on_oid
-			lobby_show.emit()
+			GameManager.lobby_show.emit()
 			host_gameid_input.text = Noray.oid
 			host_gameid_input.editable = false
 			copy_label.show()
@@ -57,19 +53,19 @@ func _on_go_pressed():
 			NetworkManager.set_name_tag(name_input.text)
 			var network_connection_configs = NetworkConnectionConfigs.new("foxssake.studio")
 			network_connection_configs.game_id = host_gameid_input.text
-			secondary_menu_completed.emit(network_connection_configs)
-			lobby_show.emit()
+			GameManager.secondary_menu_completed.emit(network_connection_configs)
+			GameManager.lobby_show.emit()
 			go_button.visible = false
 
 func _on_back_pressed():
 	print("On back pressed")
 	host_gameid_input.text = ""
 	host_gameid_input.editable = true
-	NetworkManager.disconnect_from_game()
+	GameManager.reset_session()
 	start_button.visible = false
 	copy_label.hide()
 	failed_to_connect.hide()
-	secondary_menu_cancelled.emit()
+	GameManager.secondary_menu_cancelled.emit()
 
 func _on_start_pressed() -> void:
 	if multiplayer.is_server():

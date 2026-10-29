@@ -46,7 +46,9 @@ func shows(is_host):
 	show()
 	
 func _on_back_pressed() -> void:
-	multiplayer.multiplayer_peer = null
+	GameManager.reset_session()
+	peer = null
+	is_host = false
 	ip_line.hide()
 	name_line.hide()
 	go.hide()

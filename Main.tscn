@@ -60,16 +60,25 @@ visible = true
 
 [node name="MainMenu" parent="." instance=ExtResource("4_cm0pq")]
 
-[node name="Exit" parent="MainMenu/Menu" index="0"]
-offset_left = -323.0
-offset_right = -35.0
-text = "Exit Tutorial
-"
+[node name="Exit" type="Button" parent="MainMenu/Menu" index="1"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -228.0
+offset_top = 52.0
+offset_right = -39.0
+offset_bottom = 127.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "Exit"
 
-[node name="NotTutorial" parent="MainMenu/Menu" index="2"]
+[node name="NotTutorial" parent="MainMenu/Menu" index="3"]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_right = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
@@ -84,9 +93,9 @@ offset_bottom = 193.0
 
 [node name="JoinGame" parent="MainMenu/Menu/NotTutorial" index="1"]
 offset_left = 24.0
-offset_top = 183.0
+offset_top = 203.0
 offset_right = 277.0
-offset_bottom = 234.0
+offset_bottom = 254.0
 
 [node name="NorayMenu" parent="MainMenu/Menu/NotTutorial" index="2" node_paths=PackedStringArray("name_input")]
 offset_top = 275.0
@@ -171,15 +180,14 @@ menu = NodePath("../MainMenu")
 [node name="TestLevel" parent="." instance=ExtResource("6_lgr22")]
 
 [connection signal="timeout" from="TurnTimer" to="TurnTimer" method="_on_timeout"]
-[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Exit" method="hide"]
-[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Tutorial" method="show"]
-[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/NotTutorial" method="show"]
-[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Tutorials" method="hide"]
-[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Exit" method="show"]
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Tutorial" method="hide"]
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/NotTutorial" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Menu/Exit" method="show"]
 [connection signal="pressed" from="MainMenu/Menu/Tutorial" to="MainMenu/Tutorials" method="show"]
-[connection signal="lobby_show" from="MainMenu/Menu/NotTutorial/NorayMenu" to="MainMenu/Menu/NotTutorial/Lobby" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Tutorial" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/NotTutorial" method="show"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Menu/Exit" method="hide"]
+[connection signal="pressed" from="MainMenu/Menu/Exit" to="MainMenu/Tutorials" method="hide"]
 [connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="UI" method="show"]
 [connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MainMenu" method="hide"]
 [connection signal="pressed" from="MainMenu/Menu/NotTutorial/NorayMenu/BoxContainer/Start" to="MainMenu/Menu/NotTutorial/NorayMenu" method="_on_start_pressed"]
